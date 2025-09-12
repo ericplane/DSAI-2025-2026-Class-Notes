@@ -1,0 +1,102 @@
+# Files and Filesystems Part 1 Notes
+
+
+## Summary:
+
+Key concepts include file system structure, types of files, text encoding (ASCII, UTF-8, Unicode), and basic lossless compression. The directory structure is tree-like, with permissions governing access. Files consist of metadata, headers, and contents, with extensions serving as UI hints. Compression techniques reduce file sizes, with lossless methods preserving information. Understanding permissions, file types, directory trees, UTF-8 decoding, and compression examples is essential for exams and labs.
+
+## Learning goals
+
+- File system structure: directories, files, links, permissions (read, write, execute).
+- Difference between file types: executables vs data.
+- Text encoding: ASCII, UTF-8, Unicode.
+- Basic lossless compression.
+
+## Storage and disks
+
+- HDD and SSD are non-volatile. Data persists without power.
+- A disk can be split into partitions.
+- A **drive** is a logical storage unit. It may map to a partition, RAM disk, USB, or cloud-backed mount.
+- The file system lives at the start of a partition. It defines storage and organization via: file system metadata, file allocation info, directory structure, file attributes (timestamps, permissions, size).
+- Windows example tool: Disk Management.
+
+## Directory trees
+
+- The directory structure is a tree.
+- Root node: drive (e.g., `C:` or `/`).
+- Inner nodes: directories.
+- Leaves: files and links/shortcuts.
+- Permissions on folders and files: read, write, execute. Execute on a file means runnable. Execute on a directory means you can enter it.
+
+## File types and how data is stored
+
+- Every file is bytes. Interpretation follows conventions.
+- Major categories:
+    - **Text** using character encodings. Examples: `.txt`, `.html`, `.csv`. Open in a text editor or terminal.
+    - **Executables** containing CPU instructions. Examples: `.exe` on Windows. Not readable in an editor. Loaded by the OS and run by the CPU. Have a header.
+    - **Binary data** like images (`.bmp`, `.gif`) and audio (`.mp3`, `.wav`). Need specific programs. Have a header.
+
+## File structure components
+
+- **Filename, path, permissions, and on-disk location** live in file system metadata.
+- **File type** is recorded in the file’s own header.
+- **File contents** follow the header.
+
+## Extensions vs “real” type
+
+- Filenames often end with extensions: `.txt`, `.bmp`, `.docx`, `.exe`.
+- The extension is a UI hint for association and icon.
+- The real type is defined by internal structure and header. Renaming `.jpg` to `.txt` fools the shell only until an app inspects the header.
+
+## Text encodings
+
+- Encoding maps characters to bytes.
+- **ASCII**: 7-bit, 128 symbols. Examples: `A=65`, `a=97`, `ENTER=13`, `SPACE=32`.
+- **Unicode**: universal code points, e.g., `U+03A9 = Ω`.
+- **UTF-8**: variable-length storage of Unicode using 1–4 bytes. Backward-compatible with ASCII. Efficient for English, supports all scripts.
+
+### UTF-8 byte patterns
+
+- 1 byte: `0xxxxxxx` — ASCII, example `A = 01000001`.
+- 2 bytes: `110xxxxx 10xxxxxx` — example `é (U+00E9) → 11000011 10101001`.
+- 3 bytes: `1110xxxx 10xxxxxx 10xxxxxx` — example `€ (U+20AC) → 11100010 10000010 10101100`.
+- 4 bytes: `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx` — example 🙂 `(U+1F642) → 11110000 10011111 10011001 10000010`.
+
+## Compression
+
+- Compression reduces file size on disk or over networks.
+- Types:
+    - **Lossless**: no information discarded.
+    - **Lossy**: discards information for higher ratios (e.g., JPEG, MP3).
+- Example image sizes from lossy compression steps: 1598 kB → 638 kB → 283 kB.
+- Focus here: lossless basics.
+
+### Lossless idea (dictionary approach)
+
+- Find frequent or long repeats.
+- Enumerate patterns into an index.
+- Store dictionary plus index sequence.
+- Example in slides compresses repeated phrases like “The red ball …” by mapping phrases to numbers, shrinking 204 bytes to 86 bytes.
+
+---
+
+## Mental models
+
+- **Tree model**: everything hangs from root; path is a route from root to leaf.
+- **Two metadata layers**: file system holds names, paths, perms; file header holds type details.
+- **Encoding model**: characters → code points → bytes per encoding; UTF-8 adds length via leading bits.
+- **Compression model**: redundancy is opportunity. Pattern dictionary reduces repeated text.
+
+## What to remember for exams and labs
+
+- State what permissions mean on files vs directories.
+- Explain why renaming a file does not change its real type.
+- Draw a directory tree and label root, inner nodes, leaves.
+- Decode a UTF-8 byte sequence using leading-bit rules.
+- Describe lossless vs lossy with one concrete example and the slide sizes.
+
+ASCII AND UTF-8 are backwards compatible because:
+
+- ASCII uses only 7 bits (values 0–127).
+- In UTF-8, all those same values are stored as a single byte starting with `0`.
+- That means any ASCII file is already valid UTF-8 with no changes.

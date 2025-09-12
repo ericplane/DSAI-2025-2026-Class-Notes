@@ -1,0 +1,143 @@
+# 📘 Series Convergence — Essential Guide
+
+## **Core Concepts**
+
+- **Series**: $\sum a_n$ = sum of infinite sequence
+- If r < 1, series converges, greater than one, diverges
+- **Convergence**: $S_N \to L$ (finite limit)
+- **Necessary condition**: If $\sum a_n$ converges → $\lim_{n\to\infty} a_n = 0$
+    - ⚠️ **NOT sufficient**: $\sum \frac{1}{n}$ has $a_n \to 0$ but diverges
+
+---
+
+## **Reference Series (Memorize)**
+
+| Series | Form | Behavior | Sum (if converges) |
+| --- | --- | --- | --- |
+| **Geometric** | $\sum ar^n$ | Converges if $\ | r\ |
+| **p-Series** | $\sum \frac{1}{n^p}$ | Converges if $p > 1$ | — |
+| **Harmonic** | $\sum \frac{1}{n}$ | **Diverges** | — |
+
+---
+
+## **Test Decision Tree**
+
+```
+Does a_n → 0? → NO → Series DIVERGES
+     ↓ YES
+Is it geometric/p-series? → YES → Apply formula
+     ↓ NO
+Factorials/exponentials? → YES → RATIO TEST
+     ↓ NO
+nth powers? → YES → ROOT TEST  
+     ↓ NO
+Rational functions? → YES → COMPARISON TESTS
+     ↓ NO
+Telescoping pattern? → YES → Partial fractions
+```
+
+---
+
+## **Essential Tests**
+
+### **Comparison Test**
+
+- If $0 \le a_n \le b_n$ and $\sum b_n$ converges → $\sum a_n$ converges
+- If $0 \le b_n \le a_n$ and $\sum b_n$ diverges → $\sum a_n$ diverges
+
+### **Limit Comparison Test**
+
+$$L = lim_{ntoinfty} frac{a_n}{b_n}$$
+
+- If $0 < L < \infty$ → both series have **same behavior**
+
+### **Ratio Test**
+
+$$rho = lim_{ntoinfty} left|frac{a_{n+1}}{a_n}right|$$
+
+- $\rho < 1$ → converges
+- $\rho > 1$ → diverges
+- $\rho = 1$ → **inconclusive**
+
+### **Root Test**
+
+$$sigma = lim_{ntoinfty} sqrt[n]{|a_n|}$$
+
+- $\sigma < 1$ → converges
+- $\sigma > 1$ → diverges
+- $\sigma = 1$ → **inconclusive**
+
+---
+
+## **Key Examples**
+
+1. $\sum \frac{1}{n(n+2)}$ → Partial fractions: $\frac{1/2}{n} - \frac{1/2}{n+2}$ → **Sum = 3/4**
+2. $\sum \frac{1}{n^2+1}$ → Compare with $\frac{1}{n^2}$ → **Converges**
+3. $\sum \frac{n^2+1}{n^3+1}$ → Behaves like $\frac{1}{n}$ → **Diverges**
+4. $\sum \frac{1}{\pi^n + 5}$ → Behaves like $\frac{1}{\pi^n}$ → **Converges**
+
+---
+
+## **Finding Sums of Series**
+
+### **Index Starting Points**
+
+- $\sum_{n=0}^{\infty}$ → starts with $n=0$ (first term: $a_0$ )
+- $\sum_{n=1}^{\infty}$ → starts with $n=1$ (first term: $a_1$ )
+- $\sum_{n=k}^{\infty}$ → starts with $n=k$ (first term: $a_k$ )
+
+### **Geometric Series Sum Formula**
+
+For $\sum_{n=0}^{\infty} ar^n$ where $|r| < 1$ :
+
+$$S = frac{a}{1-r}$$
+
+**Example**: $\sum_{n=0}^{\infty} \frac{1}{2^n} = \frac{1}{1-\frac{1}{2}} = 2$
+
+For $\sum_{n=1}^{\infty} ar^n$ where $|r| < 1$ :
+
+$$S = frac{ar}{1-r}$$
+
+**Example**: $\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{\frac{1}{2}}{1-\frac{1}{2}} = 1$
+
+### **Telescoping Series**
+
+When terms cancel out, leaving only finite terms:
+
+$$sum_{n=1}^{infty} left(frac{1}{n} - frac{1}{n+1}right) = 1$$
+
+**General form**: $\sum (b_n - b_{n+1}) = b_1 - \lim_{n\to\infty} b_n$
+
+### **Shifting Indices**
+
+To change starting point: $\sum_{n=k}^{\infty} a_n = \sum_{n=0}^{\infty} a_{n+k}$
+
+**Example**: $\sum_{n=3}^{\infty} \frac{1}{2^n} = \sum_{n=0}^{\infty} \frac{1}{2^{n+3}} = \frac{1}{8} \sum_{n=0}^{\infty} \frac{1}{2^n} = \frac{1}{8} \cdot 2 = \frac{1}{4}$
+
+---
+
+## **Common Mistakes to Avoid**
+
+- ❌ $a_n \to 0$ means series converges
+- ❌ Using wrong comparison series
+- ❌ Forgetting absolute value in ratio/root tests
+- ❌ Applying ratio test when $\rho = 1$
+
+---
+
+## **Quick Reference**
+
+- **Polynomials**: Use comparison with p-series
+- **Exponentials**: Use ratio test
+- **Logarithms**: Usually diverge (compare with harmonic)
+- **Factorials**: Always use ratio test
+- **Telescoping**: Look for partial fraction decomposition
+
+---
+
+## **Memory Aids**
+
+- **"p > 1 = Peace"** → p-series converges
+- **"Geo < 1 = Go"** → geometric converges
+- **"Ratio for growth, Root for powers"**
+- **"Compare when in doubt"**

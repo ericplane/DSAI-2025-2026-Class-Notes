@@ -1,0 +1,85 @@
+# Basic Computer Hardware Concepts — Part 1 Notes
+
+
+## Summary:
+
+## Learning goals
+
+- Von Neumann model at a high level.
+- Roles of RAM, ROM/firmware, CPU, GPU, buses, I/O devices.
+
+## Von Neumann model
+
+- CPU + memory + buses + I/O. Single store for code and data.
+- CPU internals: Control Unit, ALU, registers (PC, IR, Accumulator).
+- Cycle: fetch → decode → execute.
+    - Fetch: PC puts address on bus, instruction loads into IR.
+    - Decode: Control Unit interprets IR.
+    - Execute: ALU ops and bus reads or writes.
+- Memory: byte addressable via address bus, volatile.
+- Buses: address bus selects location, data bus carries values and instructions, control lines mark read or write.
+- I/O: devices exposed as memory-mapped registers at specific addresses. CPU reads or writes those addresses.
+
+## Hardware overview
+
+- Motherboard, CPU, RAM, firmware BIOS, GPU, USB and network, HDD, SSD, power supply.
+
+## Motherboard
+
+- Connects all components and hosts firmware and I/O.
+- Bus: parallel wires for data transport.
+- CPU socket: fast bus to processor. DRAM slots: fast bus to RAM.
+- Expansion: AGP or PCI slots for extra hardware like a GPU. May use shared memory.
+- Peripheral connectors: IDE, USB, ATX etc, slower buses.
+
+## CPU
+
+- Executes program instructions.
+- Reads and writes RAM and I/O over the bus.
+- Fetches instructions from RAM.
+- Modern chips have multiple cores.
+
+## RAM
+
+- Working memory. Volatile.
+- Holds data and program instructions.
+- Connected to CPU via a high-speed 64-bit data bus.
+
+## GPU
+
+- Specialized display adapter.
+- Frame buffer stores RGB pixels. Slide example: 1920×1280, 8 bits per color, about 7 MB. Output over HDMI.
+- On-board memory for textures and data such as matrices or neural nets.
+- Many simple processors for parallel math, including tensor cores. Used for 3D and for neural network training and inference.
+
+## Other peripherals and I/O
+
+- Bus types: serial like USB and PCI Express. Older parallel 8-bit buses had sync issues at speed. PCIe uses multiple serial lanes.
+- Disks: HDD spinning magnetic media, SSD non-volatile flash, USB removable storage. File systems live on them.
+- Network: wired LAN, wireless LAN, Bluetooth.
+- Human input: mouse and keyboard.
+
+## Firmware and boot
+
+- Firmware is non-volatile code and data to configure and start the system.
+- Power-on: CPU executes from reset vector (x86 example 0xFFFFFFF0). Chipset maps firmware to that address.
+- Firmware initializes minimal hardware: RAM, CPU state, disk I/O.
+- Bootloader: firmware finds MBR boot code on disk, loads it, jumps to it.
+- OS load: bootloader prepares CPU, locates kernel file, loads it, jumps to kernel. OS starts.
+
+---
+
+## Mental models
+
+- One store for code and data. Instructions are just bytes in RAM.
+- CPU only moves data and computes. Everything else is memory or mapped registers.
+- Buses are shared highways. Address picks location, control picks action, data carries payload.
+- Boot is just a chain of jumps from firmware to bootloader to kernel.
+
+## Exam and lab recall
+
+- Name the CPU parts and walk fetch–decode–execute.
+- Explain byte addressing and volatile RAM.
+- Differentiate address, data, and control lines.
+- Describe memory-mapped I/O.
+- Outline firmware to OS boot flow with the reset vector and MBR.

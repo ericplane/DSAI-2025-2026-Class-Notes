@@ -1,0 +1,162 @@
+VERY GOOD RESOURCE:
+https://missing.csail.mit.edu/
+
+**Course goal 1:** 
+
+Theory: understand the basics of a computer system
+
+**Course goal 2:** 
+
+Practice: Apply Basic Digital Skills necessary for Computer Science
+
+-Basic computer hardware concepts
+
+-Number systems and data representation
+
+-Files and files systems
+
+-Operating system fundamentals
+
+-Networking and Cloud Fundamentals
+
+**Course goal 3:** 
+
+Theory: Understand basic programming concepts
+
+**Course goal 4:** 
+
+Apply basic programming concepts in *Start* pseudocode
+
+-Basic programming pipeline
+
+-Variable-related concepts
+
+-Operations and expressions
+
+-Control flow
+
+-Basic principle of object orientation (OO)
+
+-Variable scope and lifetime.
+
+## Summary:
+The course covers basic computer systems, digital skills, and programming concepts, including hardware, number systems, operating systems, and networking. Instruction consists of three blocks per week with mandatory attendance, practical assignments, and a theoretical exam. Key learning goals include understanding binary and hexadecimal systems, logic circuits, and number representations in computing.
+
+## Mode of Instruction
+
+Three (3) blocks of two hours per week (2+2 and 2). Presence is mandatory.
+
+Week structure block consists of
+
+- Block 1 and 2
+1 hour lecture
+ 1 hour instruction plenary, and work on assignments
+- Block 3
+1 hour Q and A and mini exam
+1 hour instruction plenary, and finalize assignments + submit in BS.
+
+## Assessment Method
+
+Every week has 2 (sets of) practical assignments (Covering course Goal 2 and 4)
+
+- Deadline end of the week.
+- Non-graded but mandatory to submit in Brightspace at end of last instruction hour.
+
+End of week mini exam at the end of last lecture                                                                                   
+
+- Mandatory submit in Brightspace
+
+Failure to upload the assignments results in failing the course. 
+These are considered practical skill tests required to participate in 
+the exam.  
+
+**End of course theoretical exam (100% of grade)**
+
+- MC knowledge and understanding questions on the Theory (see above Goal 1 and 3)
+- Writing Pseudocode in Start (Goal 4)
+
+**Bonus**: if assignments and mini exams are all done 
+well, you earn the right to an oral assessment based on your assignments
+ and mini exams, in case you should fail the retake of the DSiTP exam.
+
+## Learning Goals:
+
+- Understand binary and hexadecimal number systems
+- Understand basic encodings including bits, bytes, words, floats
+- Understand some simple logic circuits
+
+## Content
+
+A number system defines how to represent numbers using symbol sequences
+
+- It defines the radix (base number)
+- It defines a writing order (where is the least and most significant major digit)
+
+For example the dozenal:
+
+- Radix 12, 12 symbols (0,,,9, A B) so A6 would be 10*12^1 + 6*12^0 = 126 in normal decimal notation
+
+Computers work with discrete eletric signals
+
+0 (low voltage), 1 (high voltage). Alternation of voltage generates a signal (01010101).
+
+Storage of signals also uses high and low voltages
+
+**Binary Systems and Number Representations**
+
+Radix: 2, symbols (0,1)
+
+Most significant (left) to least significant(rught)
+
+Example: 1101 → 1*2^3 + 1*2^2 + 0*2^1 +1*2^0 = 13 in decimal
+
+Addition: 101 + 101 = 1010
+
+Substraction: 1101 - 10 = 1011
+
+Multiplication: 11 * 110 = (110 + 1100) = 10010, essentially 1*1 = 1, 1*0 = 0, 0*0 = 0
+
+![image.png](attachment:6c837cbe-09d2-4904-b757-7b9def02b88f:image.png)
+
+A single binary digit is called a bit 0 or 1
+
+8 bits is a byte
+
+We use standard greek extensions for sizes
+
+**The hexadecimal number system**
+
+The decimal and binary system have incompatible Radix (10 is not a power of 2) hence they do not convert well. So often we use the hexadecimal number system (radix 16, 0,,,9, A…F. For example FF → 15*16^1 + 15*16^0 = 255
+
+**The number representations in computing**
+
+Unsigned integer = binary representation (only natural numbers) 
+
+- Begin with 1 sign bit then number bits
+- Positive numbers, just as unsigned integers, for example 00011011 → 27
+- Negative numbers, use first bit 1 then two’s complement → 1100101 → -27 (1^2*0 + 0^1 + 2^1*2
+
+| n1 | n2 | n1 + n2 |
+| --- | --- | --- |
+| 00000011 (3) | 11111101 (-3) | 0000000 |
+| 00001000 (8) | 11110111 (-9) | 111111111 (-1) |
+| 00010100 (20) | 11111011 (-5) | 00001111 (15) |
+
+So essentially how to write -9 is the complement of 8
+
+Signed integer = Signed binary with twos complement (all integers)
+
+Floating point = exponent plus mantissa (all real numbers)
+
+A word is typically a 16-bit, a long is often a 32-bit (4 bytes)
+
+Floating Point 8 bit (minifloat standard, not official)
+
+- 1 sign bit (1 is negative)
+- 3 exponent bits (-3 to 3,000 - 110)
+- 4 mantissa (precision_ bits)
+- -1^sign *1.mantissa * 2^(exponent-bias)
+
+$$
+(−1)sign×(1+mantissa/16)×2exponent−3
+$$
