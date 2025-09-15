@@ -82,7 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP",
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP",
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP",
+        "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP",
+        "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP",
         "Year1/Semester1/Orientation AI/ExamPrep.md",
+        "Year1/Semester1/Orientation AI/Lectures/Lecture_1_READING_OAI",
         "Year1/Semester1/Studying and Presenting/Notes.md",
         "Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md",
         "Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting"
@@ -611,7 +614,10 @@ document.addEventListener('DOMContentLoaded', () => {
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP',
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP',
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP',
+            'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP',
+            'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP',
             'Year1/Semester1/Orientation AI/ExamPrep.md',
+            'Year1/Semester1/Orientation AI/Lectures/Lecture_1_READING_OAI',
             'Year1/Semester1/Studying and Presenting/Notes.md',
             'Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md',
             'Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting'

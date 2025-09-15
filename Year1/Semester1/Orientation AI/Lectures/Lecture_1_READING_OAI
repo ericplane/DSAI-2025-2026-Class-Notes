@@ -1,0 +1,118 @@
+- ~~Stuart Russell & Peter Norvig's "Artificial Intelligence: A Modern Approach", 1995, chapter 1, section 1.1. [Available from author Stuart Russell himself](https://people.eecs.berkeley.edu/~russell/aima1e/chapter01.pdf). Further sections in chapter 1 are also a very interesting read but optional.~~
+- Sections 1 and 2 in Turing, Alan (October 1950), [Computing Machinery and Intelligence](https://academic.oup.com/mind/article/LIX/236/433/986238), Mind, LIX (236): 433–460
+- Open University. [The Chinese Room](https://www.youtube.com/watch?v=TryOC83PH1g). 60 second adventures in thought,
+- ~~The [Philosophy Bites podcast about the Chinese Room Argument](https://open.spotify.com/episode/5GgsP1iXM4na7jj3enkGhd?si=u6_dqLnrTXK-ooglG5w38A) (2013) with Daniel Dennett (16 minutes)~~
+- Daniel Dennett (1990) “*Can Machines Think?*” about the Turing test (43 small pages). Available [from author Daniel Dennett himself](https://www.researchgate.net/publication/285475907_Can_Machines_Think).
+
+## Specific Terms
+
+- **Turing Test**: Defines intelligence as indistinguishable from human in text dialogue. Needs natural language, knowledge representation, reasoning, learning.
+- **Total Turing Test**: Adds vision + robotics.
+- **Natural Language Processing (NLP)**: Communicate in human languages.
+- **Knowledge Representation**: Structures to store/use info.
+- **Automated Reasoning**: Derive conclusions from knowledge.
+- **Machine Learning**: Detect patterns, adapt.
+- **Computer Vision**: Perceive environment visually.
+- **Robotics**: Act physically in the world.
+- **Cognitive Science**: Interdisciplinary field combining psychology + AI models to explain mind.
+- **General Problem Solver (GPS)**: Early cognitive-modeling program (Newell & Simon).
+- **Syllogism**: Deductive logic form (e.g., “All men are mortal…”).
+- **Logicist Tradition**: AI as logical reasoning system. Limits: formalization difficulty + computational explosion.
+- **Agent**: Entity that perceives and acts.
+- **Rational Agent**: Acts to maximize goal achievement given beliefs.
+- **Limited Rationality**: Acting effectively when full rationality is computationally impossible.
+
+# Turing (1950) — *Computing Machinery and Intelligence*, §§1–2
+
+## 1. The Imitation Game
+
+- **Problem reframed.** Replace “Can machines think?” with a testable proxy. Rather than define “machine” or “think,” ask whether a machine can succeed in a specific game. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Setup.** Three roles: **A** (man), **B** (woman), **C** (interrogator). Interrogator communicates only via text and must decide who is who. Swap **A** for a **machine** and ask whether the interrogator’s accuracy drops to human–human levels. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Text-only channel.** No voice, vision, or touch. Purpose: isolate **intellectual** performance from **physical** appearance or traits. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Sample prompts** (illustrative, not requirements):
+    - Write a sonnet on the Forth Bridge → the responder deflects.
+    - Compute 34957+70764=10562134957 + 70764 = 105621.
+    - Chess endgame query → “R–R8 mate” after brief pause.
+        
+        Goal: broad, open-ended questioning across human domains. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+        
+
+## 2. Critique of the New Problem
+
+- **Why this test?**
+    - Cleanly separates **intellectual** from **physical** capacities.
+    - Avoids stacking the deck with beauty contests or speed races.
+    - Admits almost any topic via Q&A. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Is the bar “too hard”?** Maybe machines think in ways unlike humans. Reply: if a machine still **wins the game**, the objection loses force for the practical purpose at hand. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Strategy point.** Best strategy is assumed to be “answer as a human would,” not exploit quirks of the game. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+
+### Connections
+
+- Anticipates later **Turing Test** discussions, Dennett’s critique of “quick probes,” and Searle’s **Chinese Room** challenge to “understanding.” ([Wikipedia](https://en.wikipedia.org/wiki/Computing_Machinery_and_Intelligence?utm_source=chatgpt.com))
+
+---
+
+# Open University — *60-Second Adventures in Thought: The Chinese Room*
+
+## Core Thought Experiment (Searle, 1980)
+
+- **Scenario.** An English speaker in a room follows an **instruction book** to map Chinese inputs to Chinese outputs. Externally the exchange looks fluent; internally there is **no understanding** of Chinese. ([The Open University](https://www.open.edu/openlearn/mod/oucontent/view.php?id=135791&section=5.3&utm_source=chatgpt.com))
+- **Claim.** Symbol manipulation by rules (**syntax**) is not the same as **semantics**. Passing a conversational test can be **mere simulation**, not understanding. ([The Open University](https://www.open.edu/openlearn/mod/oucontent/view.php?id=135791&section=5.3&utm_source=chatgpt.com))
+- **Relation to Turing.** Even if a system convinces judges, the video notes, critics argue that does not prove **real intelligence** or **conscious understanding**. ([The Open University](https://www.open.edu/openlearn/mod/oucontent/view.php?id=135791&section=5.3&utm_source=chatgpt.com))
+
+[Figure: cartoon animation of a person in a sealed room exchanging slips of paper, guided by a rulebook.]
+
+### Connections
+
+- Directly targets **strong AI** claims. Poses a counter-example to equating **behavioral indistinguishability** with **mentality**. Sets up Dennett’s response emphasizing **breadth** and **depth** of competence. ([The Open University](https://www.open.edu/openlearn/history-the-arts/philosophy/60-second-adventures-thought-duplicate?trackno=3&utm_source=chatgpt.com))
+
+---
+
+# Dennett (1990) — *Can Machines Think?* (Turing Test analysis)
+
+## Purpose and Framing
+
+- Replace sterile definitions with an **operational challenge**: robust, open-ended conversation indistinguishable from a human over time. Dennett defends this spirit of Turing’s move.
+
+## The “Quick-Probe Assumption” (and why it fails)
+
+- **Bad shortcut.** Treating a **brief** or **narrow** exchange as decisive evidence of intelligence.
+- **Reason it fails.** Narrow feats can be **compartmentalized** or **scripted** without general understanding.
+
+## Toy Successes and Their Limits
+
+- **ELIZA/PARRY.** Early dialogue programs could fool some interlocutors (e.g., simulating a therapist or a paranoid patient), yet relied on **stock patterns** and domain constraints. Not evidence of general intelligence.
+- **CYRUS and expert systems.** Strong performance in a **tight knowledge niche** does not generalize to everyday discourse or world knowledge.
+
+## Why Alternative “Tests” Fail
+
+| Candidate test | Why it’s inadequate |
+| --- | --- |
+| **Win the World Chess Championship** | Chess prowess is an **isolated talent**; programs can excel here while lacking general competence. |
+| **Solve the Arab–Israeli conflict** | **Unrepeatable**, slow, and ill-defined pass criteria. |
+| **Steal the Crown Jewels nonviolently** | Tests logistics and resources more than **cognitive breadth**. |
+| Sources for examples and analysis. ([ftp.mclarkdev.com](https://ftp.mclarkdev.com/uploads/library/Programming/Artificial%20Intelligence/turingtest_verbalbehaviorasthehallmarkofintelligence.pdf?utm_source=chatgpt.com)) |  |
+
+## What a Serious Turing Test Demands
+
+- **Breadth**: flexible knowledge of people, places, events, humor, idioms, errors, repairs.
+- **Depth**: reasoning chains across time, consistency under prolonged cross-exam.
+- **Robustness**: resilience to topic shifts, trick questions, and follow-ups outside any pre-script.
+
+### Connections
+
+- Answers the **Chinese Room** by stressing that passing a **rich, extended** Turing-style interrogation across open domains is not trivial “rule-following.” It requires integrated competencies that, if achieved, would undercut the thought experiment’s force.
+
+---
+
+## Cross-Resource Synthesis
+
+- **Turing’s move**: operationalize “thinking” via an **imitation game** that isolates intellect from embodiment. ([courses.cs.umbc.edu](https://courses.cs.umbc.edu/471/papers/turing.pdf))
+- **Searle’s challenge**: behavioral success can be **syntactic** without **semantic** understanding. ([The Open University](https://www.open.edu/openlearn/mod/oucontent/view.php?id=135791&section=5.3&utm_source=chatgpt.com))
+- **Dennett’s reply**: only a **deep and wide** probe avoids “quick-probe” illusions; narrow tricks do not pass a **serious** Turing test.
+
+**Connections:**
+
+- Links to **philosophy of mind** (intentionality, semantics vs. syntax), **cognitive architecture** (knowledge representation, learning, robustness), and **evaluation methodology** for AI systems.
+
+---

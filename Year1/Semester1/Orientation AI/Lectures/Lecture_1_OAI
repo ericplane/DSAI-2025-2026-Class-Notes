@@ -1,0 +1,150 @@
+---
+
+# Orientation AI — Class 1: What is AI?
+
+**Course:** Leiden University — Orientation AI
+
+**Session:** Class 1
+
+**Topic:** What is AI?
+
+**Lecturer:** Max van Duijn
+
+**Date:** September 2025
+
+---
+
+## 1) Social context: “What is AI?”
+
+When people hear “AI,” they usually think about:
+
+- Generative models (e.g., chatbots, image generators).
+- Robots and autonomous vehicles.
+- Concepts like singularity, AGI (Artificial General Intelligence), and ASI (Artificial Superintelligence).
+- Ethical questions, privacy issues, and energy costs.
+- Warfare and autonomous weapons.
+- Societal influence of AI systems.
+- Philosophical benchmarks like the **Turing Test**.
+- Critiques such as the **Chinese Room Argument**.
+
+---
+
+## 2) Plan of the session
+
+- Explore the history of AI.
+- Examine AI in philosophy and popular culture.
+- Ask what intelligence really is, human or artificial.
+- Study and critique the **Turing Test**.
+- [Figure: Example artwork — J.W. Waterhouse, 1903]
+
+---
+
+## 3) AI in the zeitgeist
+
+- Current framing in media: “AI: hype or revolution?”
+- Industry reports highlight AI’s momentum but also uncertainty.
+- Important to remember: AI has **decades of history** in research and culture, not just recent hype.
+
+### Cultural examples
+
+- Theatre/performance piece *Uncanny Valley* (Ars Electronica, 2023).
+- **Geminoid HI-1** (2004), an android robot created by Hiroshi Ishiguro, designed to look like himself.
+
+---
+
+## 4) Sentience and consciousness
+
+**Questions often raised:**
+
+- Is AI sentient?
+- Is AI conscious?
+- Can it think?
+
+**Examples:**
+
+- Blake Lemoine (2022) claimed Google’s **LaMDA** chatbot was “sentient.”
+- AI Weirdness blog showed how large language models can generate absurd conversations (e.g., “interview with a squirrel”).
+
+**Quote:**
+
+> “The question of whether a computer can think is no more interesting than the question of whether a submarine can swim.” — Edsger Dijkstra
+> 
+
+---
+
+## 5) Course practicalities
+
+- **Exams:**
+    - Closed-book multiple choice (~40 questions).
+    - Final exam: January 14, 2026.
+    - Retake: March 20, 2026.
+    - Location: University Sports Center.
+- **Question hour:** Held in the week before the exam.
+- **Midterm homework test:**
+    - ~10 multiple-choice questions.
+    - Takes place during first 30 minutes of class on September 26, 2025.
+- **Registration rules:**
+    - First-year students are automatically registered for course and exam.
+    - Other students must register via MyStudyMap.
+    - Retake participants must also register separately.
+- **Resources:** Course page on Brightspace and an online e-study guide.
+
+---
+
+## 6) Can machines think? The Turing Test
+
+**Alan Turing, “Computing Machinery and Intelligence” (1950):**
+
+- Reframed the question “Can machines think?” into a testable setup.
+- **Imitation Game / Turing Test:**
+    - A human interrogator asks written questions.
+    - They must decide if the responder is a human or a machine.
+    - Communication is text-only to remove appearance cues.
+
+---
+
+## 7) Approaches to AI (Russell & Norvig framework)
+
+|  | Like a Human | Rational (Optimal) |
+| --- | --- | --- |
+| **Thinking** | Cognitive modeling | Laws of thought |
+| **Acting** | Turing Test approach | Rational agent approach |
+
+---
+
+## 8) Dennett on the Turing Test
+
+- Daniel Dennett, *Can Machines Think?* (1985).
+- The test relies on the **quick-probe assumption**: if a system can handle unrestricted questioning, it must have many other cognitive abilities.
+- Distinction between **restricted** Turing Tests (narrow domains) and **unrestricted** ones (any question).
+- Risk of **“Potemkin Village” AI**: systems designed to fake understanding without real intelligence.
+
+**Key quotations:**
+
+- “Any computer that can regularly fool a discerning judge in this game would be intelligent—would be a computer that thinks—beyond any reasonable doubt.”
+- “Nothing could possibly pass the Turing Test without being able to perform infinitely many other clearly intelligent actions.”
+
+**Operational role:**
+
+- The Turing Test avoids ontological debates (“truly intelligent”) by offering an empirical, behavioral standard.
+
+---
+
+## 9) AI dichotomies (continuums)
+
+- Weak AI ↔ Strong AI.
+- Narrow AI ↔ General AI.
+- Symbolic AI ↔ Connectionist AI.
+    
+    (More detail to be covered in next class.)
+    
+
+---
+
+## Connections
+
+- Leads into **philosophy of mind** (consciousness, thought experiments).
+- Sets up key benchmarks in AI evaluation (Turing Test vs. alternatives).
+- Introduces distinctions (weak/strong, symbolic/connectionist) that will guide future lectures.
+
+---
