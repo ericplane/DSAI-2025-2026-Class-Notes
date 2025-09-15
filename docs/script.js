@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Detect if we're running on GitHub Pages and adjust paths accordingly
     const isGitHubPages = window.location.hostname === 'juliusbrussee.github.io';
-    const basePath = isGitHubPages ? '/DSAI-2025-2026-Class-Notes/' : './';
+    const basePath = isGitHubPages ? '/DSAI-2025-2026-Class-Notes/' : '../';
     
     // --- File Loading & Navigation ---
     // Embedded file list for CORS-free operation (using relative paths)
