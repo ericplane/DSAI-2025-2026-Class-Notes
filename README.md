@@ -2,7 +2,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml)
 
-A modern, responsive web application for organizing and viewing DSAI (Data Science and Artificial Intelligence) class notes at Leiden University.
+A modern, responsive web application for organizing and viewing DSAI (Data Science and Artificial Intelligence) class notes at Leiden University made by Julius Brussee
 
 ## Features
 
