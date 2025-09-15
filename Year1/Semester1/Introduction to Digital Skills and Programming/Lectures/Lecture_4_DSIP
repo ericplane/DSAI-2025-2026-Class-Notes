@@ -1,0 +1,117 @@
+# Lecture 4 — Operating System Fundamentals
+
+## Slide 1 — Operating System Fundamentals
+
+- Title slide.
+
+## Slide 2 — Learning goals
+
+- Understand the role of the OS in hardware and software management.
+- Understand user interaction via GUI and CLI.
+- Distinguish kernel code and drivers, system calls, and user applications.
+- Understand basic resource management: memory, processes, applications, accounts, and access rights.
+
+## Slide 3 — What is an Operating System really? (Function)
+
+- An OS is a collection of software that makes use and development for a particular computer system easier.
+- In short: it enables effective computer use.
+- Without an OS, a computer is just hardware; it may boot, but that is all.
+
+## Slide 4 — What is an Operating System really? (Composition)
+
+- **User interface** (typically part of user applications):
+    - GUI: graphical user interface (“windows”).
+    - CLI: command line interface (“shell,” “command prompt”).
+- **Kernel**:
+    - **Drivers**: specialized software that controls hardware and allows other kernel processes to control hardware.
+    - Core services: memory management, account management and access rights, process management, application management.
+- **System calls**:
+    - Kernel- and driver-provided functions that applications use to request OS/hardware services (e.g., open a file).
+
+## Slide 5 — User applications / application management
+
+- A user application is software you install on your computer.
+- Applications run in **user mode** with restricted hardware access for:
+    - Safety (reduce virus risk).
+    - Stability (contain crashes).
+- Applications use **system calls** for tasks such as memory, file, or GPU access.
+- **Installing** an application involves:
+    - Creating a directory on the file system to store executables, data, and configuration files.
+    - Copying executable and data files from an archive into that directory.
+    - Registering the application in a **registry** so the OS knows it exists, its version, etc.
+        - The registry is a special OS-owned file.
+    - [Optional] Registering **file type associations** with the main executable.
+        - The OS maps file types to applications (e.g., `.doc` → Word).
+
+## Slide 6 — Kernel and Drivers
+
+- Kernel code and drivers provide core OS functionality:
+    - Hardware access and control (via drivers and system calls).
+    - Memory management: allocate and isolate memory for processes.
+    - Process management: scheduling, creating, terminating processes.
+    - Application management: provide system calls and installation housekeeping.
+    - User account and permission management (often with user-space tools too).
+- The kernel runs in **kernel mode** (privileged/supervisor mode) with unrestricted hardware access:
+    - Direct access to hardware ports, memory, and privileged CPU instructions.
+- Why kernel mode matters:
+    - **Safety**: isolates critical operations from unauthorized or unintended changes.
+    - **Stability**: prevents user programs from issuing harmful CPU instructions.
+
+## Slide 7 — System calls
+
+- System calls expose kernel functionality to user applications:
+    - An application requests a service (e.g., `read()` in C).
+    - A system call switches the CPU from user mode to kernel mode.
+    - The kernel performs the service (possibly via drivers if hardware is involved).
+    - Control returns to the application with the result.
+- Example: reading a file from disk.
+
+## Slide 8 — Memory management
+
+- The OS manages memory:
+    - **Allocation**: when a program opens, the OS reserves memory for it.
+    - **Deallocation**: when a program closes, the OS frees memory for reuse.
+    - **Isolation**: programs get private address spaces to avoid interference.
+    - **Virtual memory**: when RAM is insufficient, the OS uses disk as extra memory (swap file).
+    - **Protection**: limits access to prevent buggy/malicious code from crashing the system.
+- Why this matters:
+    - Faster operation via smart memory use.
+    - Fewer crashes due to isolation.
+    - More safety by restricting access to sensitive regions.
+
+## Slide 9 — Process management
+
+- A **process** is a running program.
+- The OS:
+    - **Starts** programs by loading code from disk into a new process.
+    - **Tracks** process states: running, paused, waiting, finished.
+    - **Shares** CPU time: only one process per core at a time; OS time-slices for multitasking.
+    - **Stops** misbehaving processes to preserve stability.
+    - **Enables IPC**: provides safe inter-process communication when programs must exchange data.
+- Why this matters:
+    - **Multitasking**: concurrent activities like music playback and web browsing.
+    - **Stability**: one crash does not take down the system.
+    - **Fairness**: no single process monopolizes CPU.
+
+## Slide 10 — Account management and access rights
+
+- The OS manages who can use the computer and what they can do.
+- **User accounts**: separate settings, files, and permissions for each user.
+- **Authentication**: username and password at login; OS loads the user’s environment (e.g., home directory).
+- **Access rights**:
+    - Admins have full control. Regular users have limited rights for safety.
+    - The OS enforces which files, programs, or settings a user can access.
+- **File protection**: enforce read, write, execute, and delete permissions.
+- Why this matters:
+    - **Security**: protect private files.
+    - **Safety**: prevent accidental or intentional damage.
+    - **Personalization**: preserve user-specific settings and data.
+
+### Connections:
+
+- Security: authentication, permissions, and isolation underpin system security.
+- Systems programming: system calls and process/memory models drive API design.
+- Networking: user accounts and keys integrate with remote authentication.
+- Cloud and deployment: application management scales to package managers and containers.
+
+---

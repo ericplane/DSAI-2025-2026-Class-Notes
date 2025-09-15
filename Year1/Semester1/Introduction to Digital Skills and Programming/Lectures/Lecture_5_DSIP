@@ -1,0 +1,111 @@
+# Lecture 5 — Networking and Cloud Fundamentals
+
+## Slide 1 — Networking and cloud fundamentals
+
+- Title slide.
+
+## Slide 2 — Learning goals
+
+- Understand the TCP/IP model: IP addressing hierarchy, routing, ports, and four layers.
+- Explain the client–server model.
+- Understand remote storage and computation.
+- Know common IP-based protocols: HTTP, FTP, SSH.
+
+## Slide 3 — Computers are not alone (Concepts)
+
+- Computers connect to a network over a **physical medium** (wired or wireless) that carries binary signals.
+- Each computer has a logical hierarchical address: the **IP address**.
+- Data travels in **packets** addressed to a destination IP.
+- **Routers** forward packets using the hierarchical structure of IP addresses.
+- **Servers** (always-on, powerful) provide services such as websites, email, or file storage.
+- **Clients** (phones, PCs) request or submit data to servers (e.g., load webpages, upload files).
+
+## Slide 4 — Computers are not alone (Figure)
+
+- [Figure: schematic showing clients and servers connected through routers over wired/wireless links, with IP-addressed packets flowing between nodes.]
+
+## Slide 5 — TCP/IP network model
+
+| Layer | Core function | Examples |
+| --- | --- | --- |
+| Application | Services used by user apps | HTTP, HTTPS, FTP |
+| Transport | End-to-end communication, reliability, segmentation | TCP, UDP |
+| Internet/Network | Logical addressing and routing | IP |
+| Link (Network Access) | Physical transmission within a local network | Ethernet, Wi-Fi |
+
+## Slide 6 — IP addresses and ports
+
+- **IP addresses** (Network layer) identify the destination host for a packet. Routers use them to forward across networks.
+- **Port numbers** (Transport layer) identify the destination application/service on the host.
+- **TCP** and **UDP** headers each contain a 16-bit port field ⇒ up to **65,535** ports per protocol per IP address.
+
+## Slide 7 — Client–server model (Background)
+
+- Early Internet: decentralized peer-to-peer; every computer equivalent, with static, globally reachable IPs.
+- Problems: did not scale with device growth; did not match emerging use cases like web and email.
+
+## Slide 8 — Client–server model (Definition and benefits)
+
+- **Servers**: high-performance, always-on, globally reachable, listen on specific ports, provide services (websites, databases).
+- **Clients**: user devices that send requests to servers (e.g., HTTP over TCP).
+- Benefits:
+    - Centralized control eases maintenance and security.
+    - Scales to many clients per server.
+    - Offloads heavy processing to servers.
+
+## Slide 9 — Common application protocols
+
+- **HTTP** — HyperText Transfer Protocol (port 80/81): web server ↔ web client data exchange.
+- **FTP** — File Transfer Protocol (port 21): file server ↔ client file exchange.
+- **WebSocket** — bidirectional communication over TCP (HTTP/1.1 upgrade on port 80): real-time server–client data.
+
+## Slide 10 — HTTP example
+
+- Client opens TCP connection to **IP:port** (e.g., `connect(142.250.179.196, 80)`).
+- Server accepts the connection.
+- Client sends request:
+    
+    ```
+    GET /index.html HTTP/1.0
+    
+    ```
+    
+- Server responds:
+    
+    ```
+    HTTP/1.0 200 OK
+    Content-Type: text/html
+    Content-Length: 38
+    
+    <html><body>Hello, world!</body></html>
+    
+    ```
+    
+
+## Slide 11 — Cloud storage and computation
+
+- **Storage services** (Google Drive, GitHub, OneDrive, iCloud):
+    - Document sharing, versioning, backups.
+- **Compute services** (AWS, Azure, Google Cloud):
+    - Batch, real-time, and specialized processing (e.g., GPU).
+
+## Slide 12 — Remote authentication and keys
+
+- **Username–password**: simple but cumbersome and risky.
+- **Two-factor authentication (2FA)**: adds a one-time code via a separate channel (email, SMS, authenticator app).
+- **Public–private keys (SSH)**:
+    - Generate a key pair.
+    - Register the **public key** on the server.
+    - Keep the **private key** on the local machine.
+    - On login, the server challenges you; successful decryption with the private key proves identity, avoiding password entry.
+
+## Slide 13 — LIACS servers and resources
+
+- [https://edu.liacs.nl](https://edu.liacs.nl/)
+
+### Connections:
+
+- Operating systems: sockets, processes, and permissions interact with TCP/IP and ports.
+- Security: authentication models rely on OS account management and cryptography.
+- Cloud: remote storage/computation build on client–server and application protocols.
+- Software engineering: protocol choices affect API design, scaling, and reliability.
