@@ -1,4 +1,82 @@
-# DSAI 2025–2026 Class Notes (Leiden University)
+# DSAI 2025-2026 Class Notes
+
+[![Deploy to GitHub Pages](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml)
+
+A modern, responsive web application for organizing and viewing DSAI (Data Science and Artificial Intelligence) class notes at Leiden University.
+
+## Features
+
+- 📚 **Organized Course Structure**: Year 1 Semester 1 courses including Calculus, Programming, AI Foundations, and Study Skills
+- 🧮 **Mathematical Content Support**: Full LaTeX equation rendering with MathJax
+- 🌓 **Dark/Light Theme**: Toggle between themes for comfortable reading
+- 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+- 🔍 **Search Functionality**: Quick search across all notes
+- 📂 **Collapsible Navigation**: Organized folder structure with expandable/collapsible sections
+- ⚡ **Fast Loading**: Optimized for quick access to study materials
+
+## Live Demo
+
+Visit the live website: [https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/](https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/)
+
+## Local Development
+
+1. Clone the repository:
+```bash
+git clone https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes.git
+cd DSAI-2025-2026-Class-Notes
+```
+
+2. Start a local server:
+```bash
+python3 -m http.server 8000
+```
+
+3. Open your browser and navigate to `http://localhost:8000`
+
+## Course Structure
+
+### Year 1, Semester 1
+- **Calculus 1**: Mathematical analysis and series convergence
+- **Foundations of Computer Science**: Core CS concepts
+- **Introduction to Digital Skills and Programming**: Programming fundamentals
+- **Orientation AI**: Introduction to artificial intelligence
+- **Studying and Presenting**: Academic skills development
+
+## Mathematical Content
+
+The website supports full LaTeX mathematical notation rendering, perfect for mathematical courses like Calculus. Examples include:
+
+- Inline math: `$\sum_{n=1}^{\infty} \frac{1}{n^2}$`
+- Display math: `$$\lim_{x 	o \infty} f(x) = L$$`
+- Complex formulas with proper formatting
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Technology Stack
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Math Rendering**: MathJax 3
+- **Markdown Processing**: Showdown.js
+- **Search**: Lunr.js
+- **Icons**: Font Awesome 6
+- **Hosting**: GitHub Pages
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Leiden University DSAI Program
+- MathJax for mathematical rendering
+- Font Awesome for icons
+- GitHub Pages for hosting (Leiden University)
 
 Class notes and study materials for the Data Science and Artificial Intelligence (DSAI) program, academic year 2025–2026, at Leiden University. The goal is to keep lecture notes, exam prep, and supporting materials organized and easy to navigate across years and semesters.
 

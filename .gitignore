@@ -1,2 +1,54 @@
-# VS Code settings
+# Editor and IDE files
 .vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows system files
+desktop.ini
+
+# Node.js (if using any npm packages)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (if using any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+
+# Build directories
+dist/
+build/
+
+# Local development server logs
+server.log
+
+# Backup files
+*.bak
+*.backup
+
+# Personal notes that shouldn't be shared
+personal-notes/
+private/
