@@ -1,0 +1,9 @@
+# Map detected course names (from 'Class:' or folder) to your repo course folder names
+# Keys are matched case-insensitively
+
+studying and presenting: Studying and Presenting
+introduction to digital skills and programming: Introduction to Digital Skills and Programming
+calculus 1: Calculus 1
+foundations of computer science: Foundations of Computer Science
+orientation ai: Orientation AI
+

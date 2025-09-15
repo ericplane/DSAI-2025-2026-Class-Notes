@@ -15,8 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let files = [];
     let searchIndex;
+    let searchDocs = {}; // path -> { title, headings, course, semester, content }
+    let searchPanel = null;
+    let searchResults = [];
+    let searchSelected = -1;
+    let ensureIndexPromise = null;
     let currentView = 'dashboard'; // 'dashboard' or 'content'
     let courseStats = { courses: 0, notes: 0 };
+    // Sidebar state persistence
+    let navState = { expanded: new Set(), selected: null };
+    const NAV_EXPANDED_KEY = 'nav:expanded';
+    const NAV_SELECTED_KEY = 'nav:selected';
 
     // --- Theming ---
     const applyTheme = (theme) => {
@@ -192,12 +201,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const navUl = document.createElement('ul');
-        buildNavMenu(tree, navUl);
+        buildNavMenu(tree, navUl, '');
         navigation.innerHTML = '';
+        const controls = document.createElement('div');
+        controls.style.display = 'flex';
+        controls.style.gap = '0.5rem';
+        controls.style.margin = '0 0 0.5rem 0';
+        const btnExpand = document.createElement('button');
+        btnExpand.className = 'btn';
+        btnExpand.textContent = 'Expand all';
+        btnExpand.addEventListener('click', expandAllFolders);
+        const btnCollapse = document.createElement('button');
+        btnCollapse.className = 'btn';
+        btnCollapse.textContent = 'Collapse all';
+        btnCollapse.addEventListener('click', collapseAllFolders);
+        controls.appendChild(btnExpand);
+        controls.appendChild(btnCollapse);
+        navigation.appendChild(controls);
         navigation.appendChild(navUl);
+        applyNavState();
     }
 
-    function buildNavMenu(tree, parentElement) {
+    function buildNavMenu(tree, parentElement, currentPath) {
         for (const key in tree) {
             const value = tree[key];
             const li = document.createElement('li');
@@ -223,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i class="fas fa-folder"></i> 
                     ${key}
                 `;
+                const folderPath = currentPath ? `${currentPath}/${key}` : key;
+                div.dataset.folderPath = folderPath;
                 div.addEventListener('click', (e) => {
                     e.stopPropagation();
                     toggleFolder(div, li);
@@ -231,11 +258,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const ul = document.createElement('ul');
                 ul.className = 'folder-content collapsed';
-                buildNavMenu(value, ul);
+                ul.dataset.folderPath = folderPath;
+                buildNavMenu(value, ul, folderPath);
                 li.appendChild(ul);
             }
             parentElement.appendChild(li);
         }
+    }
+
+    function expandAllFolders() {
+        navigation.querySelectorAll('.folder-content').forEach(ul => {
+            ul.classList.remove('collapsed');
+            ul.classList.add('expanded');
+            const header = ul.previousElementSibling;
+            if (header) {
+                const toggleIcon = header.querySelector('.folder-toggle');
+                if (toggleIcon) {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-down');
+                }
+                if (header.dataset.folderPath) navState.expanded.add(header.dataset.folderPath);
+            }
+        });
+        saveNavState();
+    }
+
+    function collapseAllFolders() {
+        navigation.querySelectorAll('.folder-content').forEach(ul => {
+            ul.classList.add('collapsed');
+            ul.classList.remove('expanded');
+            const header = ul.previousElementSibling;
+            if (header) {
+                const toggleIcon = header.querySelector('.folder-toggle');
+                if (toggleIcon) {
+                    toggleIcon.classList.add('fa-chevron-right');
+                    toggleIcon.classList.remove('fa-chevron-down');
+                }
+            }
+        });
+        navState.expanded.clear();
+        saveNavState();
     }
 
     function toggleFolder(folderHeader, folderLi) {
@@ -247,11 +309,55 @@ document.addEventListener('DOMContentLoaded', () => {
             folderContent.classList.add('expanded');
             toggleIcon.classList.remove('fa-chevron-right');
             toggleIcon.classList.add('fa-chevron-down');
+            if (folderHeader.dataset.folderPath) {
+                navState.expanded.add(folderHeader.dataset.folderPath);
+                saveNavState();
+            }
         } else {
             folderContent.classList.add('collapsed');
             folderContent.classList.remove('expanded');
             toggleIcon.classList.remove('fa-chevron-down');
             toggleIcon.classList.add('fa-chevron-right');
+            if (folderHeader.dataset.folderPath) {
+                navState.expanded.delete(folderHeader.dataset.folderPath);
+                saveNavState();
+            }
+        }
+    }
+
+    function loadNavState() {
+        try {
+            const arr = JSON.parse(localStorage.getItem(NAV_EXPANDED_KEY) || '[]');
+            navState.expanded = new Set(Array.isArray(arr) ? arr : []);
+            navState.selected = localStorage.getItem(NAV_SELECTED_KEY);
+        } catch {}
+    }
+
+    function saveNavState() {
+        try {
+            localStorage.setItem(NAV_EXPANDED_KEY, JSON.stringify(Array.from(navState.expanded)));
+            if (navState.selected) localStorage.setItem(NAV_SELECTED_KEY, navState.selected);
+        } catch {}
+    }
+
+    function applyNavState() {
+        navState.expanded.forEach(path => {
+            const ul = navigation.querySelector(`.folder-content[data-folder-path="${CSS.escape(path)}"]`);
+            if (ul) {
+                ul.classList.remove('collapsed');
+                ul.classList.add('expanded');
+                const header = ul.previousElementSibling;
+                if (header) {
+                    const toggleIcon = header.querySelector('.folder-toggle');
+                    if (toggleIcon) {
+                        toggleIcon.classList.remove('fa-chevron-right');
+                        toggleIcon.classList.add('fa-chevron-down');
+                    }
+                }
+            }
+        });
+        if (navState.selected) {
+            expandSidebarToPath(navState.selected);
         }
     }
 
@@ -376,9 +482,13 @@ document.addEventListener('DOMContentLoaded', () => {
         header.className = 'course-view-header';
         header.innerHTML = `
             <div class="course-view-title"><i class="fas fa-book"></i> ${course.name}</div>
-            <div class="course-meta"><span>${course.files.length} files</span></div>
+            <div style="display:flex; gap:.5rem; align-items:center;">
+                <div class="course-meta"><span>${course.files.length} files</span></div>
+                <button class="btn" id="back-to-courses"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
         `;
         wrapper.appendChild(header);
+        header.querySelector('#back-to-courses').addEventListener('click', showDashboard);
 
         // Grid
         const grid = document.createElement('div');
@@ -396,11 +506,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = document.createElement('div');
                 card.className = 'file-card';
                 const icon = titleRaw.endsWith('.md') || titleRaw.includes('Lecture_') ? 'fa-file-alt' : 'fa-file';
-                card.innerHTML = `<div><i class="fas ${icon}"></i> ${title}</div><div class="meta">${path}</div>`;
+                card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div><i class="fas ${icon}"></i> ${title}</div>
+                    <span class="badge" data-badge>…</span>
+                </div>
+                <div class="meta">${path}</div>`;
                 card.addEventListener('click', () => loadFileContent(path));
                 grid.appendChild(card);
+                // Quiz badge detection
+                const quizPath = guessQuizPathForLecture(path);
+                fetch(basePath + quizPath, { method: 'HEAD' })
+                    .then(res => {
+                        const badge = card.querySelector('[data-badge]');
+                        if (!badge) return;
+                        if (res.ok) { badge.textContent = 'Quiz'; badge.style.color = 'var(--primary)'; }
+                        else { badge.textContent = 'No quiz'; badge.style.color = 'var(--muted-foreground)'; }
+                    })
+                    .catch(() => { const badge = card.querySelector('[data-badge]'); if (badge) badge.textContent = ''; });
             });
             wrapper.appendChild(grid);
+            // Prefetch first two files and their quiz headers
+            course.files.slice(0,2).forEach(p => {
+                const key = `md:${p}`;
+                if (!sessionStorage.getItem(key)) {
+                    fetch(basePath + p).then(r=>r.text()).then(t=>sessionStorage.setItem(key, t)).catch(()=>{});
+                }
+                const q = guessQuizPathForLecture(p);
+                fetch(basePath + q, { method: 'HEAD' }).catch(()=>{});
+            });
         }
 
         content.innerHTML = '';
@@ -493,11 +626,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.tagName === 'A') {
             event.preventDefault();
             const path = event.target.dataset.path;
+            navState.selected = path; saveNavState();
             loadFileContent(path);
+            expandSidebarToPath(path);
         }
     });
 
     function loadFileContent(path) {
+        // Deep link to current file
+        updateHashForFile(path);
+        const cacheKey = `md:${path}`;
+        const cached = sessionStorage.getItem(cacheKey);
+        if (cached) {
+            renderContent(path, cached);
+            // Refresh cache in background
+            fetch(basePath + path).then(r=>r.text()).then(t=>sessionStorage.setItem(cacheKey, t)).catch(()=>{});
+            return;
+        }
         fetch(basePath + path)
             .then(response => {
                 if (!response.ok) {
@@ -506,36 +651,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.text();
             })
             .then(text => {
-                const html = converter.makeHtml(text);
-                content.innerHTML = html;
-                
-                // Render mathematical equations with MathJax
-                if (window.MathJax) {
-                    MathJax.typesetPromise([content]).catch((err) => console.log(err.message));
-                }
-                
-                dashboard.style.display = 'none';
-                content.classList.add('active');
-                currentView = 'content';
-                viewToggle.innerHTML = '<i class="fas fa-th-large"></i>';
-                
-                // Update breadcrumb with file name
-                let fileName = path.split('/').pop();
-                if (fileName.endsWith('.md')) {
-                    fileName = fileName.replace('.md', '');
-                }
-                // Format file name for better readability
-                fileName = fileName.replace(/_/g, ' ');
-                updateBreadcrumb([
-                    { name: 'Home', action: showDashboard },
-                    { name: fileName, action: null }
-                ]);
-
-                // Inject quiz CTA when a quiz exists for this lecture
-                maybeInjectQuizCTA(path);
-
-                // Expand and highlight in sidebar for this path
-                expandSidebarToPath(path);
+                sessionStorage.setItem(cacheKey, text);
+                renderContent(path, text);
             })
             .catch(error => {
                 console.error('Error loading file:', error);
@@ -560,6 +677,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 dashboard.style.display = 'none';
                 content.classList.add('active');
             });
+    }
+
+    function renderContent(path, text) {
+        // Toolbar with copy link
+        const toolbar = document.createElement('div');
+        toolbar.className = 'content-toolbar';
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'btn';
+        copyBtn.innerHTML = '<i class="fas fa-link"></i> Copy link';
+        copyBtn.addEventListener('click', () => {
+            const url = `${location.origin}${location.pathname}#file=${encodeURIComponent(path)}`;
+            navigator.clipboard.writeText(url).then(() => {
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => copyBtn.innerHTML = '<i class=\"fas fa-link\"></i> Copy link', 1200);
+            }).catch(() => {});
+        });
+        toolbar.appendChild(copyBtn);
+
+        const html = converter.makeHtml(text);
+        content.innerHTML = '';
+        content.appendChild(toolbar);
+        const article = document.createElement('div');
+        article.innerHTML = html;
+        content.appendChild(article);
+
+        if (window.MathJax) {
+            MathJax.typesetPromise([content]).catch((err) => console.log(err.message));
+        }
+
+        dashboard.style.display = 'none';
+        content.classList.add('active');
+        currentView = 'content';
+        viewToggle.innerHTML = '<i class="fas fa-th-large"></i>';
+
+        // Breadcrumb
+        let fileName = path.split('/').pop();
+        if (fileName.endsWith('.md')) { fileName = fileName.replace('.md', ''); }
+        fileName = fileName.replace(/_/g, ' ');
+        updateBreadcrumb([
+            { name: 'Home', action: showDashboard },
+            { name: fileName, action: null }
+        ]);
+
+        // Quiz CTA and sidebar focus
+        maybeInjectQuizCTA(path);
+        expandSidebarToPath(path);
     }
 
     // --- Quiz Integration ---
@@ -620,6 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     try {
                         await ensureQuizScriptLoaded();
                         await window.Quiz.open(quizPath, { basePath });
+                        updateHashForQuiz(quizPath);
                     } catch (e) {
                         alert('Unable to start quiz: ' + e.message);
                     } finally {
@@ -635,48 +799,207 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Search ---
-    function buildSearchIndex(files) {
-        Promise.all(files.map(file => fetch(basePath + file).then(res => res.text())))
-            .then(contents => {
-                searchIndex = lunr(function () {
-                    this.ref('path');
-                    this.field('content');
+    function ensureSearchIndex() {
+        if (ensureIndexPromise) return ensureIndexPromise;
+        const fetchTexts = (path) => new Promise((resolve) => {
+            const key = `md:${path}`;
+            const cached = sessionStorage.getItem(key);
+            if (cached) {
+                resolve(cached);
+                fetch(basePath + path).then(r=>r.text()).then(t=>sessionStorage.setItem(key,t)).catch(()=>{});
+            } else {
+                fetch(basePath + path).then(r=>r.text()).then(t=>{ sessionStorage.setItem(key,t); resolve(t); }).catch(()=>resolve(''));
+            }
+        });
 
-                    files.forEach((file, i) => {
-                        this.add({
-                            path: file,
-                            content: contents[i]
-                        });
+        ensureIndexPromise = Promise.all(files.map(p => fetchTexts(p))).then(texts => {
+            // Build docs metadata
+            searchDocs = {};
+            files.forEach((path, i) => {
+                const meta = extractMeta(path, texts[i] || '');
+                searchDocs[path] = meta;
+            });
+            // Build lunr index with boosted fields
+            searchIndex = lunr(function () {
+                this.ref('path');
+                this.field('title', { boost: 4 });
+                this.field('headings', { boost: 3 });
+                this.field('course', { boost: 2 });
+                this.field('content');
+                files.forEach(path => {
+                    const d = searchDocs[path];
+                    this.add({
+                        path,
+                        title: d.title,
+                        headings: d.headings.join(' '),
+                        course: d.course,
+                        content: d.content
                     });
                 });
-            })
-            .catch(error => {
-                console.log('Search index could not be built:', error);
             });
+        }).catch(err => {
+            console.log('Search index build failed:', err);
+        });
+        return ensureIndexPromise;
     }
 
-    searchInput.addEventListener('input', (event) => {
-        const query = event.target.value;
-        if (query.length > 2 && searchIndex) {
-            const results = searchIndex.search(query);
-            displaySearchResults(results);
-        } else if (query.length === 0) {
-            if (currentView === 'dashboard') {
-                buildNavigation(files);
+    function extractMeta(path, md) {
+        const parts = path.split('/');
+        const course = parts[2] || '';
+        const semester = parts[1] || '';
+        let title = '';
+        const headings = [];
+        const lines = md.split(/\r?\n/);
+        for (const line of lines) {
+            if (!title) {
+                const m = line.match(/^#\s+(.+)/);
+                if (m) title = m[1].trim();
             }
+            const h2 = line.match(/^##\s+(.+)/);
+            if (h2) headings.push(h2[1].trim());
+            const h3 = line.match(/^###\s+(.+)/);
+            if (h3) headings.push(h3[1].trim());
         }
+        if (!title) {
+            let fname = path.split('/').pop() || '';
+            if (fname.endsWith('.md')) fname = fname.slice(0, -3);
+            title = fname.replace(/_/g, ' ');
+        }
+        const content = md.replace(/```[\s\S]*?```/g, ' ') // strip code blocks
+                         .replace(/[#>*_`~\[\]!()-]/g, ' ') // strip markdown punctuation
+                         .replace(/\s+/g, ' ') // collapse
+                         .trim();
+        return { path, title, headings, course, semester, content, raw: md };
+    }
+
+    function buildSearchString(query) {
+        // Parse fielded tokens: field:term or quoted phrases; default search across boosted fields
+        const tokens = [];
+        const re = /([\w]+:\"[^\"]+\"|[\w]+:[^\s]+|\"[^\"]+\"|\S+)/g;
+        let m; while ((m = re.exec(query)) !== null) tokens.push(m[0]);
+        const parts = [];
+        tokens.forEach(tok => {
+            if (/^[\w]+:/.test(tok)) {
+                // fielded stays as-is, with optional boost left to user
+                parts.push(tok);
+            } else {
+                // phase or term; add to multiple fields with boosts
+                const term = tok;
+                parts.push(`title:${term}^4`);
+                parts.push(`headings:${term}^3`);
+                parts.push(`course:${term}^2`);
+                parts.push(`content:${term}`);
+            }
+        });
+        return parts.join(' ');
+    }
+
+    function showSearchPanel(results, query) {
+        if (!searchPanel) {
+            searchPanel = document.createElement('div');
+            searchPanel.className = 'search-panel';
+            searchPanel.innerHTML = `<div class="search-header">
+                <div><i class="fas fa-search"></i> Results for “${escapeHtml(query)}”</div>
+                <button class="btn" id="close-search">Esc</button>
+            </div>
+            <div class="search-list"></div>`;
+            document.body.appendChild(searchPanel);
+            searchPanel.querySelector('#close-search').addEventListener('click', hideSearchPanel);
+        } else {
+            searchPanel.querySelector('.search-header div').innerHTML = `<i class=\"fas fa-search\"></i> Results for “${escapeHtml(query)}”`;
+        }
+        const list = searchPanel.querySelector('.search-list');
+        list.innerHTML = '';
+        results.forEach((r, idx) => {
+            const doc = searchDocs[r.ref];
+            const item = document.createElement('div');
+            item.className = 'search-item';
+            item.dataset.path = r.ref;
+            item.innerHTML = `
+                <div class="search-item-title">${escapeHtml(doc.title)} <span class="search-item-meta">${escapeHtml(doc.semester)} / ${escapeHtml(doc.course)}</span></div>
+                <div class="search-snippet">${makeSnippet(doc.raw, query)}</div>
+            `;
+            item.addEventListener('click', () => {
+                hideSearchPanel();
+                loadFileContent(r.ref);
+            });
+            list.appendChild(item);
+        });
+        searchResults = results;
+        searchSelected = results.length ? 0 : -1;
+        updateSearchActiveItem();
+    }
+
+    function hideSearchPanel() {
+        if (searchPanel) { searchPanel.remove(); searchPanel = null; }
+        searchResults = [];
+        searchSelected = -1;
+    }
+
+    function updateSearchActiveItem() {
+        if (!searchPanel) return;
+        const items = searchPanel.querySelectorAll('.search-item');
+        items.forEach((el, i) => el.classList.toggle('active', i === searchSelected));
+    }
+
+    function escapeHtml(s) {
+        return String(s || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function makeSnippet(md, query) {
+        const text = md.replace(/\s+/g, ' ').trim();
+        const terms = (query || '').replace(/\"/g,'').split(/\s+/).filter(Boolean);
+        let pos = -1;
+        for (const t of terms) {
+            const p = text.toLowerCase().indexOf(t.toLowerCase());
+            if (p !== -1) { pos = p; break; }
+        }
+        const start = Math.max(0, (pos === -1 ? 0 : pos - 60));
+        const end = Math.min(text.length, start + 200);
+        let snippet = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+        // highlight
+        terms.forEach(t => {
+            if (!t) return;
+            const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            snippet = snippet.replace(re, m => `<mark>${escapeHtml(m)}</mark>`);
+        });
+        return snippet;
+    }
+
+    const debounce = (fn, ms=200) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; };
+    const runSearch = debounce((q) => {
+        if (!q) { hideSearchPanel(); updateHashForQuery(''); return; }
+        updateHashForQuery(q);
+        ensureSearchIndex().then(() => {
+            const searchStr = buildSearchString(q);
+            let results = [];
+            try { results = searchIndex.search(searchStr); } catch { results = []; }
+            showSearchPanel(results.slice(0, 30), q);
+        });
+    }, 220);
+
+    searchInput.addEventListener('input', (event) => {
+        const q = event.target.value.trim();
+        runSearch(q);
     });
 
-    function displaySearchResults(results) {
-        // Preserve full sidebar structure always; update dashboard cards only
-        if (currentView !== 'dashboard') return;
-        const matchingFiles = results.map(r => r.ref);
-        const matchingCourses = extractCourses(matchingFiles);
-        coursesGrid.innerHTML = '';
-        matchingCourses.forEach(course => {
-            const courseCard = createCourseCard(course);
-            coursesGrid.appendChild(courseCard);
-        });
+    // Keyboard navigation for results
+    searchInput.addEventListener('keydown', (e) => {
+        if (!searchPanel) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); searchSelected = Math.min(searchSelected + 1, searchResults.length - 1); updateSearchActiveItem(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); searchSelected = Math.max(searchSelected - 1, 0); updateSearchActiveItem(); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (searchSelected >= 0) { const path = searchResults[searchSelected].ref; hideSearchPanel(); loadFileContent(path); } }
+        else if (e.key === 'Escape') { hideSearchPanel(); }
+    });
+
+    function updateHashForQuery(q) {
+        const qp = new URLSearchParams(location.hash.slice(1));
+        if (q) qp.set('q', q); else qp.delete('q');
+        location.hash = qp.toString();
     }
 
     // Mobile responsiveness
@@ -695,4 +1018,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize layout state once
     updateSidebarLayoutState();
+    loadNavState();
+    handleInitialHash();
+    window.addEventListener('hashchange', handleInitialHash);
+
+    // Expose a few helpers for deep-link handler
+    window.loadFileContent = loadFileContent;
+    window.ensureQuizScriptLoaded = ensureQuizScriptLoaded;
 });
+
+// Deep-link helpers
+function updateHashForFile(path) {
+    const qp = new URLSearchParams(location.hash.slice(1));
+    qp.set('file', path);
+    qp.delete('quiz');
+    location.hash = qp.toString();
+}
+
+function updateHashForQuiz(quizPath) {
+    const qp = new URLSearchParams(location.hash.slice(1));
+    qp.set('quiz', quizPath);
+    location.hash = qp.toString();
+}
+
+function handleInitialHash() {
+    const qp = new URLSearchParams(location.hash.slice(1));
+    const file = qp.get('file');
+    const quiz = qp.get('quiz');
+    const q = qp.get('q');
+    if (q && typeof document !== 'undefined') {
+        const input = document.getElementById('search-input');
+        if (input) { input.value = q; }
+        const ev = new Event('input');
+        if (input) input.dispatchEvent(ev);
+    }
+    if (file) {
+        // call into the DOMContentLoaded scope function via global
+        if (typeof window.loadFileContent === 'function') {
+            window.loadFileContent(file);
+        } else {
+            // fallback: trigger click on matching nav link
+            const a = document.querySelector(`.navigation a[data-path="${CSS.escape(file)}"]`);
+            if (a) a.click();
+        }
+        if (quiz) {
+            const basePath = (window.location.hostname === 'juliusbrussee.github.io') ? '/DSAI-2025-2026-Class-Notes/' : './';
+            (window.ensureQuizScriptLoaded ? window.ensureQuizScriptLoaded() : Promise.resolve()).then(() => {
+                if (window.Quiz && window.Quiz.open) window.Quiz.open(quiz, { basePath });
+            }).catch(()=>{});
+        }
+    }
+}

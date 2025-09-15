@@ -1,0 +1,34 @@
+# name: Generate Quizzes
+
+# on:
+#   push:
+#     branches: [ main ]
+#     paths:
+#       - 'Year*/**'
+#       - 'scripts/generate_quizzes_from_md.py'
+#   workflow_dispatch: {}
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
+
+#       - name: Generate quizzes
+#         run: |
+#           python scripts/generate_quizzes_from_md.py --root Year1 --out quizzes
+#           python scripts/update_file_list.py
+
+#       - name: Commit generated quizzes
+#         uses: stefanzweifel/git-auto-commit-action@v5
+#         with:
+#           commit_message: 'chore: auto-generate quizzes and refresh file list'
+#           file_pattern: |
+#             quizzes/**/*.json
+#             file-list.json

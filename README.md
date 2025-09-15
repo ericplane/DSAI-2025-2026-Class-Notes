@@ -138,6 +138,34 @@ Date: YYYY-MM-DD
 - Add `Semester2` structure and placeholders when schedules are confirmed.
 - Add assets (figures/diagrams) to each course as needed and fix any “attachment:” style links by moving images into an `assets/` folder.
 
+## Notion → Repo → Quiz workflow
+
+You can import notes exported from Notion and auto‑generate quizzes for each lecture.
+
+- Quick import (manual export):
+  1) In Notion, Export → Markdown & CSV for the pages you want.
+  2) Run the ingest script to place files into this repo structure:
+     - Example: `python scripts/ingest_notion_export.py --source path/to/export.zip --default-year Year1 --default-semester Semester1`
+     - Optional mapping: `--course-map scripts/config/course_map.example.yaml`
+     - Dry run first: add `--dry-run`.
+
+- Generate quizzes from notes:
+  - `python scripts/generate_quizzes_from_md.py --root Year1 --out quizzes` (add `--force` to overwrite existing)
+  - Heuristics supported:
+    - Bullet definitions like `- Term: definition` produce multiple‑choice questions.
+    - Q/A lines like `Q: ...` then `A: ...` produce short‑text questions.
+
+- Auto on push (optional):
+  - Workflow `.github/workflows/generate-quizzes.yml` runs the generator when you push changes under `Year*/` and commits resulting `quizzes/**/*.json`.
+
+### Tips for better quiz generation
+- Use clear definition bullets: `- Term: concise definition` or `- **Term**: definition`.
+- Add explicit Q/A lines where you want guaranteed questions.
+- Keep definitions under ~280 chars for cleaner options.
+
+### Advanced (Notion API sync)
+Prefer true sync from Notion? Add a Notion integration and use a custom fetch script with the Notion API (requires secrets like `NOTION_TOKEN`). This repo ships a simple manual‑export importer for reliability; happy to scaffold an API pull workflow on request.
+
 ## Disclaimer and License
 
 These are personal study notes intended for learning and revision. They may contain errors or omissions and are not official course materials.
