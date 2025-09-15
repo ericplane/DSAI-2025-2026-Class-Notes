@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let searchResults = [];
     let searchSelected = -1;
     let ensureIndexPromise = null;
+    let currentFilePath = null;
     let currentView = 'dashboard'; // 'dashboard' or 'content'
     let courseStats = { courses: 0, notes: 0 };
     // Sidebar state persistence
@@ -711,6 +712,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentView = 'content';
         viewToggle.innerHTML = '<i class="fas fa-th-large"></i>';
 
+        // Track current file to avoid duplicate reloads via hashchange
+        currentFilePath = path;
+        window.__CURRENT_FILE__ = path;
+
         // Breadcrumb
         let fileName = path.split('/').pop();
         if (fileName.endsWith('.md')) { fileName = fileName.replace('.md', ''); }
@@ -768,8 +773,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => {
                 if (!res.ok) throw new Error('No quiz');
                 // Create CTA UI
+                // Avoid duplicate CTA for same path
+                const existing = content.querySelector(`.quiz-cta[data-path="${CSS.escape(lecturePath)}"]`);
+                if (existing) return;
                 const cta = document.createElement('div');
                 cta.className = 'quiz-cta';
+                cta.setAttribute('data-path', lecturePath);
                 cta.innerHTML = `
                     <div>
                         <strong>Interactive Quiz Available</strong>
@@ -1030,15 +1039,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // Deep-link helpers
 function updateHashForFile(path) {
     const qp = new URLSearchParams(location.hash.slice(1));
+    const prev = qp.get('file');
+    if (prev === path) return; // no-op if unchanged
     qp.set('file', path);
     qp.delete('quiz');
-    location.hash = qp.toString();
+    const next = qp.toString();
+    if (('#' + next) !== location.hash) location.hash = next;
 }
 
 function updateHashForQuiz(quizPath) {
     const qp = new URLSearchParams(location.hash.slice(1));
+    const prev = qp.get('quiz');
+    if (prev === quizPath) return;
     qp.set('quiz', quizPath);
-    location.hash = qp.toString();
+    const next = qp.toString();
+    if (('#' + next) !== location.hash) location.hash = next;
 }
 
 function handleInitialHash() {
@@ -1052,7 +1067,7 @@ function handleInitialHash() {
         const ev = new Event('input');
         if (input) input.dispatchEvent(ev);
     }
-    if (file) {
+    if (file && file !== (window.__CURRENT_FILE__ || null)) {
         // call into the DOMContentLoaded scope function via global
         if (typeof window.loadFileContent === 'function') {
             window.loadFileContent(file);
@@ -1061,11 +1076,11 @@ function handleInitialHash() {
             const a = document.querySelector(`.navigation a[data-path="${CSS.escape(file)}"]`);
             if (a) a.click();
         }
-        if (quiz) {
-            const basePath = (window.location.hostname === 'juliusbrussee.github.io') ? '/DSAI-2025-2026-Class-Notes/' : './';
-            (window.ensureQuizScriptLoaded ? window.ensureQuizScriptLoaded() : Promise.resolve()).then(() => {
-                if (window.Quiz && window.Quiz.open) window.Quiz.open(quiz, { basePath });
-            }).catch(()=>{});
-        }
+    }
+    if (quiz) {
+        const basePath = (window.location.hostname === 'juliusbrussee.github.io') ? '/DSAI-2025-2026-Class-Notes/' : './';
+        (window.ensureQuizScriptLoaded ? window.ensureQuizScriptLoaded() : Promise.resolve()).then(() => {
+            if (window.Quiz && window.Quiz.open) window.Quiz.open(quiz, { basePath });
+        }).catch(()=>{});
     }
 }
