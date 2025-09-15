@@ -10,8 +10,10 @@ A modern, responsive web application for organizing and viewing DSAI (Data Scien
 - 🧮 **Mathematical Content Support**: Full LaTeX equation rendering with MathJax
 - 🌓 **Dark/Light Theme**: Toggle between themes for comfortable reading
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- 🔍 **Search Functionality**: Quick search across all notes
-- 📂 **Collapsible Navigation**: Organized folder structure with expandable/collapsible sections
+- 🧪 **Interactive Quizzes**: Per‑lecture quizzes with explanations and local history
+- 🔍 **Enhanced Search**: Boosted titles/headings + snippets with keyboard nav
+- 🔗 **Deep Links**: Link to a file (`#file`), quiz (`#quiz`), or query (`#q`)
+- 📂 **Collapsible Navigation**: Persistent folder tree (expand/collapse all)
 
 ## Local Development
 
@@ -57,6 +59,24 @@ Year3/
 - **Icons**: Font Awesome 6
 - **Hosting**: GitHub Pages
 
+## New UX Highlights
+
+- Course cards open a course screen with a file grid and per‑file “Quiz/No quiz” badges.
+- Sidebar always shows the full folder tree and auto‑expands/highlights the active file.
+- Copy link button in the content toolbar for sharing the current file.
+
+## Deep Links
+
+- Open a file: `#file=Year1/Semester1/<Course>/Lectures/<Lecture>` (with or without `.md`).
+- Open a quiz: `#quiz=quizzes/Year1/Semester1/<Course>/Lectures/<Lecture>.json`.
+- Restore a search: `#q=<your query>`; results panel appears on load.
+
+Examples:
+
+- `#file=Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP`
+- `#quiz=quizzes/Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus.json`
+- `#q=two's complement`
+
 ---
 
 **Created by [Julius Brussee](https://github.com/JuliusBrussee)** | Leiden University DSAI Program
@@ -88,6 +108,38 @@ Year3/
 
 - For math, GitHub supports inline `$...$` and block `$$...$$` LaTeX. Keep formulas concise and readable.
 - Images/diagrams: place under an `assets/` folder inside the course or lecture folder, and link with relative paths, e.g., `![Title](assets/filename.png)`.
+
+## Add or Edit Quizzes
+
+Quizzes live under a mirrored path of the lecture file in the `quizzes/` directory. The site automatically shows a “Start Quiz” banner on a lecture page if a matching quiz JSON exists.
+
+- Location: `quizzes/<lecture path>.json` (lecture path without `.md`)
+- Example: for `Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP`, add
+  `quizzes/Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP.json`
+
+Minimal JSON:
+
+```
+{
+  "id": "y1s1-dsip-lecture-1",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP",
+  "title": "Lecture 1 — ...",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "YYYY-MM-DD", "author": "..." },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",                      
+      "prompt": "... (Markdown + MathJax)",
+      "options": [ { "id": "a", "text": "...", "isCorrect": true } ],
+      "explanation": "Why this is correct.",
+      "tags": ["topic"], "difficulty": "easy", "points": 1
+    }
+  ]
+}
+```
+
+Finish behavior: the quiz shows Back/Next, and only on the last question a “Finish” button appears. Finishing clears in‑progress answers so a new attempt starts fresh.
 
 ## How to Add Content
 
@@ -138,7 +190,7 @@ Date: YYYY-MM-DD
 - Add `Semester2` structure and placeholders when schedules are confirmed.
 - Add assets (figures/diagrams) to each course as needed and fix any “attachment:” style links by moving images into an `assets/` folder.
 
-## Notion → Repo → Quiz workflow
+## Notion → Repo → Quiz workflow (optional)
 
 You can import notes exported from Notion and auto‑generate quizzes for each lecture.
 
@@ -155,8 +207,8 @@ You can import notes exported from Notion and auto‑generate quizzes for each l
     - Bullet definitions like `- Term: definition` produce multiple‑choice questions.
     - Q/A lines like `Q: ...` then `A: ...` produce short‑text questions.
 
-- Auto on push (optional):
-  - Workflow `.github/workflows/generate-quizzes.yml` runs the generator when you push changes under `Year*/` and commits resulting `quizzes/**/*.json`.
+- Auto on push:
+  - See `.github/workflows/generate-quizzes.yml` for a sample (commented). Enable and adapt as needed.
 
 ### Tips for better quiz generation
 - Use clear definition bullets: `- Term: concise definition` or `- **Term**: definition`.
