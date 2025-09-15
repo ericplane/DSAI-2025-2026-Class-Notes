@@ -1,0 +1,79 @@
+{
+  "id": "y1s1-study-presenting-lecture-2",
+  "lecturePath": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting",
+  "title": "Studying and Presenting — Lecture 2 (Collaboration)",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Collaboration is defined as:","options":[
+      {"id":"a","text":"Dividing work with no coordination","isCorrect":false},
+      {"id":"b","text":"Continuously building and maintaining a shared understanding of a problem","isCorrect":true},
+      {"id":"c","text":"Working alone efficiently","isCorrect":false},
+      {"id":"d","text":"Voting on the final result only","isCorrect":false}
+    ],"explanation":"Lecture distinguishes collaboration from cooperation.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"What is Collaboration?"}],"tags":["collaboration"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"Which is a people-oriented Belbin role?","options":[
+      {"id":"a","text":"Coordinator","isCorrect":true},
+      {"id":"b","text":"Shaper","isCorrect":false},
+      {"id":"c","text":"Implementer","isCorrect":false},
+      {"id":"d","text":"Completer-Finisher","isCorrect":false}
+    ],"explanation":"People-oriented roles: Coordinator, Teamworker, Resource Investigator.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Define Team Roles (Belbin)"}],"tags":["belbin"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"The Shaper role risk is noted as:","options":[
+      {"id":"a","text":"Over-delegation","isCorrect":false},
+      {"id":"b","text":"Can be impatient","isCorrect":true},
+      {"id":"c","text":"May lose initial enthusiasm","isCorrect":false},
+      {"id":"d","text":"Finds confrontation difficult","isCorrect":false}
+    ],"explanation":"Risks per role are listed; Shaper can be impatient.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Define Team Roles (Belbin)"}],"tags":["belbin"],"difficulty":"medium","points":1},
+
+    {"id":"q4","type":"multi","prompt":"Select components of a good collaboration infrastructure from the lecture.","options":[
+      {"id":"a","text":"Clear plan","isCorrect":true},
+      {"id":"b","text":"Team agreements/rules","isCorrect":true},
+      {"id":"c","text":"Task division","isCorrect":true},
+      {"id":"d","text":"No documentation","isCorrect":false}
+    ],"explanation":"Plan, agreements, and task division are recommended.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Create a Good Infrastructure"}],"tags":["infrastructure"],"difficulty":"easy","points":1},
+
+    {"id":"q5","type":"single","prompt":"Effective meeting goals include:","options":[
+      {"id":"a","text":"Updating progress and making decisions","isCorrect":true},
+      {"id":"b","text":"Avoiding planning","isCorrect":false},
+      {"id":"c","text":"Assigning blame","isCorrect":false},
+      {"id":"d","text":"Only socializing","isCorrect":false}
+    ],"explanation":"Meetings: update, decide, solve problems, and plan.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Hold Effective Team Meetings"}],"tags":["meetings"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"multi","prompt":"Common collaboration challenges mentioned are:","options":[
+      {"id":"a","text":"Different expectations","isCorrect":true},
+      {"id":"b","text":"Unequal contribution","isCorrect":true},
+      {"id":"c","text":"Identical opinions always","isCorrect":false},
+      {"id":"d","text":"Personal conflicts","isCorrect":true}
+    ],"explanation":"Social and cognitive challenges include expectations, conflicts, ideas, and unequal contribution.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Challenges of Collaboration"}],"tags":["challenges"],"difficulty":"medium","points":1},
+
+    {"id":"q7","type":"single","prompt":"One suggested solution to obstacles is to:","options":[
+      {"id":"a","text":"Ignore the problem","isCorrect":false},
+      {"id":"b","text":"Address the problem through infrastructure (e.g., clearer rules)","isCorrect":true},
+      {"id":"c","text":"Always ask the teacher first","isCorrect":false},
+      {"id":"d","text":"Avoid roles","isCorrect":false}
+    ],"explanation":"Solutions listed: address directly, adjust infrastructure, or escalate to teacher.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Common Obstacles in Collaboration"}],"tags":["solutions"],"difficulty":"easy","points":1},
+
+    {"id":"q8","type":"single","prompt":"Presentation advice includes:","options":[
+      {"id":"a","text":"Keep slides clean and use informative titles","isCorrect":true},
+      {"id":"b","text":"Overload slides with text","isCorrect":false},
+      {"id":"c","text":"Stand with your back to the audience","isCorrect":false},
+      {"id":"d","text":"Ignore pacing","isCorrect":false}
+    ],"explanation":"Visuals should support the story; titles and clean slides help.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Preparing and Delivering a Presentation"}],"tags":["presenting"],"difficulty":"easy","points":1},
+
+    {"id":"q9","type":"single","prompt":"Academic integrity violations include:","options":[
+      {"id":"a","text":"Paraphrasing with citation","isCorrect":false},
+      {"id":"b","text":"Plagiarism and cheating on exams","isCorrect":true},
+      {"id":"c","text":"Group work with attribution","isCorrect":false},
+      {"id":"d","text":"Practicing delivery","isCorrect":false}
+    ],"explanation":"Notes list plagiarism, cheating, falsifying documents as fraud.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Academic Integrity"}],"tags":["integrity"],"difficulty":"easy","points":1},
+
+    {"id":"q10","type":"single","prompt":"Assignment 2 requires a video presentation of duration:","options":[
+      {"id":"a","text":"2–3 minutes","isCorrect":false},
+      {"id":"b","text":"4–5 minutes (±30s)","isCorrect":true},
+      {"id":"c","text":"10 minutes","isCorrect":false},
+      {"id":"d","text":"No limit","isCorrect":false}
+    ],"explanation":"The assignment specifies 4–5 minutes with small tolerance.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting","heading":"Assignment 2: Group Presentation on Team Roles"}],"tags":["assignment"],"difficulty":"easy","points":1}
+  ]
+}
+

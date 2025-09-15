@@ -1,0 +1,93 @@
+{
+  "id": "y1s1-dsip-lecture-3",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP",
+  "title": "Lecture 3 — Basic Computer Hardware Concepts",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Which components are central in the Von Neumann model?","options":[
+      {"id":"a","text":"CPU, memory, buses, I/O","isCorrect":true},
+      {"id":"b","text":"CPU, GPU only","isCorrect":false},
+      {"id":"c","text":"Only the ALU","isCorrect":false},
+      {"id":"d","text":"Only storage devices","isCorrect":false}
+    ],"explanation":"The lecture lists CPU + memory + buses + I/O, with one store for code and data.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["von neumann"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"What are the three main CPU cycle stages?","options":[
+      {"id":"a","text":"Encode → transmit → receive","isCorrect":false},
+      {"id":"b","text":"Fetch → decode → execute","isCorrect":true},
+      {"id":"c","text":"Read → write → sleep","isCorrect":false},
+      {"id":"d","text":"Boot → login → run","isCorrect":false}
+    ],"explanation":"The classic cycle: fetch instruction, decode, then execute.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["cpu"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"Which CPU registers are explicitly mentioned?","options":[
+      {"id":"a","text":"PC, IR, Accumulator","isCorrect":true},
+      {"id":"b","text":"GPU, TLB, L3","isCorrect":false},
+      {"id":"c","text":"HDD, SSD, USB","isCorrect":false},
+      {"id":"d","text":"NIC, MAC, IP","isCorrect":false}
+    ],"explanation":"Program Counter (PC), Instruction Register (IR), and Accumulator are named.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["registers"],"difficulty":"medium","points":1},
+
+    {"id":"q4","type":"single","prompt":"What does the address bus do?","options":[
+      {"id":"a","text":"Carries the value being read/written","isCorrect":false},
+      {"id":"b","text":"Selects the memory/I-O location","isCorrect":true},
+      {"id":"c","text":"Signals read vs write only","isCorrect":false},
+      {"id":"d","text":"Connects the GPU to the monitor","isCorrect":false}
+    ],"explanation":"Address bus selects location; data bus carries values; control lines mark read/write.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["bus"],"difficulty":"easy","points":1},
+
+    {"id":"q5","type":"single","prompt":"RAM is described as:","options":[
+      {"id":"a","text":"Non-volatile and slower than disk","isCorrect":false},
+      {"id":"b","text":"Volatile working memory connected via a high-speed bus","isCorrect":true},
+      {"id":"c","text":"Permanent firmware storage","isCorrect":false},
+      {"id":"d","text":"A type of GPU memory only","isCorrect":false}
+    ],"explanation":"RAM is volatile and byte-addressable, connected via high-speed bus.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"RAM"}],"tags":["ram"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"single","prompt":"What is memory-mapped I/O?","options":[
+      {"id":"a","text":"A GPU memory optimization technique","isCorrect":false},
+      {"id":"b","text":"Exposing device registers at memory addresses for CPU reads/writes","isCorrect":true},
+      {"id":"c","text":"Mapping RAM to disk","isCorrect":false},
+      {"id":"d","text":"Using Wi-Fi to access memory","isCorrect":false}
+    ],"explanation":"I/O devices appear as registers in the address space; CPU uses loads/stores.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model / I/O"}],"tags":["io"],"difficulty":"medium","points":1},
+
+    {"id":"q7","type":"single","prompt":"Which is true about the GPU per the notes?","options":[
+      {"id":"a","text":"It stores frames as RGB pixels in a frame buffer.","isCorrect":true},
+      {"id":"b","text":"It cannot be used for neural networks.","isCorrect":false},
+      {"id":"c","text":"It has no onboard memory.","isCorrect":false},
+      {"id":"d","text":"It does only I/O bridging.","isCorrect":false}
+    ],"explanation":"Notes mention frame buffer, onboard memory, and parallel math incl. tensor cores.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"GPU"}],"tags":["gpu"],"difficulty":"easy","points":1},
+
+    {"id":"q8","type":"single","prompt":"At power-on, where does the CPU start executing (example)?","options":[
+      {"id":"a","text":"At an arbitrary RAM location","isCorrect":false},
+      {"id":"b","text":"From the reset vector mapped to firmware (e.g., 0xFFFFFFF0)","isCorrect":true},
+      {"id":"c","text":"From the OS kernel entry immediately","isCorrect":false},
+      {"id":"d","text":"From the bootloader on disk without firmware","isCorrect":false}
+    ],"explanation":"Firmware maps to the reset vector; firmware initializes then loads bootloader.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Firmware and boot"}],"tags":["boot"],"difficulty":"medium","points":1},
+
+    {"id":"q9","type":"single","prompt":"Which statement about buses is consistent with the lecture?","options":[
+      {"id":"a","text":"PCIe uses multiple serial lanes to achieve high throughput.","isCorrect":true},
+      {"id":"b","text":"Old parallel buses had no synchronization issues.","isCorrect":false},
+      {"id":"c","text":"USB is not a bus.","isCorrect":false},
+      {"id":"d","text":"The data bus selects addresses.","isCorrect":false}
+    ],"explanation":"Notes: newer buses (PCIe) are serial with multiple lanes; old parallel had sync issues.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Other peripherals and I/O"}],"tags":["bus"],"difficulty":"medium","points":1},
+
+    {"id":"q10","type":"multi","prompt":"Select the CPU internal components listed in the notes.","options":[
+      {"id":"a","text":"Control Unit","isCorrect":true},
+      {"id":"b","text":"ALU","isCorrect":true},
+      {"id":"c","text":"Registers (PC, IR)","isCorrect":true},
+      {"id":"d","text":"Disk controller","isCorrect":false}
+    ],"explanation":"Disk controllers are peripherals; CPU internals include CU, ALU, and registers.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["cpu"],"difficulty":"easy","points":1},
+
+    {"id":"q11","type":"single","prompt":"Which memory property is emphasized?","options":[
+      {"id":"a","text":"Memory is word-addressable only","isCorrect":false},
+      {"id":"b","text":"Memory is byte-addressable via the address bus","isCorrect":true},
+      {"id":"c","text":"Memory addresses are random","isCorrect":false},
+      {"id":"d","text":"Only the GPU can access memory","isCorrect":false}
+    ],"explanation":"Lecture states memory is byte-addressable via address bus.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Von Neumann model"}],"tags":["memory"],"difficulty":"easy","points":1},
+
+    {"id":"q12","type":"single","prompt":"Which boot step order is correct?","options":[
+      {"id":"a","text":"Bootloader → Firmware → OS kernel","isCorrect":false},
+      {"id":"b","text":"Firmware → Bootloader → OS kernel","isCorrect":true},
+      {"id":"c","text":"OS kernel → Firmware → Bootloader","isCorrect":false},
+      {"id":"d","text":"Firmware only → Application","isCorrect":false}
+    ],"explanation":"Firmware initializes and loads bootloader; bootloader loads kernel.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP","heading":"Firmware and boot"}],"tags":["boot"],"difficulty":"easy","points":1}
+  ]
+}
+

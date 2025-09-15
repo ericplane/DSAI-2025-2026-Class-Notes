@@ -1,0 +1,93 @@
+{
+  "id": "y1s1-calculus-lecture-1-2",
+  "lecturePath": "Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus",
+  "title": "Calculus 1 — Series Convergence (Lectures 1 & 2)",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Necessary condition: If \\($\\sum a_n\\) converges, what must hold?","options":[
+      {"id":"a","text":"$a_n$ is decreasing","isCorrect":false},
+      {"id":"b","text":"$a_n \\to 0$","isCorrect":true},
+      {"id":"c","text":"$a_n$ is positive","isCorrect":false},
+      {"id":"d","text":"$a_n$ is bounded away from 0","isCorrect":false}
+    ],"explanation":"Convergence implies $a_n \\to 0$, but not vice versa.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Core Concepts"}],"tags":["necessary"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"Which geometric series condition ensures convergence?","options":[
+      {"id":"a","text":"$|r| < 1$","isCorrect":true},
+      {"id":"b","text":"$|r| \\le 1$","isCorrect":false},
+      {"id":"c","text":"$r>1$","isCorrect":false},
+      {"id":"d","text":"$r=1$","isCorrect":false}
+    ],"explanation":"Geometric series $\\sum ar^n$ converges iff $|r|<1$.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Reference Series (Memorize)"}],"tags":["geometric"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"$\\sum \\frac{1}{n}$ is:","options":[
+      {"id":"a","text":"Convergent","isCorrect":false},
+      {"id":"b","text":"Divergent (harmonic)","isCorrect":true},
+      {"id":"c","text":"Absolute convergent","isCorrect":false},
+      {"id":"d","text":"Conditional convergent","isCorrect":false}
+    ],"explanation":"The harmonic series diverges.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Reference Series (Memorize)"}],"tags":["harmonic"],"difficulty":"easy","points":1},
+
+    {"id":"q4","type":"single","prompt":"Limit Comparison Test: if $L=\\lim \\frac{a_n}{b_n}$ with $0<L<\\infty$, then:","options":[
+      {"id":"a","text":"$\\sum a_n$ and $\\sum b_n$ have the same behavior","isCorrect":true},
+      {"id":"b","text":"$\\sum a_n$ converges but $\\sum b_n$ diverges","isCorrect":false},
+      {"id":"c","text":"Inconclusive","isCorrect":false},
+      {"id":"d","text":"They both diverge only","isCorrect":false}
+    ],"explanation":"A finite, positive limit implies both converge or both diverge together.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Limit Comparison Test"}],"tags":["comparison"],"difficulty":"medium","points":1},
+
+    {"id":"q5","type":"single","prompt":"Ratio Test: $\\rho = \\lim \\left|\\frac{a_{n+1}}{a_n}\\right|$. Convergent if:","options":[
+      {"id":"a","text":"$\\rho>1$","isCorrect":false},
+      {"id":"b","text":"$\\rho=1$","isCorrect":false},
+      {"id":"c","text":"$\\rho<1$","isCorrect":true},
+      {"id":"d","text":"No condition","isCorrect":false}
+    ],"explanation":"Ratio test concludes when $\\rho<1$ (diverges if $\\rho>1$, inconclusive if $\\rho=1$).","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Ratio Test"}],"tags":["ratio"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"single","prompt":"Root Test: $\\sigma = \\lim \\sqrt[n]{|a_n|}$. Convergent if:","options":[
+      {"id":"a","text":"$\\sigma>1$","isCorrect":false},
+      {"id":"b","text":"$\\sigma=1$","isCorrect":false},
+      {"id":"c","text":"$\\sigma<1$","isCorrect":true},
+      {"id":"d","text":"None of the above" ,"isCorrect":false}
+    ],"explanation":"Root test parallels ratio test: $\\sigma<1$ converges, $>1$ diverges, $=1$ inconclusive.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Root Test"}],"tags":["root"],"difficulty":"easy","points":1},
+
+    {"id":"q7","type":"single","prompt":"$\\sum \\frac{1}{n^2+1}$:","options":[
+      {"id":"a","text":"Diverges (like $1/n$)","isCorrect":false},
+      {"id":"b","text":"Converges (compare with $1/n^2$)","isCorrect":true},
+      {"id":"c","text":"Inconclusive","isCorrect":false},
+      {"id":"d","text":"Alternating series","isCorrect":false}
+    ],"explanation":"Compare with p-series $1/n^2$ (p>1) ⇒ convergent.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Key Examples"}],"tags":["comparison"],"difficulty":"medium","points":1},
+
+    {"id":"q8","type":"single","prompt":"$\\sum \\frac{n^2+1}{n^3+1}$ behaves like:","options":[
+      {"id":"a","text":"$1/n^2$","isCorrect":false},
+      {"id":"b","text":"$1/n$ (diverges)","isCorrect":true},
+      {"id":"c","text":"$1$","isCorrect":false},
+      {"id":"d","text":"$1/n^3$","isCorrect":false}
+    ],"explanation":"Dominant terms give $(n^2)/(n^3)=1/n$ ⇒ diverges.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Key Examples"}],"tags":["asymptotics"],"difficulty":"medium","points":1},
+
+    {"id":"q9","type":"single","prompt":"Sum of $\\sum_{n=0}^{\\infty} ar^n$ with $|r|<1$ is:","options":[
+      {"id":"a","text":"$a/(1-r)$","isCorrect":true},
+      {"id":"b","text":"$ar$","isCorrect":false},
+      {"id":"c","text":"$a/(1+r)$","isCorrect":false},
+      {"id":"d","text":"$a(1-r)$","isCorrect":false}
+    ],"explanation":"Standard geometric sum formula.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Geometric Series Sum Formula"}],"tags":["geometric"],"difficulty":"easy","points":1},
+
+    {"id":"q10","type":"single","prompt":"The series $\\sum \\left(\\frac{1}{2}\\right)^n$ from $n=1$ converges to:","options":[
+      {"id":"a","text":"2","isCorrect":false},
+      {"id":"b","text":"1","isCorrect":true},
+      {"id":"c","text":"1/2","isCorrect":false},
+      {"id":"d","text":"Diverges" ,"isCorrect":false}
+    ],"explanation":"Here $a=1/2$ and $r=1/2$ with $n=1$ start ⇒ $S=ar/(1-r)= (1/2)/(1/2)=1$.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Geometric Series Sum Formula"}],"tags":["geometric"],"difficulty":"easy","points":1},
+
+    {"id":"q11","type":"single","prompt":"A good decision tree step after $a_n \\to 0$ is to:","options":[
+      {"id":"a","text":"Immediately apply root test to all","isCorrect":false},
+      {"id":"b","text":"Check if it is geometric or p-series and apply the corresponding criterion","isCorrect":true},
+      {"id":"c","text":"Declare convergence","isCorrect":false},
+      {"id":"d","text":"Switch to telescoping always","isCorrect":false}
+    ],"explanation":"The cheatsheet suggests identifying common forms first.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Test Decision Tree"}],"tags":["strategy"],"difficulty":"easy","points":1},
+
+    {"id":"q12","type":"single","prompt":"A telescoping series has sum given by:","options":[
+      {"id":"a","text":"$b_1 - \\lim b_n$","isCorrect":true},
+      {"id":"b","text":"$\\lim a_n$","isCorrect":false},
+      {"id":"c","text":"$1/(1-r)$","isCorrect":false},
+      {"id":"d","text":"$0$ always","isCorrect":false}
+    ],"explanation":"For $\\sum (b_n-b_{n+1})$, the partial sums collapse to this limit.","sources":[{"path":"Year1/Semester1/Calculus 1/Lectures/Lecture_1&2_Calculus","heading":"Telescoping Series"}],"tags":["telescoping"],"difficulty":"medium","points":1}
+  ]
+}
+

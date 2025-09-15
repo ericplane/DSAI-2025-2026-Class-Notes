@@ -1,0 +1,178 @@
+{
+  "id": "y1s1-dsip-lecture-1",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP",
+  "title": "Lecture 1 — Number Systems and Representations",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the radix (base) of the binary number system?",
+      "options": [
+        { "id": "a", "text": "2", "isCorrect": true },
+        { "id": "b", "text": "8", "isCorrect": false },
+        { "id": "c", "text": "10", "isCorrect": false },
+        { "id": "d", "text": "16", "isCorrect": false }
+      ],
+      "explanation": "Binary uses base 2 with symbols 0 and 1.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Binary Systems and Number Representations" }],
+      "tags": ["binary", "radix"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Convert the binary number 1101 to decimal.",
+      "options": [
+        { "id": "a", "text": "11", "isCorrect": false },
+        { "id": "b", "text": "12", "isCorrect": false },
+        { "id": "c", "text": "13", "isCorrect": true },
+        { "id": "d", "text": "14", "isCorrect": false }
+      ],
+      "explanation": "1101 = 1·2^3 + 1·2^2 + 0·2^1 + 1·2^0 = 8 + 4 + 0 + 1 = 13.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Binary Systems and Number Representations" }],
+      "tags": ["conversion"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Why is hexadecimal commonly used alongside binary in computing?",
+      "options": [
+        { "id": "a", "text": "Because decimal and binary have incompatible bases; base 16 groups binary digits compactly.", "isCorrect": true },
+        { "id": "b", "text": "Because hexadecimal uses the same base as decimal.", "isCorrect": false },
+        { "id": "c", "text": "Because it makes arithmetic always faster.", "isCorrect": false },
+        { "id": "d", "text": "Because it avoids the need for binary altogether.", "isCorrect": false }
+      ],
+      "explanation": "Base 10 is not a power of 2, so hexadecimal (base 16) provides a compact, aligned representation for binary.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "The hexadecimal number system" }],
+      "tags": ["hex", "representation"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "In two’s complement signed integers, what does a leading 1 bit indicate?",
+      "options": [
+        { "id": "a", "text": "A positive number", "isCorrect": false },
+        { "id": "b", "text": "A negative number", "isCorrect": true },
+        { "id": "c", "text": "Floating point", "isCorrect": false },
+        { "id": "d", "text": "An odd number", "isCorrect": false }
+      ],
+      "explanation": "Signed integers use a sign bit; in two’s complement, leading 1 encodes negative values.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "The number representations in computing" }],
+      "tags": ["two's complement"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "How many bits are in a byte?",
+      "options": [
+        { "id": "a", "text": "4", "isCorrect": false },
+        { "id": "b", "text": "8", "isCorrect": true },
+        { "id": "c", "text": "16", "isCorrect": false },
+        { "id": "d", "text": "32", "isCorrect": false }
+      ],
+      "explanation": "A byte is 8 bits.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Binary Systems and Number Representations" }],
+      "tags": ["units"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In the 8-bit minifloat described, what is the exponent bias used in the formula $(1+\\text{mantissa}/16)\\cdot 2^{\\text{exponent}-\\text{bias}}$?",
+      "options": [
+        { "id": "a", "text": "3", "isCorrect": true },
+        { "id": "b", "text": "7", "isCorrect": false },
+        { "id": "c", "text": "15", "isCorrect": false },
+        { "id": "d", "text": "127", "isCorrect": false }
+      ],
+      "explanation": "The example minifloat uses 3 exponent bits with bias 3 as shown and described in the notes.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Floating Point 8 bit (minifloat)" }],
+      "tags": ["floating point"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "In positional notation, where is the most significant digit?",
+      "options": [
+        { "id": "a", "text": "On the right (least significant position)", "isCorrect": false },
+        { "id": "b", "text": "On the left (most significant position)", "isCorrect": true },
+        { "id": "c", "text": "In the middle", "isCorrect": false },
+        { "id": "d", "text": "It depends on the encoding", "isCorrect": false }
+      ],
+      "explanation": "The notes explicitly mention most significant (left) to least significant (right).",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Binary Systems and Number Representations" }],
+      "tags": ["positional"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "In dozenal (base 12), what is the decimal value of A6?",
+      "options": [
+        { "id": "a", "text": "116", "isCorrect": false },
+        { "id": "b", "text": "126", "isCorrect": true },
+        { "id": "c", "text": "136", "isCorrect": false },
+        { "id": "d", "text": "146", "isCorrect": false }
+      ],
+      "explanation": "A6 = 10·12^1 + 6·12^0 = 120 + 6 = 126.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Content" }],
+      "tags": ["bases"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which statement about signed integers is correct?",
+      "options": [
+        { "id": "a", "text": "Unsigned integers use a sign bit.", "isCorrect": false },
+        { "id": "b", "text": "Signed integers typically use two’s complement representation.", "isCorrect": true },
+        { "id": "c", "text": "Signed integers cannot represent negative numbers.", "isCorrect": false },
+        { "id": "d", "text": "Two’s complement is only for floating point.", "isCorrect": false }
+      ],
+      "explanation": "The notes define signed integers with two’s complement for all integers.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "The number representations in computing" }],
+      "tags": ["integers"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which sequence correctly summarizes the minifloat components?",
+      "options": [
+        { "id": "a", "text": "4 sign bits, 3 mantissa bits, 1 exponent bit", "isCorrect": false },
+        { "id": "b", "text": "1 sign bit, 3 exponent bits, 4 mantissa bits", "isCorrect": true },
+        { "id": "c", "text": "1 exponent bit, 3 sign bits, 4 mantissa bits", "isCorrect": false },
+        { "id": "d", "text": "3 sign bits, 1 mantissa bit, 4 exponent bits", "isCorrect": false }
+      ],
+      "explanation": "The example uses 1 sign, 3 exponent (bias 3), 4 mantissa bits.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Floating Point 8 bit (minifloat)" }],
+      "tags": ["floating point"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which best describes a byte in this context?",
+      "options": [
+        { "id": "a", "text": "A single binary digit", "isCorrect": false },
+        { "id": "b", "text": "Eight binary digits treated as a unit", "isCorrect": true },
+        { "id": "c", "text": "A floating point mantissa", "isCorrect": false },
+        { "id": "d", "text": "A hexadecimal digit", "isCorrect": false }
+      ],
+      "explanation": "The notes highlight: a single binary digit is a bit; 8 bits is a byte.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Binary Systems and Number Representations" }],
+      "tags": ["units"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "prompt": "Select all statements that match the notes about number systems and representation.",
+      "options": [
+        { "id": "a", "text": "Binary uses high and low voltages to represent 1 and 0.", "isCorrect": true },
+        { "id": "b", "text": "Decimal converts perfectly to binary because 10 is a power of 2.", "isCorrect": false },
+        { "id": "c", "text": "Hexadecimal is often used because it maps compactly to binary.", "isCorrect": true },
+        { "id": "d", "text": "Two’s complement encodes negative integers.", "isCorrect": true }
+      ],
+      "explanation": "(a), (c), and (d) reflect the notes; (b) is false because 10 is not a power of 2.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_1_DSIP", "heading": "Content" }],
+      "tags": ["bases", "hardware"], "difficulty": "medium", "points": 1
+    }
+  ]
+}
+

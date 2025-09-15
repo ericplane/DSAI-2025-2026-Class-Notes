@@ -1,0 +1,93 @@
+{
+  "id": "y1s1-dsip-lecture-4",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP",
+  "title": "Lecture 4 — Operating System Fundamentals",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Which elements are listed as part of an OS’s composition?","options":[
+      {"id":"a","text":"User interface (GUI/CLI), kernel (drivers, core services), system calls","isCorrect":true},
+      {"id":"b","text":"Only the GUI","isCorrect":false},
+      {"id":"c","text":"Only hardware drivers","isCorrect":false},
+      {"id":"d","text":"Only applications","isCorrect":false}
+    ],"explanation":"Lecture shows UI, kernel (drivers/core), and system calls.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"What is an Operating System really? (Composition)"}],"tags":["os"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"Applications run in which mode and why?","options":[
+      {"id":"a","text":"Kernel mode for speed","isCorrect":false},
+      {"id":"b","text":"User mode for safety and stability","isCorrect":true},
+      {"id":"c","text":"Debug mode for development","isCorrect":false},
+      {"id":"d","text":"Admin mode to access IO ports","isCorrect":false}
+    ],"explanation":"User mode limits damage and isolates failures.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"User applications / application management"}],"tags":["privilege"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"System calls are:","options":[
+      {"id":"a","text":"Kernel-exposed functions that user apps call to request services","isCorrect":true},
+      {"id":"b","text":"Only CLI commands","isCorrect":false},
+      {"id":"c","text":"GUI widgets","isCorrect":false},
+      {"id":"d","text":"Registry entries","isCorrect":false}
+    ],"explanation":"System calls bridge user-space to kernel services like read/write.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"System calls"}],"tags":["syscalls"],"difficulty":"easy","points":1},
+
+    {"id":"q4","type":"single","prompt":"Which is NOT listed as a kernel/core service?","options":[
+      {"id":"a","text":"Memory management","isCorrect":false},
+      {"id":"b","text":"Process management","isCorrect":false},
+      {"id":"c","text":"Account and access rights management","isCorrect":false},
+      {"id":"d","text":"Web page rendering","isCorrect":true}
+    ],"explanation":"Web rendering is an application concern, not a kernel core service.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"Kernel and Drivers"}],"tags":["kernel"],"difficulty":"easy","points":1},
+
+    {"id":"q5","type":"single","prompt":"Virtual memory is described as:","options":[
+      {"id":"a","text":"Using CPU registers as storage","isCorrect":false},
+      {"id":"b","text":"Using disk as an extension of RAM when needed","isCorrect":true},
+      {"id":"c","text":"Compressing RAM","isCorrect":false},
+      {"id":"d","text":"Only for graphics","isCorrect":false}
+    ],"explanation":"Notes: the OS uses disk (swap file) when RAM is insufficient.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"Memory management"}],"tags":["memory"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"single","prompt":"What is a process?","options":[
+      {"id":"a","text":"Any installed application (even if not running)","isCorrect":false},
+      {"id":"b","text":"A running program with state managed by the OS","isCorrect":true},
+      {"id":"c","text":"A file on disk","isCorrect":false},
+      {"id":"d","text":"A system call","isCorrect":false}
+    ],"explanation":"The notes define processes as running programs with states and scheduling.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"Process management"}],"tags":["process"],"difficulty":"easy","points":1},
+
+    {"id":"q7","type":"multi","prompt":"Which tasks belong to process management per the lecture?","options":[
+      {"id":"a","text":"Scheduling CPU time","isCorrect":true},
+      {"id":"b","text":"Stopping misbehaving processes","isCorrect":true},
+      {"id":"c","text":"Installing drivers","isCorrect":false},
+      {"id":"d","text":"Enabling inter-process communication (IPC)","isCorrect":true}
+    ],"explanation":"Scheduling, stopping processes, and IPC are explicitly listed.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"Process management"}],"tags":["process"],"difficulty":"medium","points":1},
+
+    {"id":"q8","type":"single","prompt":"Which best describes the registry in application management?","options":[
+      {"id":"a","text":"A kernel mode privilege list","isCorrect":false},
+      {"id":"b","text":"A special OS-owned file storing application metadata","isCorrect":true},
+      {"id":"c","text":"A code repository in the cloud","isCorrect":false},
+      {"id":"d","text":"A password manager","isCorrect":false}
+    ],"explanation":"The registry records application existence, versions, etc.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"User applications / application management"}],"tags":["registry"],"difficulty":"easy","points":1},
+
+    {"id":"q9","type":"single","prompt":"Switching from user mode to kernel mode occurs during:","options":[
+      {"id":"a","text":"A system call execution","isCorrect":true},
+      {"id":"b","text":"Typing on the keyboard","isCorrect":false},
+      {"id":"c","text":"Rendering a web page","isCorrect":false},
+      {"id":"d","text":"Opening a GUI window","isCorrect":false}
+    ],"explanation":"System calls trigger a controlled switch to kernel mode to perform services.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"System calls"}],"tags":["syscalls"],"difficulty":"medium","points":1},
+
+    {"id":"q10","type":"multi","prompt":"Select the stated benefits of running apps in user mode.","options":[
+      {"id":"a","text":"Safety (reduced virus risk)","isCorrect":true},
+      {"id":"b","text":"Stability (contain crashes)","isCorrect":true},
+      {"id":"c","text":"Direct unrestricted hardware access","isCorrect":false},
+      {"id":"d","text":"Faster kernel execution","isCorrect":false}
+    ],"explanation":"User mode limits privileges, improving safety and stability.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"User applications / application management"}],"tags":["security"],"difficulty":"easy","points":1},
+
+    {"id":"q11","type":"single","prompt":"Access rights on files are used primarily for:","options":[
+      {"id":"a","text":"Improving CPU speed","isCorrect":false},
+      {"id":"b","text":"Protecting files from unauthorized access","isCorrect":true},
+      {"id":"c","text":"Compressing data","isCorrect":false},
+      {"id":"d","text":"Rendering GUIs","isCorrect":false}
+    ],"explanation":"File protection is highlighted under account management and access rights.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"Account management and access rights"}],"tags":["permissions"],"difficulty":"easy","points":1},
+
+    {"id":"q12","type":"single","prompt":"Installing an application typically involves which steps?","options":[
+      {"id":"a","text":"Copying files to a directory and registering the app in a registry","isCorrect":true},
+      {"id":"b","text":"Editing the kernel source code","isCorrect":false},
+      {"id":"c","text":"Reformatting the disk","isCorrect":false},
+      {"id":"d","text":"Only unzipping a file without registration","isCorrect":false}
+    ],"explanation":"Notes list creating a directory, copying files, and registry updates.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP","heading":"User applications / application management"}],"tags":["apps"],"difficulty":"easy","points":1}
+  ]
+}
+

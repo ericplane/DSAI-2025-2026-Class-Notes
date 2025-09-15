@@ -1,0 +1,178 @@
+{
+  "id": "y1s1-dsip-lecture-2",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP",
+  "title": "Lecture 2 — Files and Filesystems (Part 1)",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which statement best describes a file?",
+      "options": [
+        { "id": "a", "text": "A named collection of bytes; interpretation depends on format.", "isCorrect": true },
+        { "id": "b", "text": "Always human-readable text.", "isCorrect": false },
+        { "id": "c", "text": "Always an executable program.", "isCorrect": false },
+        { "id": "d", "text": "Stored only in RAM.", "isCorrect": false }
+      ],
+      "explanation": "Every file is bytes; type/meaning follows conventions like headers and encodings.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "File types and how data is stored" }],
+      "tags": ["files"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does execute permission mean on a directory?",
+      "options": [
+        { "id": "a", "text": "You can run the directory as a program.", "isCorrect": false },
+        { "id": "b", "text": "You can enter (traverse) the directory.", "isCorrect": true },
+        { "id": "c", "text": "You can rename the directory.", "isCorrect": false },
+        { "id": "d", "text": "You can change its owner.", "isCorrect": false }
+      ],
+      "explanation": "Execute on a directory controls the ability to traverse into it.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Directory trees" }],
+      "tags": ["permissions"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Where is a file’s real type recorded?",
+      "options": [
+        { "id": "a", "text": "In the file’s extension only.", "isCorrect": false },
+        { "id": "b", "text": "In the file’s header / internal structure.", "isCorrect": true },
+        { "id": "c", "text": "In its parent directory name.", "isCorrect": false },
+        { "id": "d", "text": "In the operating system kernel.", "isCorrect": false }
+      ],
+      "explanation": "Extensions are UI hints; the internal header/structure encodes real type.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Extensions vs “real” type" }],
+      "tags": ["headers"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "prompt": "Which items reside in file system metadata (not in the file header)?",
+      "options": [
+        { "id": "a", "text": "Filename and path", "isCorrect": true },
+        { "id": "b", "text": "Permissions", "isCorrect": true },
+        { "id": "c", "text": "On-disk location (allocation)", "isCorrect": true },
+        { "id": "d", "text": "Magic number indicating file type", "isCorrect": false }
+      ],
+      "explanation": "FS metadata: name, path, perms, location; file header: real type signature/magic + format.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "File structure components" }],
+      "tags": ["metadata"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which encoding stores Unicode using 1–4 bytes and is ASCII-compatible?",
+      "options": [
+        { "id": "a", "text": "ASCII", "isCorrect": false },
+        { "id": "b", "text": "UTF-8", "isCorrect": true },
+        { "id": "c", "text": "UTF-16 only", "isCorrect": false },
+        { "id": "d", "text": "Base64", "isCorrect": false }
+      ],
+      "explanation": "UTF-8 is variable-length and backward-compatible with ASCII.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Text encodings" }],
+      "tags": ["utf-8"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which UTF-8 pattern matches a 3-byte character?",
+      "options": [
+        { "id": "a", "text": "0xxxxxxx", "isCorrect": false },
+        { "id": "b", "text": "110xxxxx 10xxxxxx", "isCorrect": false },
+        { "id": "c", "text": "1110xxxx 10xxxxxx 10xxxxxx", "isCorrect": true },
+        { "id": "d", "text": "11110xxx 10xxxxxx 10xxxxxx 10xxxxxx", "isCorrect": false }
+      ],
+      "explanation": "3-byte form uses 1110xxxx followed by two 10xxxxxx continuation bytes.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "UTF-8 byte patterns" }],
+      "tags": ["utf-8"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which statement about compression is true per the lecture?",
+      "options": [
+        { "id": "a", "text": "Lossless compression discards some information.", "isCorrect": false },
+        { "id": "b", "text": "Lossy compression preserves all information.", "isCorrect": false },
+        { "id": "c", "text": "Lossless compression preserves information exactly.", "isCorrect": true },
+        { "id": "d", "text": "Compression only applies to images.", "isCorrect": false }
+      ],
+      "explanation": "Lossless preserves information; lossy trades fidelity for ratio.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Compression" }],
+      "tags": ["compression"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which best describes the dictionary approach to lossless compression?",
+      "options": [
+        { "id": "a", "text": "Store only unique bytes and discard the rest.", "isCorrect": false },
+        { "id": "b", "text": "Replace repeated patterns with shorter references to a dictionary.", "isCorrect": true },
+        { "id": "c", "text": "Convert binary to text for smaller size.", "isCorrect": false },
+        { "id": "d", "text": "Encrypts data with a key.", "isCorrect": false }
+      ],
+      "explanation": "Lecture example maps repeated phrases to indices, reducing total bytes.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Lossless idea (dictionary approach)" }],
+      "tags": ["compression"], "difficulty": "medium", "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which item is NOT a file category listed in the notes?",
+      "options": [
+        { "id": "a", "text": "Text files", "isCorrect": false },
+        { "id": "b", "text": "Executables", "isCorrect": false },
+        { "id": "c", "text": "Binary data (e.g., images)", "isCorrect": false },
+        { "id": "d", "text": "Quantum state files", "isCorrect": true }
+      ],
+      "explanation": "Text, executables, and binary formats are covered; 'quantum state files' are not.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "File types and how data is stored" }],
+      "tags": ["files"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which of the following is true about ASCII and UTF-8 compatibility?",
+      "options": [
+        { "id": "a", "text": "ASCII characters are not valid UTF-8.", "isCorrect": false },
+        { "id": "b", "text": "All ASCII bytes map directly to single-byte UTF-8 codes starting with 0.", "isCorrect": true },
+        { "id": "c", "text": "ASCII requires two bytes in UTF-8.", "isCorrect": false },
+        { "id": "d", "text": "UTF-8 cannot represent ASCII control codes.", "isCorrect": false }
+      ],
+      "explanation": "The notes state ASCII is backward-compatible: same single-byte values in UTF-8.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "ASCII AND UTF-8 are backwards compatible because:" }],
+      "tags": ["utf-8", "ascii"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which is a property of HDD/SSD described in the notes?",
+      "options": [
+        { "id": "a", "text": "They are volatile storage.", "isCorrect": false },
+        { "id": "b", "text": "They are non-volatile; data persists without power.", "isCorrect": true },
+        { "id": "c", "text": "They store only directories.", "isCorrect": false },
+        { "id": "d", "text": "They cannot be partitioned.", "isCorrect": false }
+      ],
+      "explanation": "Lecture states HDD/SSD are non-volatile and may be partitioned.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Storage and disks" }],
+      "tags": ["storage"], "difficulty": "easy", "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "prompt": "Select all correct statements about directory trees from the lecture.",
+      "options": [
+        { "id": "a", "text": "The root is a drive (e.g., C: or /).", "isCorrect": true },
+        { "id": "b", "text": "Inner nodes are files only.", "isCorrect": false },
+        { "id": "c", "text": "Leaves can be files or links/shortcuts.", "isCorrect": true },
+        { "id": "d", "text": "Permissions apply to both folders and files.", "isCorrect": true }
+      ],
+      "explanation": "Inner nodes are directories, leaves include files/links, and permissions exist for both.",
+      "sources": [{ "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_2_DSIP", "heading": "Directory trees" }],
+      "tags": ["directories"], "difficulty": "medium", "points": 1
+    }
+  ]
+}
+

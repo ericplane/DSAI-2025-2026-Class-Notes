@@ -750,3 +750,25 @@ body.dark-mode .theme-toggle i::before {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
 }
+
+/* Quiz CTA (loaded before quiz.css to style the banner) */
+.quiz-cta {
+    margin: 1rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.quiz-cta button {
+    margin-left: auto;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    cursor: pointer;
+}

@@ -1,0 +1,93 @@
+{
+  "id": "y1s1-dsip-lecture-5",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP",
+  "title": "Lecture 5 — Networking and Cloud Fundamentals",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Which layer handles logical addressing and routing in the TCP/IP model?","options":[
+      {"id":"a","text":"Application","isCorrect":false},
+      {"id":"b","text":"Transport","isCorrect":false},
+      {"id":"c","text":"Internet/Network","isCorrect":true},
+      {"id":"d","text":"Link","isCorrect":false}
+    ],"explanation":"The Internet (Network) layer provides IP addressing and routing.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"TCP/IP network model"}],"tags":["tcpip"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"A port number identifies:","options":[
+      {"id":"a","text":"The network adapter hardware","isCorrect":false},
+      {"id":"b","text":"An application/service endpoint on a host","isCorrect":true},
+      {"id":"c","text":"The router's MAC address","isCorrect":false},
+      {"id":"d","text":"The Wi‑Fi channel","isCorrect":false}
+    ],"explanation":"Ports reside in Transport headers and map to application endpoints.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"IP addresses and ports"}],"tags":["ports"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"How many ports are available per transport protocol per IP?","options":[
+      {"id":"a","text":"1,024","isCorrect":false},
+      {"id":"b","text":"4,096","isCorrect":false},
+      {"id":"c","text":"65,535","isCorrect":true},
+      {"id":"d","text":"Unlimited","isCorrect":false}
+    ],"explanation":"A 16-bit port field allows up to 65,535 ports.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"IP addresses and ports"}],"tags":["ports"],"difficulty":"easy","points":1},
+
+    {"id":"q4","type":"single","prompt":"Which is a common application-layer protocol from the notes?","options":[
+      {"id":"a","text":"HTTP","isCorrect":true},
+      {"id":"b","text":"IP","isCorrect":false},
+      {"id":"c","text":"TCP","isCorrect":false},
+      {"id":"d","text":"Ethernet","isCorrect":false}
+    ],"explanation":"HTTP is an application-layer protocol; IP is network-layer; TCP is transport; Ethernet is link.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Common application protocols"}],"tags":["protocols"],"difficulty":"easy","points":1},
+
+    {"id":"q5","type":"single","prompt":"In the HTTP example, which request line is shown?","options":[
+      {"id":"a","text":"GET /index.html HTTP/1.0","isCorrect":true},
+      {"id":"b","text":"POST /login HTTP/1.1","isCorrect":false},
+      {"id":"c","text":"PUT /file HTTP/2","isCorrect":false},
+      {"id":"d","text":"DELETE /data HTTP/1.0","isCorrect":false}
+    ],"explanation":"The example shows a GET for /index.html using HTTP/1.0.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"HTTP example"}],"tags":["http"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"multi","prompt":"Select the correct characteristics of servers in the client–server model.","options":[
+      {"id":"a","text":"Always-on and globally reachable","isCorrect":true},
+      {"id":"b","text":"Listen on specific ports","isCorrect":true},
+      {"id":"c","text":"Request data from clients only","isCorrect":false},
+      {"id":"d","text":"Provide services such as websites or databases","isCorrect":true}
+    ],"explanation":"Servers are always-on, listen on ports, and provide services to clients.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Client–server model"}],"tags":["client-server"],"difficulty":"easy","points":1},
+
+    {"id":"q7","type":"single","prompt":"Which protocol provides secure remote shell access as described?","options":[
+      {"id":"a","text":"SSH","isCorrect":true},
+      {"id":"b","text":"FTP","isCorrect":false},
+      {"id":"c","text":"HTTP","isCorrect":false},
+      {"id":"d","text":"ICMP","isCorrect":false}
+    ],"explanation":"SSH uses public–private key pairs to authenticate.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Remote authentication and keys"}],"tags":["ssh"],"difficulty":"easy","points":1},
+
+    {"id":"q8","type":"single","prompt":"Which statement about IP addresses vs ports is correct?","options":[
+      {"id":"a","text":"Ports identify hosts; IP addresses identify applications.","isCorrect":false},
+      {"id":"b","text":"IP addresses identify hosts; ports identify applications.","isCorrect":true},
+      {"id":"c","text":"Both identify hardware only.","isCorrect":false},
+      {"id":"d","text":"Ports exist at the link layer.","isCorrect":false}
+    ],"explanation":"IP addresses are host-level, ports are application-level within transport headers.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"IP addresses and ports"}],"tags":["tcpip"],"difficulty":"easy","points":1},
+
+    {"id":"q9","type":"single","prompt":"Which example is listed as a cloud storage service?","options":[
+      {"id":"a","text":"Docker","isCorrect":false},
+      {"id":"b","text":"Linux kernel","isCorrect":false},
+      {"id":"c","text":"Google Drive","isCorrect":true},
+      {"id":"d","text":"AWS EC2 only","isCorrect":false}
+    ],"explanation":"Notes list storage services like Google Drive; EC2 is compute.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Cloud storage and computation"}],"tags":["cloud"],"difficulty":"easy","points":1},
+
+    {"id":"q10","type":"single","prompt":"WebSocket communication is described as:","options":[
+      {"id":"a","text":"Unidirectional over UDP","isCorrect":false},
+      {"id":"b","text":"Bidirectional over TCP using an HTTP/1.1 upgrade","isCorrect":true},
+      {"id":"c","text":"File transfer only","isCorrect":false},
+      {"id":"d","text":"A replacement for HTTPS","isCorrect":false}
+    ],"explanation":"Notes: WebSocket is bidirectional over TCP via HTTP/1.1 upgrade.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Common application protocols"}],"tags":["websocket"],"difficulty":"medium","points":1},
+
+    {"id":"q11","type":"single","prompt":"Which authentication method avoids passwords by using key pairs?","options":[
+      {"id":"a","text":"Username–password","isCorrect":false},
+      {"id":"b","text":"2FA with SMS","isCorrect":false},
+      {"id":"c","text":"SSH keys","isCorrect":true},
+      {"id":"d","text":"CAPTCHA","isCorrect":false}
+    ],"explanation":"Public–private key auth as described for SSH.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Remote authentication and keys"}],"tags":["auth"],"difficulty":"easy","points":1},
+
+    {"id":"q12","type":"single","prompt":"Routers forward packets primarily based on:","options":[
+      {"id":"a","text":"Port numbers","isCorrect":false},
+      {"id":"b","text":"MAC addresses over the Internet","isCorrect":false},
+      {"id":"c","text":"IP address hierarchy","isCorrect":true},
+      {"id":"d","text":"Application protocol","isCorrect":false}
+    ],"explanation":"Routers use hierarchical IP addressing to forward packets across networks.","sources":[{"path":"Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP","heading":"Computers are not alone (Concepts)"}],"tags":["routing"],"difficulty":"medium","points":1}
+  ]
+}
+

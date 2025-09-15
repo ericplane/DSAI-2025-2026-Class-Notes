@@ -1,0 +1,79 @@
+{
+  "id": "y1s1-study-presenting-lecture-1",
+  "lecturePath": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting",
+  "title": "Studying and Presenting — Lecture 1",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-15", "author": "Codex" },
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Which study tactic focuses on distributing practice over time?","options":[
+      {"id":"a","text":"Spaced repetition","isCorrect":true},
+      {"id":"b","text":"Cramming","isCorrect":false},
+      {"id":"c","text":"Passive rereading","isCorrect":false},
+      {"id":"d","text":"Highlighting only","isCorrect":false}
+    ],"explanation":"Lecture emphasizes spaced repetition over massed practice.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Evidence-Based Study Strategies"}],"tags":["spaced"],"difficulty":"easy","points":1},
+
+    {"id":"q2","type":"single","prompt":"Interleaving means:","options":[
+      {"id":"a","text":"Focusing on one topic exclusively","isCorrect":false},
+      {"id":"b","text":"Alternating between topics within sessions","isCorrect":true},
+      {"id":"c","text":"Skipping hard topics","isCorrect":false},
+      {"id":"d","text":"Only reading summaries","isCorrect":false}
+    ],"explanation":"Interleave topics (e.g., ABC today and ABC tomorrow) to enhance learning.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Evidence-Based Study Strategies"}],"tags":["interleaving"],"difficulty":"easy","points":1},
+
+    {"id":"q3","type":"single","prompt":"Active recall is best described as:","options":[
+      {"id":"a","text":"Rewriting notes verbatim","isCorrect":false},
+      {"id":"b","text":"Testing yourself and actively retrieving information","isCorrect":true},
+      {"id":"c","text":"Listening to lectures passively","isCorrect":false},
+      {"id":"d","text":"Annotating slides only","isCorrect":false}
+    ],"explanation":"Active recall uses testing and retrieval to strengthen memory.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Effective Study Tactics"}],"tags":["active recall"],"difficulty":"easy","points":1},
+
+    {"id":"q4","type":"multi","prompt":"Select components of effective planning highlighted in the lecture.","options":[
+      {"id":"a","text":"Time management","isCorrect":true},
+      {"id":"b","text":"Metacognition","isCorrect":true},
+      {"id":"c","text":"Realistic scheduling and breaks","isCorrect":true},
+      {"id":"d","text":"Avoiding to-do lists entirely","isCorrect":false}
+    ],"explanation":"Planning includes time management, metacognition, realistic schedules, and breaks.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Planning for Effective Study"}],"tags":["planning"],"difficulty":"easy","points":1},
+
+    {"id":"q5","type":"single","prompt":"Which matrix is suggested for prioritization?","options":[
+      {"id":"a","text":"Covariance matrix","isCorrect":false},
+      {"id":"b","text":"Eisenhower Matrix","isCorrect":true},
+      {"id":"c","text":"Adjacency matrix","isCorrect":false},
+      {"id":"d","text":"Incidence matrix","isCorrect":false}
+    ],"explanation":"The lecture uses the Eisenhower Matrix for prioritization.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Planning for Effective Study"}],"tags":["prioritization"],"difficulty":"easy","points":1},
+
+    {"id":"q6","type":"single","prompt":"Advice for taking notes includes:","options":[
+      {"id":"a","text":"Write in your own words","isCorrect":true},
+      {"id":"b","text":"Capture every spoken word","isCorrect":false},
+      {"id":"c","text":"Ignore titles and emphasis","isCorrect":false},
+      {"id":"d","text":"Avoid any method like mapping or Cornell","isCorrect":false}
+    ],"explanation":"Notes: own words, prioritize listening, identify cues, and use structured methods.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Advice for Taking Notes"}],"tags":["notes"],"difficulty":"easy","points":1},
+
+    {"id":"q7","type":"single","prompt":"Metacognition refers to:","options":[
+      {"id":"a","text":"Speed reading","isCorrect":false},
+      {"id":"b","text":"Thinking about your own thinking (managing your learning)","isCorrect":true},
+      {"id":"c","text":"Group brainstorming","isCorrect":false},
+      {"id":"d","text":"Highlighting","isCorrect":false}
+    ],"explanation":"Lecture defines metacognition as managing your learning and reflecting on thinking.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"How Memory Works / Key Processes"}],"tags":["metacognition"],"difficulty":"easy","points":1},
+
+    {"id":"q8","type":"single","prompt":"To avoid procrastination, the lecture suggests:","options":[
+      {"id":"a","text":"Plan the exam date only","isCorrect":false},
+      {"id":"b","text":"Make concrete, small tasks and clear to-do lists","isCorrect":true},
+      {"id":"c","text":"Only work when inspired","isCorrect":false},
+      {"id":"d","text":"Avoid reflecting on progress","isCorrect":false}
+    ],"explanation":"Break work into small, concrete tasks and plan them.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Avoiding Procrastination"}],"tags":["procrastination"],"difficulty":"easy","points":1},
+
+    {"id":"q9","type":"single","prompt":"The Study Diary assignment length is:","options":[
+      {"id":"a","text":"1 page","isCorrect":false},
+      {"id":"b","text":"2–4 pages","isCorrect":true},
+      {"id":"c","text":"5–10 pages","isCorrect":false},
+      {"id":"d","text":"No length specified","isCorrect":false}
+    ],"explanation":"The assignment requires a clearly structured 2–4 page diary.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Assignment #1: Study Diary"}],"tags":["assignment"],"difficulty":"easy","points":1},
+
+    {"id":"q10","type":"multi","prompt":"Select effective techniques to minimize cognitive load from the lecture.","options":[
+      {"id":"a","text":"Chunking","isCorrect":true},
+      {"id":"b","text":"Diagrams and mindmaps","isCorrect":true},
+      {"id":"c","text":"Worked-out examples","isCorrect":true},
+      {"id":"d","text":"Avoid collaboration entirely","isCorrect":false}
+    ],"explanation":"Chunking, diagrams, worked examples, and collaboration are noted techniques.","sources":[{"path":"Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md","heading":"Minimizing Cognitive Load"}],"tags":["cognitive load"],"difficulty":"medium","points":1}
+  ]
+}
+

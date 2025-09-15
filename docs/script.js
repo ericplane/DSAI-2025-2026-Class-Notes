@@ -462,6 +462,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     { name: 'Home', action: showDashboard },
                     { name: fileName, action: null }
                 ]);
+
+                // Inject quiz CTA when a quiz exists for this lecture
+                maybeInjectQuizCTA(path);
             })
             .catch(error => {
                 console.error('Error loading file:', error);
@@ -486,6 +489,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 dashboard.style.display = 'none';
                 content.classList.add('active');
             });
+    }
+
+    // --- Quiz Integration ---
+    function normalizeLecturePath(path) {
+        return path.endsWith('.md') ? path.slice(0, -3) : path;
+    }
+
+    function guessQuizPathForLecture(path) {
+        const lecturePath = normalizeLecturePath(path);
+        return `quizzes/${lecturePath}.json`;
+    }
+
+    function ensureQuizScriptLoaded() {
+        return new Promise((resolve, reject) => {
+            if (window.Quiz && typeof window.Quiz.open === 'function') return resolve();
+            const script = document.createElement('script');
+            window.__QUIZ_BASE_PATH__ = basePath;
+            script.src = basePath + 'quiz.js';
+            script.async = true;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Failed to load quiz engine'));
+            document.body.appendChild(script);
+        });
+    }
+
+    function preloadQuizStyles() {
+        if (document.querySelector('link[data-quiz-preload]')) return;
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'style';
+        link.href = basePath + 'quiz.css';
+        link.setAttribute('data-quiz-preload', '1');
+        document.head.appendChild(link);
+    }
+
+    function maybeInjectQuizCTA(lecturePath) {
+        const quizPath = guessQuizPathForLecture(lecturePath);
+        fetch(basePath + quizPath, { method: 'HEAD' })
+            .then(res => {
+                if (!res.ok) throw new Error('No quiz');
+                const cta = document.createElement('div');
+                cta.className = 'quiz-cta';
+                cta.innerHTML = `
+                    <div>
+                        <strong>Interactive Quiz Available</strong>
+                        <div>Test your understanding of this lecture.</div>
+                    </div>
+                    <button type=\"button\"><i class=\"fas fa-play\"></i> Start Quiz</button>
+                `;
+                const btn = cta.querySelector('button');
+                btn.addEventListener('click', async () => {
+                    btn.disabled = true; btn.textContent = 'Loading…';
+                    try {
+                        await ensureQuizScriptLoaded();
+                        await window.Quiz.open(quizPath, { basePath });
+                    } catch (e) {
+                        alert('Unable to start quiz: ' + e.message);
+                    } finally {
+                        btn.disabled = false; btn.innerHTML = '<i class=\"fas fa-play\"></i> Start Quiz';
+                    }
+                });
+                content.prepend(cta);
+                // Preload quiz CSS for faster overlay styling
+                preloadQuizStyles();
+            })
+            .catch(() => {});
     }
 
     // --- Search ---
