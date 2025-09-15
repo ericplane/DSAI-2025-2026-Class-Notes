@@ -80,7 +80,7 @@
 
     const btnSubmit = document.createElement('button');
     btnSubmit.className = 'quiz-btn primary';
-    btnSubmit.textContent = 'Submit';
+    btnSubmit.textContent = 'Finish';
     btnSubmit.addEventListener('click', submit);
 
     left.appendChild(btnPrev);
@@ -222,6 +222,7 @@
     }
 
     updateProgress();
+    updateControls();
   }
 
   function selectOption(q, optId, isMulti, optEl) {
@@ -279,6 +280,22 @@
     persistProgress();
   }
 
+  function updateControls() {
+    // Update prev/next/finish visibility and disabled states
+    if (!el.footer) return;
+    const buttons = el.footer.querySelectorAll('.quiz-btn');
+    let btnPrev, btnNext, btnSubmit;
+    buttons.forEach(b => {
+      if (b.textContent === 'Back') btnPrev = b;
+      else if (b.textContent === 'Next') btnNext = b;
+      else if (b.textContent === 'Finish') btnSubmit = b;
+    });
+    const last = state.current === (state.quiz.questions.length - 1);
+    if (btnPrev) btnPrev.disabled = state.current === 0;
+    if (btnNext) btnNext.style.display = last ? 'none' : '';
+    if (btnSubmit) btnSubmit.style.display = last ? '' : 'none';
+  }
+
   function updateProgress() {
     const total = state.quiz.questions.length;
     const pct = ((state.current + 1) / total) * 100;
@@ -329,6 +346,12 @@
 
     if (window.MathJax && window.MathJax.typesetPromise) {
       window.MathJax.typesetPromise([el.body]).catch(() => {});
+    }
+
+    // Clear in-progress data so next start is a reset
+    if (state.quiz && state.quiz.lecturePath) {
+      const key = `quiz:${state.quiz.lecturePath}:inProgress`;
+      try { localStorage.removeItem(key); } catch {}
     }
   }
 

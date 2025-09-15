@@ -184,6 +184,22 @@ body {
     min-height: calc(100vh - 125px);
 }
 
+/* Center content when sidebar is hidden (desktop) */
+@media (min-width: 769px) {
+  .main-container.sidebar-hidden {
+    justify-content: center;
+  }
+  .main-container.sidebar-hidden .content-wrapper {
+    flex: 0 1 auto;
+  }
+  .main-container.sidebar-hidden .sidebar {
+    position: absolute;
+    left: 0;
+    transform: translateX(-100%);
+    z-index: 100;
+  }
+}
+
 /* Sidebar */
 .sidebar {
     width: 320px;
@@ -290,6 +306,12 @@ body {
     transform: translateX(4px);
 }
 
+/* Highlight selected file in sidebar */
+.navigation a.active {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+
 /* Content Wrapper */
 .content-wrapper {
     flex: 1;
@@ -302,6 +324,71 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+}
+
+/* Course screen (detail view) */
+.course-screen {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.course-view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.course-view-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.file-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.file-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.file-card .meta {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
 }
 
 /* Dashboard */

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewToggle = document.getElementById('view-toggle');
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
+    const mainContainer = document.querySelector('.main-container');
     const breadcrumb = document.getElementById('breadcrumb');
     const coursesGrid = document.getElementById('courses-grid');
     const converter = new showdown.Converter();
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth <= 768) {
             sidebar.classList.toggle('open');
         }
+        updateSidebarLayoutState();
     });
 
     // Detect if we're running on GitHub Pages and adjust paths accordingly
@@ -314,40 +316,106 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showCourseFiles(course) {
-        // Filter navigation to show only this course's files
-        const courseFiles = files.filter(file => 
-            course.files.some(courseFile => courseFile === file)
-        );
-        
-        // Update breadcrumb
+        // Keep full sidebar; only update breadcrumb and content
         updateBreadcrumb([
             { name: 'Home', action: showDashboard },
             { name: course.name, action: null }
         ]);
 
-        // Filter navigation
-        navigation.innerHTML = '';
-        const ul = document.createElement('ul');
-        courseFiles.forEach(file => {
-            let fileName = file.split('/').pop();
-            if (fileName.endsWith('.md')) {
-                fileName = fileName.replace('.md', '');
-            }
-            // Format file name for better readability
-            fileName = fileName.replace(/_/g, ' ');
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = '#';
-            a.textContent = fileName;
-            a.dataset.path = file;
-            li.appendChild(a);
-            ul.appendChild(li);
-        });
-        navigation.appendChild(ul);
-
         // Switch to content view but keep dashboard visible initially
         currentView = 'content';
         viewToggle.innerHTML = '<i class="fas fa-th-large"></i>';
+
+        // Also render course detail screen in content area
+        showCourseScreen(course);
+    }
+
+    function expandSidebarToPath(path) {
+        // Expand sidebar tree and highlight the link for a path
+        const links = navigation.querySelectorAll('a');
+        let target = null;
+        links.forEach(a => {
+            if (a.dataset.path === path) target = a;
+            a.classList.remove('active');
+        });
+        if (!target) return;
+        target.classList.add('active');
+        // Expand ancestors
+        let node = target.parentElement; // li
+        while (node && node !== navigation) {
+            if (node.classList && node.classList.contains('folder-content')) {
+                node.classList.remove('collapsed');
+                node.classList.add('expanded');
+                // Update toggle icon on header sibling
+                const header = node.previousElementSibling;
+                if (header && header.querySelector) {
+                    const toggleIcon = header.querySelector('.folder-toggle');
+                    if (toggleIcon) {
+                        toggleIcon.classList.remove('fa-chevron-right');
+                        toggleIcon.classList.add('fa-chevron-down');
+                    }
+                }
+            }
+            node = node.parentElement;
+        }
+        // Ensure sidebar is open on mobile
+        if (window.innerWidth <= 768) {
+            sidebar.classList.add('open');
+        }
+    }
+
+    function showCourseScreen(course) {
+        dashboard.style.display = 'none';
+        content.classList.add('active');
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'course-screen';
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'course-view-header';
+        header.innerHTML = `
+            <div class="course-view-title"><i class="fas fa-book"></i> ${course.name}</div>
+            <div class="course-meta"><span>${course.files.length} files</span></div>
+        `;
+        wrapper.appendChild(header);
+
+        // Grid
+        const grid = document.createElement('div');
+        grid.className = 'file-grid';
+
+        if (!course.files.length) {
+            const empty = document.createElement('div');
+            empty.className = 'empty-state';
+            empty.innerHTML = '<i class="fas fa-inbox"></i> <div>No content yet for this course.</div>';
+            wrapper.appendChild(empty);
+        } else {
+            course.files.forEach(path => {
+                const titleRaw = path.split('/').pop();
+                const title = (titleRaw.endsWith('.md') ? titleRaw.replace('.md','') : titleRaw).replace(/_/g, ' ');
+                const card = document.createElement('div');
+                card.className = 'file-card';
+                const icon = titleRaw.endsWith('.md') || titleRaw.includes('Lecture_') ? 'fa-file-alt' : 'fa-file';
+                card.innerHTML = `<div><i class="fas ${icon}"></i> ${title}</div><div class="meta">${path}</div>`;
+                card.addEventListener('click', () => loadFileContent(path));
+                grid.appendChild(card);
+            });
+            wrapper.appendChild(grid);
+        }
+
+        content.innerHTML = '';
+        content.appendChild(wrapper);
+    }
+
+    function updateSidebarLayoutState() {
+        // On desktop, center content when sidebar is collapsed
+        if (window.innerWidth > 768) {
+            const hidden = sidebar.classList.contains('collapsed');
+            if (hidden) mainContainer.classList.add('sidebar-hidden');
+            else mainContainer.classList.remove('sidebar-hidden');
+        } else {
+            mainContainer.classList.remove('sidebar-hidden');
+        }
     }
 
     function updateBreadcrumb(items) {
@@ -465,6 +533,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Inject quiz CTA when a quiz exists for this lecture
                 maybeInjectQuizCTA(path);
+
+                // Expand and highlight in sidebar for this path
+                expandSidebarToPath(path);
             })
             .catch(error => {
                 console.error('Error loading file:', error);
@@ -597,36 +668,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function displaySearchResults(results) {
-        if (currentView === 'content') {
-            navigation.innerHTML = ''; // Clear current navigation
-            const ul = document.createElement('ul');
-            results.forEach(result => {
-                const path = result.ref;
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = '#';
-                let fileName = path.split('/').pop();
-                if (fileName.endsWith('.md')) {
-                    fileName = fileName.replace('.md', '');
-                }
-                // Format file name for better readability
-                fileName = fileName.replace(/_/g, ' ');
-                a.textContent = fileName;
-                a.dataset.path = path;
-                li.appendChild(a);
-                ul.appendChild(li);
-            });
-            navigation.appendChild(ul);
-        } else {
-            // In dashboard view, filter course cards
-            const matchingFiles = results.map(r => r.ref);
-            const matchingCourses = extractCourses(matchingFiles);
-            coursesGrid.innerHTML = '';
-            matchingCourses.forEach(course => {
-                const courseCard = createCourseCard(course);
-                coursesGrid.appendChild(courseCard);
-            });
-        }
+        // Preserve full sidebar structure always; update dashboard cards only
+        if (currentView !== 'dashboard') return;
+        const matchingFiles = results.map(r => r.ref);
+        const matchingCourses = extractCourses(matchingFiles);
+        coursesGrid.innerHTML = '';
+        matchingCourses.forEach(course => {
+            const courseCard = createCourseCard(course);
+            coursesGrid.appendChild(courseCard);
+        });
     }
 
     // Mobile responsiveness
@@ -640,5 +690,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             sidebar.classList.remove('collapsed', 'open');
         }
+        updateSidebarLayoutState();
     });
+
+    // Initialize layout state once
+    updateSidebarLayoutState();
 });
