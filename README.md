@@ -1,8 +1,8 @@
 # DSAI 2025-2026 Class Notes
 
-[![Deploy to GitHub Pages](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml/badge.svg)](https://github.com/JuliusBrussee/DSAI-2025-2026-Class-Notes/actions/workflows/deploy.yml)
+A modern, responsive web application for organizing and viewing DSAI (Data Science and Artificial Intelligence) class notes at Leiden University.
 
-A modern, responsive web application for organizing and viewing DSAI (Data Science and Artificial Intelligence) class notes at Leiden University made by Julius Brussee
+**🌐 Live Website:** [https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/](https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/)
 
 ## Features
 
@@ -12,11 +12,6 @@ A modern, responsive web application for organizing and viewing DSAI (Data Scien
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
 - 🔍 **Search Functionality**: Quick search across all notes
 - 📂 **Collapsible Navigation**: Organized folder structure with expandable/collapsible sections
-- ⚡ **Fast Loading**: Optimized for quick access to study materials
-
-## Live Demo
-
-Visit the live website: [https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/](https://juliusbrussee.github.io/DSAI-2025-2026-Class-Notes/)
 
 ## Local Development
 
@@ -33,30 +28,25 @@ python3 -m http.server 8000
 
 3. Open your browser and navigate to `http://localhost:8000`
 
-## Course Structure
+## About
 
-### Year 1, Semester 1
-- **Calculus 1**: Mathematical analysis and series convergence
-- **Foundations of Computer Science**: Core CS concepts
-- **Introduction to Digital Skills and Programming**: Programming fundamentals
-- **Orientation AI**: Introduction to artificial intelligence
-- **Studying and Presenting**: Academic skills development
+Class notes and study materials for the Data Science and Artificial Intelligence (DSAI) program, academic year 2025–2026, at Leiden University. These are personal notes and may contain mistakes; they are not official course materials. 
 
-## Mathematical Content
+## Repository Structure
 
-The website supports full LaTeX mathematical notation rendering, perfect for mathematical courses like Calculus. Examples include:
-
-- Inline math: `$\sum_{n=1}^{\infty} \frac{1}{n^2}$`
-- Display math: `$$\lim_{x 	o \infty} f(x) = L$$`
-- Complex formulas with proper formatting
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+```
+Year1/
+  Semester1/
+    <Course Name>/
+      Lectures/
+        Lecture_<N>[_ShortTopic][.md]
+      ExamPrep.md
+      Notes.md
+      assets/                (optional; images/diagrams)
+  Semester2/
+Year2/
+Year3/
+```
 
 ## Technology Stack
 
@@ -67,46 +57,9 @@ The website supports full LaTeX mathematical notation rendering, perfect for mat
 - **Icons**: Font Awesome 6
 - **Hosting**: GitHub Pages
 
-## License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Leiden University DSAI Program
-- MathJax for mathematical rendering
-- Font Awesome for icons
-- GitHub Pages for hosting (Leiden University)
-
-Class notes and study materials for the Data Science and Artificial Intelligence (DSAI) program, academic year 2025–2026, at Leiden University. The goal is to keep lecture notes, exam prep, and supporting materials organized and easy to navigate across years and semesters.
-
-If you find issues or have suggestions, feel free to open an issue or a PR. These are personal notes and may contain mistakes; they are not official course materials. Feel free however to submit your own notes for each lecture, I will review pull requests regularly 
-
-## Repository Structure
-
-Top-level folders group content by academic year, then by semester, then by course. Each course can contain lecture notes, general notes, exam prep, and (optionally) assignments or assets.
-
-```
-Year1/
-  Semester1/
-    <Course Name>/
-      Lectures/
-        Lecture_<N>[_ShortTopic][.md]
-      ExamPrep.md
-      Notes.md
-      Assignments/           (optional)
-      assets/                (optional; images/diagrams)
-  Semester2/
-Year2/
-Year3/
-```
-
-Current examples include:
-- `Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/`
-- `Year1/Semester1/Studying and Presenting/Lectures/`
-- `Year1/Semester1/Calculus 1/Lectures/`
-
-Some lecture files were initially created without the `.md` extension. Going forward, prefer adding `.md` to new Markdown notes for better tooling support. Existing files can stay as-is.
+**Created by [Julius Brussee](https://github.com/JuliusBrussee)** | Leiden University DSAI Program
 
 ## Naming Conventions
 
