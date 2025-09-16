@@ -599,8 +599,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.showDashboard = showDashboard;
 
     function updateStats(files) {
-        document.getElementById('total-courses').textContent = courseStats.courses;
-        document.getElementById('total-notes').textContent = courseStats.notes;
+        const totalCoursesEl = document.getElementById('total-courses');
+        const totalNotesEl = document.getElementById('total-notes');
+        if (totalCoursesEl) totalCoursesEl.textContent = courseStats.courses;
+        if (totalNotesEl) totalNotesEl.textContent = courseStats.notes;
     }
 
     function buildDefaultStructure() {
@@ -1084,6 +1086,8 @@ function handleInitialHash() {
         }
     }
     if (quiz) {
+        // Avoid reopening if a quiz modal is already on screen
+        if (document.querySelector('.quiz-backdrop')) return;
         const basePath = (window.location.hostname === 'juliusbrussee.github.io') ? '/DSAI-2025-2026-Class-Notes/' : './';
         (window.ensureQuizScriptLoaded ? window.ensureQuizScriptLoaded() : Promise.resolve()).then(() => {
             if (window.Quiz && window.Quiz.open) window.Quiz.open(quiz, { basePath });

@@ -48,7 +48,8 @@
     close.className = 'quiz-close';
     close.setAttribute('aria-label', 'Close quiz');
     close.innerHTML = '✕';
-    close.addEventListener('click', closeQuiz);
+    // Prevent click-through and ensure proper close handling
+    close.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeQuiz(); });
     header.appendChild(h);
     header.appendChild(close);
 
@@ -103,6 +104,11 @@
     el.progressBar = bar;
 
     document.body.appendChild(backdrop);
+
+    // Close when clicking on the shaded backdrop (but not inside the modal)
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) { e.stopPropagation(); closeQuiz(); }
+    });
 
     // Close on ESC
     const esc = (e) => { if (e.key === 'Escape') closeQuiz(); };
@@ -375,9 +381,25 @@
 
   function closeQuiz() {
     if (el.backdrop) {
-      el.backdrop.remove();
+      try { el.backdrop.remove(); } catch {}
+      el.backdrop = null;
+      el.modal = null;
+      el.header = null;
+      el.body = null;
+      el.footer = null;
+      el.progressBar = null;
     }
-    // Clear local in-progress state on close? Keep to allow resume.
+
+    // Remove quiz deep-link from URL so it doesn't auto-reopen
+    try {
+      const qp = new URLSearchParams(location.hash.slice(1));
+      if (qp.has('quiz')) {
+        qp.delete('quiz');
+        const next = qp.toString();
+        if (('#' + next) !== location.hash) location.hash = next;
+      }
+    } catch {}
+    // Keep in-progress state so users can resume next time they open.
   }
 
   async function loadQuiz(basePath, quizPath) {
@@ -390,6 +412,12 @@
     ensureStylesheet();
     const basePath = (typeof opts?.basePath === 'string') ? opts.basePath : (window.__QUIZ_BASE_PATH__ || './');
     state.basePath = basePath;
+    // If an overlay is already present, remove it to avoid duplicates
+    if (el.backdrop) {
+      try { el.backdrop.remove(); } catch {}
+      el.backdrop = null;
+    }
+
     const data = await loadQuiz(basePath, quizPath);
     const normalized = normalizeQuiz(data);
     state.quiz = normalized;
