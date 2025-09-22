@@ -1,0 +1,191 @@
+{
+  "id": "y1s1-study-presenting-lecture-3",
+  "lecturePath": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting",
+  "title": "Studying and Presenting — Lecture 3 ((Re)Searching the Literature)",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-22", "author": "Codex" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which description best fits grey literature in this lecture?",
+      "options": [
+        { "id": "a", "text": "Scholar-authored, peer-reviewed primary studies", "isCorrect": false },
+        { "id": "b", "text": "Reports, theses, and technical notes produced outside formal publishing", "isCorrect": true },
+        { "id": "c", "text": "Magazines and news sites aimed at the general public", "isCorrect": false },
+        { "id": "d", "text": "Unvetted social media posts", "isCorrect": false }
+      ],
+      "explanation": "Grey literature sits between scholarly and popular sources and includes reports, theses, datasets, and working papers.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 6 — What is scientific literature?" }
+      ],
+      "tags": ["source-types"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "Select all criteria that belong to the CRAAP test discussed in the lecture.",
+      "options": [
+        { "id": "a", "text": "Currency", "isCorrect": true },
+        { "id": "b", "text": "Relevance", "isCorrect": true },
+        { "id": "c", "text": "Authority", "isCorrect": true },
+        { "id": "d", "text": "Accuracy", "isCorrect": true },
+        { "id": "e", "text": "Purpose", "isCorrect": true },
+        { "id": "f", "text": "Aesthetics", "isCorrect": false }
+      ],
+      "explanation": "CRAAP stands for Currency, Relevance, Authority, Accuracy, and Purpose.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 10 — CRAAP Test" }
+      ],
+      "tags": ["evaluation"],
+      "difficulty": "medium",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "How should AI search assistants be used according to the lecture?",
+      "options": [
+        { "id": "a", "text": "Treat AI summaries as substitutes for reading the papers", "isCorrect": false },
+        { "id": "b", "text": "Use them to brainstorm queries but verify by reading the original sources", "isCorrect": true },
+        { "id": "c", "text": "Rely on AI-generated references without checking", "isCorrect": false },
+        { "id": "d", "text": "Avoid AI tools entirely", "isCorrect": false }
+      ],
+      "explanation": "AI can reformulate queries and surface concepts, but the lecture insists on opening and verifying the actual papers yourself.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 11 — What about AI search?" }
+      ],
+      "tags": ["ai"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the recommended first step when starting a literature search?",
+      "options": [
+        { "id": "a", "text": "Jump straight into a specialized database with no preparation", "isCorrect": false },
+        { "id": "b", "text": "Begin with general exploration to harvest keywords and concepts", "isCorrect": true },
+        { "id": "c", "text": "Limit yourself to one keyword you already know", "isCorrect": false },
+        { "id": "d", "text": "Search only within the library catalogue", "isCorrect": false }
+      ],
+      "explanation": "The lecture starts the workflow with broad exploration (news, Google, Wikipedia) to build vocabulary before database searching.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 15 — Starting your search" }
+      ],
+      "tags": ["workflow"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "Which actions are part of snowball searching?",
+      "options": [
+        { "id": "a", "text": "Following the references listed in a relevant paper", "isCorrect": true },
+        { "id": "b", "text": "Checking newer papers that cite your starting article", "isCorrect": true },
+        { "id": "c", "text": "Sorting results only by publication year", "isCorrect": false },
+        { "id": "d", "text": "Reading only abstracts and ignoring citation links", "isCorrect": false }
+      ],
+      "explanation": "Snowballing works backward through reference lists and forward through citation tracking to expand coverage.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 23 — Snowball Searching" }
+      ],
+      "tags": ["snowballing"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What key information should every entry in your search log capture?",
+      "options": [
+        { "id": "a", "text": "Database, query string, filters, and notes on results", "isCorrect": true },
+        { "id": "b", "text": "Only the database name", "isCorrect": false },
+        { "id": "c", "text": "Personal opinions about the lecturer", "isCorrect": false },
+        { "id": "d", "text": "Screenshots of search pages without context", "isCorrect": false }
+      ],
+      "explanation": "The template tracks database, query, filters, outcome, and next steps to keep the process reproducible.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 31 — Searching verifiability" }
+      ],
+      "tags": ["documentation"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "If GetIt@Leiden does not provide full text, what is the recommended next step before requesting interlibrary loan?",
+      "options": [
+        { "id": "a", "text": "Abandon the paper altogether", "isCorrect": false },
+        { "id": "b", "text": "Check the catalogue, Google Scholar, or contact the author for a legal copy", "isCorrect": true },
+        { "id": "c", "text": "Download from any random file-sharing site", "isCorrect": false },
+        { "id": "d", "text": "Pay for the article out of pocket immediately", "isCorrect": false }
+      ],
+      "explanation": "The lecture recommends catalogue checks, Google Scholar OA links, or contacting the author before turning to interlibrary loan.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 32 — How to get the article" }
+      ],
+      "tags": ["access"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the rule for paraphrasing to avoid plagiarism according to the lecture?",
+      "options": [
+        { "id": "a", "text": "Change a few words but keep the sentence structure and skip citation", "isCorrect": false },
+        { "id": "b", "text": "Understand the idea fully, restate it in your own structure, and cite the source", "isCorrect": true },
+        { "id": "c", "text": "Copy text verbatim if you cite it later", "isCorrect": false },
+        { "id": "d", "text": "Avoid reading the original to stay unbiased", "isCorrect": false }
+      ],
+      "explanation": "The paraphrase protocol insists on grasping the idea, closing the text, rewriting in your own structure, and citing.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 36 — Is this plagiarism?" }
+      ],
+      "tags": ["integrity"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which reading flow does the lecture recommend for efficiently assessing a scientific article?",
+      "options": [
+        { "id": "a", "text": "Read the paper linearly from start to finish without skimming", "isCorrect": false },
+        { "id": "b", "text": "Skim title, abstract, figures, and conclusion before diving into intro and methods", "isCorrect": true },
+        { "id": "c", "text": "Jump straight to the references", "isCorrect": false },
+        { "id": "d", "text": "Only read methods and ignore conclusions", "isCorrect": false }
+      ],
+      "explanation": "The lecture outlines a staged approach: skim the big-picture sections first, then read introduction and methods before committing deeper.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 40 — Anatomy of an article" }
+      ],
+      "tags": ["reading"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is one recommended fix when your search returns too many results?",
+      "options": [
+        { "id": "a", "text": "Swap AND for OR between different concepts", "isCorrect": false },
+        { "id": "b", "text": "Add a more specific concept or apply filters like year or subject", "isCorrect": true },
+        { "id": "c", "text": "Remove parentheses from complex queries", "isCorrect": false },
+        { "id": "d", "text": "Disable all filters to see everything", "isCorrect": false }
+      ],
+      "explanation": "To tame large result sets, the lecture suggests adding precision with extra concepts and database filters and checking Boolean structure.",
+      "sources": [
+        { "path": "Year1/Semester1/Studying and Presenting/Lectures/Lecture_3_Studying_and_Presenting.md", "heading": "Slide 41 — Number of results: Too few / Too many" }
+      ],
+      "tags": ["troubleshooting"],
+      "difficulty": "easy",
+      "points": 1
+    }
+  ]
+}
