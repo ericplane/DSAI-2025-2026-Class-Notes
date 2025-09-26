@@ -1,0 +1,207 @@
+{
+  "id": "y1s1-dsip-lecture-7",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP",
+  "title": "Lecture 7 — Variables, Types, and Structured Data",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-26", "author": "Codex" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "How does the lecture describe a variable within programming?",
+      "options": [
+        { "id": "a", "text": "A name that refers to a location in memory holding a value", "isCorrect": true },
+        { "id": "b", "text": "A constant that can never be rebound", "isCorrect": false },
+        { "id": "c", "text": "A mathematical symbol that has no connection to memory", "isCorrect": false },
+        { "id": "d", "text": "A comment used to explain code", "isCorrect": false }
+      ],
+      "explanation": "Slide 3 emphasises that a variable is a handle to memory rather than the value itself.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 3 — Variables" }
+      ],
+      "tags": ["variables"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the effect of assignment by value (`=`) in the Start language example?",
+      "options": [
+        { "id": "a", "text": "It creates a new instance for the target without aliasing the source", "isCorrect": true },
+        { "id": "b", "text": "It makes both variables reference the same storage", "isCorrect": false },
+        { "id": "c", "text": "It copies into the existing storage of the target", "isCorrect": false },
+        { "id": "d", "text": "It prevents the target from changing again", "isCorrect": false }
+      ],
+      "explanation": "Assignment by value yields distinct instances so later changes to one do not affect the other.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 5 — Assignment by value (`=`)" }
+      ],
+      "tags": ["assignment"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which statement about assignment by reference (`>`) is correct?",
+      "options": [
+        { "id": "a", "text": "It aliases two variable names to the same storage location", "isCorrect": true },
+        { "id": "b", "text": "It copies the value into a brand-new instance", "isCorrect": false },
+        { "id": "c", "text": "It deletes the source variable after assignment", "isCorrect": false },
+        { "id": "d", "text": "It prevents either name from mutating the value", "isCorrect": false }
+      ],
+      "explanation": "The lecture calls out reference assignment as the only operator that introduces aliasing.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 6 — Assignment by reference (`>` )" }
+      ],
+      "tags": ["assignment"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What prerequisite must be met before using assignment by copy (`:=`)?",
+      "options": [
+        { "id": "a", "text": "The target variable must already reference valid storage", "isCorrect": true },
+        { "id": "b", "text": "The source must be a constant", "isCorrect": false },
+        { "id": "c", "text": "The variables must be arrays", "isCorrect": false },
+        { "id": "d", "text": "The copy operation only works on numbers", "isCorrect": false }
+      ],
+      "explanation": "Copy preserves the target's identity by overwriting existing storage, so that storage has to exist first.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 7 — Assignment by copy (`:=`)" }
+      ],
+      "tags": ["assignment"],
+      "difficulty": "medium",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the purpose of a type as described in the lecture?",
+      "options": [
+        { "id": "a", "text": "It constrains which values and operations are allowed", "isCorrect": true },
+        { "id": "b", "text": "It guarantees the program runs faster", "isCorrect": false },
+        { "id": "c", "text": "It stores the history of every variable", "isCorrect": false },
+        { "id": "d", "text": "It replaces the need for testing", "isCorrect": false }
+      ],
+      "explanation": "Types prevent category errors by governing valid values and operations.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 8 — Types" }
+      ],
+      "tags": ["types"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What relationship between types and instances do the notes emphasise?",
+      "options": [
+        { "id": "a", "text": "A type is the blueprint while an instance is a concrete value of that type", "isCorrect": true },
+        { "id": "b", "text": "Types and instances are interchangeable terms", "isCorrect": false },
+        { "id": "c", "text": "Instances define new types automatically", "isCorrect": false },
+        { "id": "d", "text": "Only instances can enforce constraints", "isCorrect": false }
+      ],
+      "explanation": "Slide 9 clarifies that variables declare a type and then hold instances compatible with it.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 9 — Types and instances" }
+      ],
+      "tags": ["types"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which primitive type does the lecture list as storing Unicode code units or scalars?",
+      "options": [
+        { "id": "a", "text": "char", "isCorrect": true },
+        { "id": "b", "text": "bool", "isCorrect": false },
+        { "id": "c", "text": "byte", "isCorrect": false },
+        { "id": "d", "text": "int", "isCorrect": false }
+      ],
+      "explanation": "The primitive type table attributes Unicode storage to `char` with implementation-dependent width.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 11 — Common primitive types (table)" }
+      ],
+      "tags": ["types"],
+      "difficulty": "medium",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does the `type record start ... end` block accomplish in the Start example?",
+      "options": [
+        { "id": "a", "text": "It defines a custom type with named members", "isCorrect": true },
+        { "id": "b", "text": "It immediately creates an instance", "isCorrect": false },
+        { "id": "c", "text": "It declares a loop structure", "isCorrect": false },
+        { "id": "d", "text": "It deletes previous variables of the same name", "isCorrect": false }
+      ],
+      "explanation": "The block describes the structure for a record type whose instances will later be instantiated.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 12 — Custom types" }
+      ],
+      "tags": ["custom-types"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "multi",
+      "prompt": "Which steps are required when using a custom record type, according to the lecture?",
+      "options": [
+        { "id": "a", "text": "Declare a variable of the custom type", "isCorrect": true },
+        { "id": "b", "text": "Create or alias an instance of that type", "isCorrect": true },
+        { "id": "c", "text": "Assign values to its members", "isCorrect": true },
+        { "id": "d", "text": "Recompile the language runtime first", "isCorrect": false }
+      ],
+      "explanation": "Slide 13 lists declaration, instantiation/aliasing, and member assignment as the core workflow.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 13 — Using custom types" }
+      ],
+      "tags": ["custom-types"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "How does the lecture characterise a collection type?",
+      "options": [
+        { "id": "a", "text": "As a function mapping keys to values", "isCorrect": true },
+        { "id": "b", "text": "As a random number generator", "isCorrect": false },
+        { "id": "c", "text": "As a special comment block", "isCorrect": false },
+        { "id": "d", "text": "As an immutable constant", "isCorrect": false }
+      ],
+      "explanation": "Slide 14 states that collections are abstractions representing a mapping `K → V`.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 14 — Custom type: the Collection" }
+      ],
+      "tags": ["collections"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is highlighted about constants in this lecture?",
+      "options": [
+        { "id": "a", "text": "They are immutable values even if the language lacks constant variables", "isCorrect": true },
+        { "id": "b", "text": "They automatically prevent variables from being rebound", "isCorrect": false },
+        { "id": "c", "text": "They only exist for numbers greater than zero", "isCorrect": false },
+        { "id": "d", "text": "They must be declared with the `const` keyword in Start", "isCorrect": false }
+      ],
+      "explanation": "Slide 17 explains that literals like numbers and strings are constants even if the language lets you rebind names.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP", "heading": "Slide 17 — Constants" }
+      ],
+      "tags": ["constants"],
+      "difficulty": "easy",
+      "points": 1
+    }
+  ]
+}

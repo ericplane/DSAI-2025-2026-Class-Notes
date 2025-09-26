@@ -1,0 +1,70 @@
+# Thesis
+
+- Strong AI is false: running the right computer program is neither constitutive of nor sufficient for having a mind. Programs have only syntax; minds have semantics.
+
+# Key distinctions
+
+- **Strong AI vs Weak AI**: Strong AI claims a program that passes the Turing Test literally has a mind; Weak AI treats programs as useful models only.
+- **Syntax vs Semantics**: Computation manipulates formal symbols; understanding requires intrinsic meaning. Syntax alone cannot yield semantics.
+- **Simulation vs Duplication**: A simulation of a process (digestion, combustion, or cognition) is not the process itself.
+
+# Core argument: The Chinese Room
+
+- Setup: An English speaker follows a rulebook to map Chinese input symbols to output symbols, fooling natives yet understanding nothing. Passing a Turing Test-style behavioral criterion does not entail understanding.
+- Conclusion: Executing the right program with the right I/O is not sufficient for cognition or understanding.
+
+# Formal scaffolding Searle states
+
+- **Axiom 1**: Programs are purely syntactic.
+- **Axiom 2**: Human minds have semantic content.
+- **Axiom 3**: Syntax by itself is not sufficient for semantics.
+- From these: programs are neither constitutive of nor sufficient for minds.
+- **Axiom 4**: Brains cause minds via specific neurobiological processes. Any artifact producing minds must have equivalent causal powers, not just run a program.
+
+# Replies Searle anticipates—and his counters
+
+- **Systems reply** (“the whole room understands”): Memorize the rulebook and do it in your head; nothing in the “system” adds semantics. Still no understanding.
+- **Robot reply** (ground symbols via sensors/actuators): Wiring I/O to the world is still computation over uninterpreted symbols; no intrinsic semantics guaranteed.
+- **Brain simulator reply** (neuron-level simulation): Simulation of causal processes is not duplication of causal powers, just as simulating digestion doesn’t digest.
+- **Connectionism** (parallel nets): Even a “Chinese Gym” of many parallel processors is still formal symbol manipulation; parallelism doesn’t add semantics.
+- **“Unconscious understanding” reply**: Rebranding the purely syntactic process as “unconscious understanding” doesn’t supply intrinsic meaning.
+
+# Positive picture
+
+- Mental phenomena are biological. Specific neurochemical/neurological processes produce consciousness and thought; medium matters.
+
+# Implications
+
+- Turing-style behavioral indistinguishability is not a sufficient test for having a mind.
+- To create artificial minds, one must replicate the brain’s relevant causal powers, not just its formal organization.
+
+# Names and context to know
+
+- Alan Turing (Turing Test), Paul & Patricia Churchland (connectionist counterpoint in same issue).
+
+# Likely quiz questions and crisp answers
+
+- **Q:** What is Strong AI and why does Searle reject it?
+    
+    **A:** The claim that a correct program is sufficient for a mind; rejected because programs have only syntax while minds require semantics.
+    
+- **Q:** Summarize the Chinese Room.
+    
+    **A:** Rule-following symbol manipulation can pass language tests without any understanding; shows behavior isn’t sufficient for semantics.
+    
+- **Q:** Why doesn’t simulation equal duplication?
+    
+    **A:** Simulations model formal structure but lack the physical causal powers that produce the phenomenon.
+    
+- **Q:** What must an artificial system have to produce minds?
+    
+    **A:** Causal powers at least equivalent to those of brains, not just a program.
+    
+- **Q:** How does Searle address connectionism?
+    
+    **A:** Parallel processing remains computation over symbols; still syntax without intrinsic semantics.
+    
+
+# One-line takeaway
+
+- Computation is formal symbol manipulation; minds are biological, semantic, and caused by the brain’s specific causal powers—so programs alone do not make minds.

@@ -1,0 +1,189 @@
+{
+  "id": "y1s1-dsip-lecture-6",
+  "lecturePath": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP",
+  "title": "Lecture 6 — Computational Thinking and the Programming Pipeline",
+  "settings": { "shuffleQuestions": true, "shuffleOptions": true, "showImmediateFeedback": true },
+  "meta": { "version": 1, "lastUpdated": "2025-09-26", "author": "Codex" },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "According to the lecture, what makes a procedure a computation?",
+      "options": [
+        { "id": "a", "text": "A sequence of clear, unambiguous steps that solve the problem", "isCorrect": true },
+        { "id": "b", "text": "Any clever idea, even if some steps are ambiguous", "isCorrect": false },
+        { "id": "c", "text": "Only processes that manipulate numbers on physical hardware", "isCorrect": false },
+        { "id": "d", "text": "Only processes that can be executed in parallel", "isCorrect": false }
+      ],
+      "explanation": "Computation is defined as breaking a problem into precise, unambiguous steps whose execution yields the solution.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 3 — What is computation?" }
+      ],
+      "tags": ["computation"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "Which components are part of the Turing Machine model described in the notes?",
+      "options": [
+        { "id": "a", "text": "An infinite tape used as memory", "isCorrect": true },
+        { "id": "b", "text": "A finite alphabet of symbols", "isCorrect": true },
+        { "id": "c", "text": "A read/write head that can move left or right", "isCorrect": true },
+        { "id": "d", "text": "Dedicated GPU cores for accelerating transitions", "isCorrect": false }
+      ],
+      "explanation": "The lecture highlights the tape, finite alphabet, read/write head, and finite control states/transition function as core TM components.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 4 — The Turing machine (TM)" }
+      ],
+      "tags": ["turing-machine"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does the lecture recommend you list to ensure your algorithm is ready for implementation?",
+      "options": [
+        { "id": "a", "text": "All atomic computations the algorithm requires", "isCorrect": true },
+        { "id": "b", "text": "The syntax of every programming language you know", "isCorrect": false },
+        { "id": "c", "text": "The marketing pitch for the program", "isCorrect": false },
+        { "id": "d", "text": "Every possible input the program will never receive", "isCorrect": false }
+      ],
+      "explanation": "Slide 7 stresses that if you cannot enumerate the atomic operations, your algorithm is not ready.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 7 — Computational thinking: first three steps" }
+      ],
+      "tags": ["algorithms"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "During the programming pipeline, which artifact is produced when source code is parsed before execution?",
+      "options": [
+        { "id": "a", "text": "A parse tree that captures the program's structure", "isCorrect": true },
+        { "id": "b", "text": "A project timeline", "isCorrect": false },
+        { "id": "c", "text": "A user manual", "isCorrect": false },
+        { "id": "d", "text": "A compiled exam answer", "isCorrect": false }
+      ],
+      "explanation": "The compile/interpret stage builds a parse tree before translating and executing.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 8 — Programming: last three steps" }
+      ],
+      "tags": ["pipeline"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "prompt": "When framing a Turing Machine task in the lecture, which assumptions should you state explicitly?",
+      "options": [
+        { "id": "a", "text": "The tape alphabet", "isCorrect": true },
+        { "id": "b", "text": "The start state", "isCorrect": true },
+        { "id": "c", "text": "Where the head starts on the tape", "isCorrect": true },
+        { "id": "d", "text": "The number of physical CPU cores available", "isCorrect": false }
+      ],
+      "explanation": "Slide 5 emphasizes documenting the alphabet, start state, and head position as assumptions.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 5 — TM task: outline a block of 1s" }
+      ],
+      "tags": ["turing-machine"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In the substring search example, which assumption about indexing is made explicit?",
+      "options": [
+        { "id": "a", "text": "The list uses zero-based indexing", "isCorrect": true },
+        { "id": "b", "text": "The list uses one-based indexing", "isCorrect": false },
+        { "id": "c", "text": "Only uppercase letters appear", "isCorrect": false },
+        { "id": "d", "text": "Indices wrap around automatically", "isCorrect": false }
+      ],
+      "explanation": "Slide 9 states the assumption of zero-based indexing for the character list.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 9 — Example problem: find index of a name in a list" }
+      ],
+      "tags": ["strings"],
+      "difficulty": "medium",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does the algorithm do immediately after a character mismatch when searching for the name?",
+      "options": [
+        { "id": "a", "text": "Increment the list index and reset the name index to 0", "isCorrect": true },
+        { "id": "b", "text": "Restart the entire program", "isCorrect": false },
+        { "id": "c", "text": "Delete the current list element", "isCorrect": false },
+        { "id": "d", "text": "Return the last matching index", "isCorrect": false }
+      ],
+      "explanation": "Upon mismatch, the steps specify `i++` and `j = 0` before continuing.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 10 — Algorithmic steps (sketch)" }
+      ],
+      "tags": ["algorithms"],
+      "difficulty": "medium",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What guidance does the lecture give for writing the first implementation of an algorithm?",
+      "options": [
+        { "id": "a", "text": "Keep a one-to-one mapping between algorithm steps and code statements", "isCorrect": true },
+        { "id": "b", "text": "Optimize aggressively before the code runs once", "isCorrect": false },
+        { "id": "c", "text": "Use as many languages as possible in one program", "isCorrect": false },
+        { "id": "d", "text": "Skip comments and documentation entirely", "isCorrect": false }
+      ],
+      "explanation": "Slide 11 advises maintaining a direct mapping from algorithm steps to code in early implementations.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 11 — Programming the algorithm" }
+      ],
+      "tags": ["implementation"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which type of error can remain even after a program compiles successfully?",
+      "options": [
+        { "id": "a", "text": "Logic or semantic errors", "isCorrect": true },
+        { "id": "b", "text": "Syntax errors", "isCorrect": false },
+        { "id": "c", "text": "Grammar errors in the English description", "isCorrect": false },
+        { "id": "d", "text": "Missing hardware drivers", "isCorrect": false }
+      ],
+      "explanation": "Compilation catches syntax issues, but semantic problems can persist into execution.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 12 — Compile and run" }
+      ],
+      "tags": ["errors"],
+      "difficulty": "easy",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which scenario illustrates a semantic issue rather than a syntax error?",
+      "options": [
+        { "id": "a", "text": "A condition uses an uninitialized variable, leading to meaningless behavior", "isCorrect": true },
+        { "id": "b", "text": "A missing closing brace causing the code not to parse", "isCorrect": false },
+        { "id": "c", "text": "A typo in a keyword that stops compilation", "isCorrect": false },
+        { "id": "d", "text": "Using tabs instead of spaces in indentation", "isCorrect": false }
+      ],
+      "explanation": "Semantic issues concern meaning and behavior, such as acting on uninitialized data; syntax issues are structural.",
+      "sources": [
+        { "path": "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP", "heading": "Slide 13 — Syntax vs Semantics" }
+      ],
+      "tags": ["semantics"],
+      "difficulty": "medium",
+      "points": 1
+    }
+  ]
+}

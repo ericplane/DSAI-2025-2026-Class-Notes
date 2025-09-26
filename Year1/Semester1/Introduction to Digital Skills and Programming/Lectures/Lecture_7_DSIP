@@ -1,0 +1,352 @@
+## Lecture 2 — Variable‑related Programming Concepts
+
+### Slide 1 — Variable-related programming concepts
+
+**Scope:** variables, assignments, types, instances, constants; plus custom records and collections.
+
+**Key Takeaways**
+
+- Variables are names to references; types constrain values; assignments change links or values.
+
+---
+
+### Slide 2 — Introduction example (Start code)
+
+```
+var firstname is text
+var lastname  is text
+var money     is number
+
+firstname = "Joost"
+lastname  = "Broekens"
+money     = 1000
+money     = money + 500
+
+var fullname is text
+fullname = firstname ++ lastname
+
+type record start
+  var name    is text
+  var balance is number
+end
+
+var p is record
+p = record()
+p.name    = fullname
+p.balance = money
+
+type transactions start
+  number[*]
+end
+
+var t is transactions
+t = transactions()
+t[0] = 100
+t[1] = 150
+t[2] = -20
+
+print(p)
+p.balance = p.balance + t[0]
+p.balance = p.balance + t[1]
+p.balance = p.balance + t[2]
+print(p)
+
+```
+
+**What this teaches:** declaration, initialization, concatenation, custom types, collections, indexing, mutation.
+
+**Key Takeaways**
+
+- Read top to bottom: declare → assign → define types → instantiate → mutate → print.
+
+---
+
+### Slide 3 — Variables
+
+**Three angles:**
+
+- Math: symbol for a value.
+- Programming: symbol for a **reference** to memory holding a value.
+- Natural language: a thing that can change.
+
+**Exam pitfall:** Confusing “name” with “content.” The name points to a reference.
+
+**Key Takeaways**
+
+- Treat a variable as a handle to memory. The handle can be re-pointed or the memory can be edited.
+
+---
+
+### Slide 4 — Assignment operators
+
+**Operators:**
+
+- `=` assignment **by value**
+- `>` assignment **by reference** (aliasing)
+- `:=` assignment **by copy** (copy into an existing object)
+
+**Memory model sketch:**
+
+```
+By value:   a  ─► [v1]      b ─► [v1]  (distinct boxes with equal content)
+By ref:     a,b ─► [v1]     (same box, two names)
+By copy:    a ─► [v0] ; a := b copies b’s value into a’s existing box
+
+```
+
+**Mnemonic:** **V‑R‑C** = Value, Reference, Copy.
+
+**Key Takeaways**
+
+- Know the side effects: only reference creates aliases; copy requires pre‑existing storage.
+
+---
+
+### Slide 5 — Assignment by value (`=`)
+
+**Semantics:** `a = b` creates a new instance for `a` with the same value as `b`. No aliasing.
+
+**Code probe:**
+
+```
+x = 1
+y = x   # y gets 1, separate instance
+x = 10  # x changes, y stays 1
+
+```
+
+**Key Takeaways**
+
+- After `a = b`, modifying `a` does not affect `b`.
+
+---
+
+### Slide 6 — Assignment by reference (`>`)
+
+**Semantics:** `a -> b` makes `a` and `b` refer to the **same** location. Aliasing.
+
+**Code probe:**
+
+```
+x = 1
+y -> x   # alias
+# Mutations through either name affect the same storage
+
+```
+
+**Exam warning:** Read‑only vs write effects. After aliasing, any write via either name changes the shared value.
+
+**Key Takeaways**
+
+- Reference is the only operator that introduces aliasing.
+
+---
+
+### Slide 7 — Assignment by copy (`:=`)
+
+**Semantics:** Copy **into** an existing object referenced by `a`. Precondition: `a` already refers to valid storage.
+
+**Pattern:** Useful to overwrite contents without changing `a`’s identity/reference.
+
+**Key Takeaways**
+
+- `a` must already be initialized. `:=` preserves `a`’s reference, updates its content.
+
+---
+
+### Slide 8 — Types
+
+**Definition:** A type constrains what values a variable may hold and what operations are valid.
+
+**Examples:** Math sets (ℕ, ℤ, ℚ, ℝ, ℂ). Programming primitives vs custom types.
+
+**Key Takeaways**
+
+- Types prevent category errors. The compiler/interpreter enforces them.
+
+---
+
+### Slide 9 — Types and instances
+
+**Rule:** Declare type at variable declaration. Values of a type are **instances** of that type. Types are incompatible unless defined otherwise.
+
+**Example:**
+
+```
+var money is number
+money = 1000          # ok
+money = "text"       # type error
+
+```
+
+**Key Takeaways**
+
+- Separate *type* (blueprint) from *instance* (concrete value).
+
+---
+
+### Slide 10 — Types (language examples)
+
+- Start: `number`, `text` primitives.
+- Python: `int`, `float`, `bool`, `str`, `bytes`.
+- Others define many more; logic stays the same.
+
+**Key Takeaways**
+
+- Learn each language’s primitive set and literal forms.
+
+---
+
+### Slide 11 — Common primitive types (table)
+
+| Type | Bits | Range/Meaning |
+| --- | --- | --- |
+| bool | 1 | `true`/`false` (stored in wider cells in practice) |
+| byte | 8 | 0–255 unsigned |
+| char | 16 or 32 | Unicode code unit or scalar, impl‑dependent |
+| int | 16 or 32 | Signed, typical ranges `−32768…32767` or 32‑bit equivalent |
+| float/number | 32 | IEEE‑754 single precision, ~7 decimal digits |
+| text | sequence | Sequence of chars/bytes |
+
+**Key Takeaways**
+
+- Precision and range matter. Overflow and rounding are common exam traps.
+
+---
+
+### Slide 12 — Custom types
+
+**Motivation:** Real domains need structured values.
+
+**Pattern:**
+
+```
+type record start
+  var name    is text
+  var balance is number
+end
+
+```
+
+**Key Takeaways**
+
+- A type defines member names and their types. Instances conform to that shape.
+
+---
+
+### Slide 13 — Using custom types
+
+**Steps:**
+
+1. Declare a variable of the type.
+2. Create an instance (constructor‑like call) or alias an existing one.
+3. Assign member values.
+
+**Key Takeaways**
+
+- Distinguish declaring a variable vs instantiating a value.
+
+---
+
+### Slide 14 — Custom type: the Collection
+
+**Abstraction:** A collection stores key→value mappings.
+
+- Formal view: a function `a: K → V`.
+- Concrete artifacts: arrays, vectors, hash maps, dictionaries.
+
+**Key Takeaways**
+
+- Index type and value type define the collection’s behavior.
+
+---
+
+### Slide 15 — Collection definition syntax (Start)
+
+```
+type transactions start
+  number[*]   # key type = number, value type = number
+end
+
+```
+
+**Key Takeaways**
+
+- `[*]` signals numerically indexed storage.
+
+---
+
+### Slide 16 — Using a collection
+
+**Flow:** declare → instantiate → assign by index → read/mutate.
+
+**Example:**
+
+```
+var t is transactions
+t = transactions()
+t[0] = 100; t[1] = 150; t[2] = -20
+
+```
+
+**Key Takeaways**
+
+- Out‑of‑range and uninitialized indices are common error sources. Initialize deliberately.
+
+---
+
+### Slide 17 — Constants
+
+**Idea:** Constants are immutable values. Some languages allow constant variables; Start/Python do not, but literal values are still constant.
+
+**Examples:** `1`, `10`, `3`, `7`, `"Joost"` are constants.
+
+**Key Takeaways**
+
+- Constants cannot be changed; variables bound to them can be rebound unless language enforces const bindings.
+
+---
+
+### Slide 18 — Wrap up
+
+- **Variable:** name → reference → value of a type.
+- **Assignments:** value vs reference vs copy.
+- **Types:** primitives vs custom; collections as K→V.
+- **Constants:** immutable values.
+
+**Exam Checklist**
+
+- Can you predict effects of `=`, `>`, `:=` on variables and memory?
+- Can you define and use a custom record and a collection?
+- Can you point out type errors and aliasing bugs?
+
+---
+
+## Appendix — Quick Reference Cards
+
+### Assignment operators
+
+- `=` Value: new instance; no alias.
+- `>` Reference: alias; two names, one storage.
+- `:=` Copy into existing storage; identity preserved.
+
+### Debugging aliasing
+
+1. Draw boxes for storage.
+2. Draw arrows for names.
+3. Apply the operator’s rule.
+4. Check which boxes mutate after each statement.
+
+### Memory aids
+
+- **VRC** = Value, Reference, Copy.
+- **F vs F** = Syntax is *Form*, Semantics is *Function*.
+
+---
+
+## Real‑world anchors
+
+- Banking record = custom type; account mutations = assignment semantics.
+- Arrays/vectors in code = collections; indices are keys; values can be numbers or records.
+
+---

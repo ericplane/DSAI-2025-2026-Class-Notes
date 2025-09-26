@@ -1,0 +1,180 @@
+# DSAI Part 2 Lecture 1
+
+> Scope: Complete coverage of Part 2 Lecture 1: Computational Thinking & the Programming Pipeline and Part 2 Lecture 2: Variables. Slide-by-slide structure, clarified definitions, worked examples, memory aids, and key-takeaway boxes. Update this document as questions arise.
+> 
+
+---
+
+## Lecture 1 — Computational Thinking & the Programming Pipeline
+
+### Slide 1 — Computational Thinking and the programming pipeline
+
+**Idea:** How problems become running programs. From human description → formal steps → machine execution.
+
+**Why it matters:** Exam questions trace a task through these stages or ask you to identify where an error lives (requirements vs algorithm vs implementation).
+
+**Key terms:** computation, algorithm, specification, source code, syntax tree, compiler, interpreter.
+
+**Key Takeaways**
+
+- Separate *what* you want (problem/spec) from *how* you do it (algorithm) and *how* you tell the computer (program).
+
+---
+
+### Slide 2 — Learning goals
+
+**Targets:**
+
+- Turing Machine basics.
+- Pipeline: problem → algorithm → (formal) specification → source → parse tree → compiled/interpreted execution.
+- Syntax vs semantics.
+
+**Key Takeaways**
+
+- Map any exercise to the right stage; it reduces confusion and guides fixes.
+
+---
+
+### Slide 3 — What is computation?
+
+**Plain definition:** Break a problem into small, unambiguous steps whose execution solves it.
+
+**Context:** Algorithms have ancient roots; modern formalization leads to the Church–Turing thesis: what is effectively computable can be computed by a Turing Machine.
+
+**Exam angle:** Recognize when a “step” is ambiguous. Ambiguity = not computable.
+
+**Key Takeaways**
+
+- Computation = sequence of precise operations. Precision beats cleverness.
+
+---
+
+### Slide 4 — The Turing machine (TM)
+
+**Components:**
+
+- Infinite **tape** (memory), finite **alphabet** (symbols), **head** (read/write + move L/R), finite **states** with a transition function.
+- TM ≈ abstract von Neumann computer: tape ↔ memory, states ↔ control unit, head ↔ bus interface.
+
+**Key Takeaways**
+
+- Think “finite control + unbounded memory.”
+
+---
+
+### Slide 5 — TM task: outline a block of 1s
+
+**Goal:** If tape has a run of `1`s, write `0` on both borders: `…1111… → …011110…`.
+
+**Assumption:** Head starts on a `1` in the block.
+
+**Key Takeaways**
+
+- Always state assumptions: alphabet, start state, head position.
+
+---
+
+### Slide 6 — TM solution sketch
+
+**Transitions (informal):** go left over `1`s to the left blank, write `0`, sweep right over `1`s to right blank, write `0`, accept.
+
+**Mental model:**
+
+```
+state  symbol → (next_state, write, move)
+goleft   1    → (goleft, 1,  <)
+goleft   _    → (goright,0,  >)
+goright  1    → (goright,1,  >)
+goright  _    → (done,   0,  >)
+
+```
+
+**Key Takeaways**
+
+- Trace one head move at a time. Never skip transitions when debugging.
+
+---
+
+### Slide 7 — Computational thinking: first three steps
+
+1. **Well-defined problem** → 2) **Algorithm** (ordered steps) → 3) **Computations** (atomic operations: compare, move, set, jump, return).
+
+**Pitfall:** Jumping to code before removing ambiguity in the problem.
+
+**Key Takeaways**
+
+- If you cannot list the atomic operations, your algorithm is not ready.
+
+---
+
+### Slide 8 — Programming: last three steps
+
+1. **Program** (write code in a language) → 5) **Interpret/Compile** (parse + translate) → 6) **Execute** (run on CPU).
+
+**Artifacts:** Source file → parse tree → bytecode/machine code.
+
+**Key Takeaways**
+
+- Syntax errors die at parse time; logic errors survive to run time.
+
+---
+
+### Slide 9 — Example problem: find index of a name in a list
+
+**Problem:** Find the start index of `name` inside a character list/string, else `-1`.
+
+**Assumptions:** Same alphabet, contiguous match, zero-based indexing.
+
+**Key Takeaways**
+
+- State data representation and indexing rules upfront.
+
+---
+
+### Slide 10 — Algorithmic steps (sketch)
+
+- Initialize list index `i` and name index `j` to 0.
+- Compare characters; on mismatch: `i++`, reset `j=0`.
+- On match: store `start=i`, then advance `i++`, `j++`.
+- If `j` reaches `len(name)`, return `start`.
+- If `i` reaches `len(list)`, return `1`.
+
+**Key Takeaways**
+
+- Two pointers + reset on mismatch = classic substring scan.
+
+---
+
+### Slide 11 — Programming the algorithm
+
+**From steps to code:** Translate each atomic action to language constructs (assignments, comparisons, loops, conditionals).
+
+**Key Takeaways**
+
+- Keep a 1–1 mapping from step to statement for first implementation; optimize later.
+
+---
+
+### Slide 12 — Compile and run
+
+- **Compile/interpret:** Build a parse tree; check grammar; translate.
+- **Execute:** CPU runs translated instructions.
+
+**Key Takeaways**
+
+- “It compiles” ≠ “It is correct.” Semantics can still be wrong.
+
+---
+
+### Slide 13 — Syntax vs Semantics
+
+- **Syntax:** Form/structure. Example: `if (x) {}` is well-formed or not.
+- **Semantics:** Meaning/behavior. Example: `if (x)` with `x` uninitialized may be syntactically valid but meaningless.
+
+**Mnemonic:** **F**orm vs **F**unction → *Syntax = Form*, *Semantics = Function*.
+
+**Key Takeaways**
+
+- Exam traps often mix the two. Identify whether the issue is form or meaning.
+
+---

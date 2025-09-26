@@ -70,6 +70,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Detect if we're running on GitHub Pages and adjust paths accordingly
     const isGitHubPages = window.location.hostname === 'juliusbrussee.github.io';
     const basePath = isGitHubPages ? '/DSAI-2025-2026-Class-Notes/' : './';
+
+    const encodePath = (path) => path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+    const hasExtension = (path) => {
+        const name = path.split('/').pop() || '';
+        return /\.[^./]+$/.test(name);
+    };
+    const headRequest = (path) => fetch(basePath + encodePath(path), { method: 'HEAD' });
+    const getFileExtension = (path) => {
+        const name = path.split('/').pop() || '';
+        const dotIndex = name.lastIndexOf('.');
+        return dotIndex >= 0 ? name.slice(dotIndex + 1).toLowerCase() : '';
+    };
+    const isMarkdownPath = (path) => {
+        const ext = getFileExtension(path);
+        return !ext || ext === 'md';
+    };
+    const IMAGE_EXTENSIONS = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'heic', 'heif', 'tif', 'tiff']);
+    const isImagePath = (path) => IMAGE_EXTENSIONS.has(getFileExtension(path));
+    async function fetchTextWithFallback(path) {
+        if (!isMarkdownPath(path)) {
+            throw new Error(`Cannot fetch non-markdown content as text: ${path}`);
+        }
+        const attempts = hasExtension(path) ? [path] : [path, `${path}.md`];
+        let lastError = null;
+        for (const candidate of attempts) {
+            try {
+                const response = await fetch(basePath + encodePath(candidate));
+                if (!response.ok) {
+                    lastError = new Error(`HTTP ${response.status} ${response.statusText || ''}`.trim() + ` for ${candidate}`);
+                    continue;
+                }
+                const text = await response.text();
+                if (candidate !== path) {
+                    console.info(`Loaded fallback path ${candidate} for ${path}`);
+                }
+                return { text, candidate };
+            } catch (error) {
+                lastError = error;
+            }
+        }
+        throw lastError || new Error(`Failed to fetch ${path}`);
+    }
     
     // --- File Loading & Navigation ---
     // Embedded file list for CORS-free operation (using relative paths)
@@ -84,11 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP",
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP",
         "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP",
+        "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP",
+        "Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP",
         "Year1/Semester1/Orientation AI/ExamPrep.md",
+        "Year1/Semester1/Orientation AI/Lectures/Lecture_1_OAI",
         "Year1/Semester1/Orientation AI/Lectures/Lecture_1_READING_OAI",
+        "Year1/Semester1/Orientation AI/Lectures/Lecture_2_READING_OAI",
         "Year1/Semester1/Studying and Presenting/Notes.md",
         "Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md",
-        "Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting"
+        "Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting",
+        "improvements-plan.md"
     ];
 
     // Try to load from file-list.json first, fallback to embedded list
@@ -160,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Test each known file
         for (const file of knownFiles) {
-            const fullPath = basePath + file;
+            const fullPath = basePath + encodePath(file);
             try {
                 const response = await fetch(fullPath);
                 if (response.ok) {
@@ -509,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const title = (titleRaw.endsWith('.md') ? titleRaw.replace('.md','') : titleRaw).replace(/_/g, ' ');
                 const card = document.createElement('div');
                 card.className = 'file-card';
-                const icon = titleRaw.endsWith('.md') || titleRaw.includes('Lecture_') ? 'fa-file-alt' : 'fa-file';
+                const icon = isImagePath(path) ? 'fa-image' : (titleRaw.endsWith('.md') || titleRaw.includes('Lecture_') ? 'fa-file-alt' : 'fa-file');
                 card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
                     <div><i class="fas ${icon}"></i> ${title}</div>
                     <span class="badge" data-badge>…</span>
@@ -517,26 +564,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="meta">${path}</div>`;
                 card.addEventListener('click', () => loadFileContent(path));
                 grid.appendChild(card);
-                // Quiz badge detection
-                const quizPath = guessQuizPathForLecture(path);
-                fetch(basePath + quizPath, { method: 'HEAD' })
-                    .then(res => {
-                        const badge = card.querySelector('[data-badge]');
-                        if (!badge) return;
-                        if (res.ok) { badge.textContent = 'Quiz'; badge.style.color = 'var(--primary)'; }
-                        else { badge.textContent = 'No quiz'; badge.style.color = 'var(--muted-foreground)'; }
-                    })
-                    .catch(() => { const badge = card.querySelector('[data-badge]'); if (badge) badge.textContent = ''; });
+                const badge = card.querySelector('[data-badge]');
+                if (isMarkdownPath(path)) {
+                    const quizPath = guessQuizPathForLecture(path);
+                    headRequest(quizPath)
+                        .then(res => {
+                            if (!badge) return;
+                            if (res.ok) { badge.textContent = 'Quiz'; badge.style.color = 'var(--primary)'; }
+                            else { badge.textContent = 'No quiz'; badge.style.color = 'var(--muted-foreground)'; }
+                        })
+                        .catch(() => { if (badge) badge.textContent = ''; });
+                } else if (isImagePath(path)) {
+                    if (badge) { badge.textContent = 'Image'; badge.style.color = 'var(--primary)'; }
+                } else if (badge) {
+                    badge.textContent = '';
+                }
             });
             wrapper.appendChild(grid);
             // Prefetch first two files and their quiz headers
             course.files.slice(0,2).forEach(p => {
-                const key = `md:${p}`;
-                if (!sessionStorage.getItem(key)) {
-                    fetch(basePath + p).then(r=>r.text()).then(t=>sessionStorage.setItem(key, t)).catch(()=>{});
+                if (isMarkdownPath(p)) {
+                    const key = `md:${p}`;
+                    if (!sessionStorage.getItem(key)) {
+                        fetchTextWithFallback(p).then(({ text }) => sessionStorage.setItem(key, text)).catch(()=>{});
+                    }
+                    const q = guessQuizPathForLecture(p);
+                    headRequest(q).catch(()=>{});
                 }
-                const q = guessQuizPathForLecture(p);
-                fetch(basePath + q, { method: 'HEAD' }).catch(()=>{});
             });
         }
 
@@ -618,11 +672,16 @@ document.addEventListener('DOMContentLoaded', () => {
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_3_DSIP',
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_4_DSIP',
             'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_5_DSIP',
+            'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_6_DSIP',
+            'Year1/Semester1/Introduction to Digital Skills and Programming/Lectures/Lecture_7_DSIP',
             'Year1/Semester1/Orientation AI/ExamPrep.md',
+            'Year1/Semester1/Orientation AI/Lectures/Lecture_1_OAI',
             'Year1/Semester1/Orientation AI/Lectures/Lecture_1_READING_OAI',
+            'Year1/Semester1/Orientation AI/Lectures/Lecture_2_READING_OAI',
             'Year1/Semester1/Studying and Presenting/Notes.md',
             'Year1/Semester1/Studying and Presenting/Lectures/Lecture_1_Studying_and_Presenting.md',
-            'Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting'
+            'Year1/Semester1/Studying and Presenting/Lectures/Lecture_2_Studying_and_Presenting',
+            'improvements-plan.md'
         ];
         
         files = defaultFiles;
@@ -642,26 +701,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function loadFileContent(path) {
-        // Deep link to current file
         updateHashForFile(path);
+
+        if (isImagePath(path)) {
+            renderImageContent(path);
+            return;
+        }
+
+        if (!isMarkdownPath(path)) {
+            renderUnsupportedFile(path);
+            return;
+        }
+
         const cacheKey = `md:${path}`;
         const cached = sessionStorage.getItem(cacheKey);
         if (cached) {
-            renderContent(path, cached);
-            // Refresh cache in background
-            fetch(basePath + path).then(r=>r.text()).then(t=>sessionStorage.setItem(cacheKey, t)).catch(()=>{});
+            renderMarkdownContent(path, cached);
+            fetchTextWithFallback(path)
+                .then(({ text }) => sessionStorage.setItem(cacheKey, text))
+                .catch(() => {});
             return;
         }
-        fetch(basePath + path)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(text => {
+
+        fetchTextWithFallback(path)
+            .then(({ text }) => {
                 sessionStorage.setItem(cacheKey, text);
-                renderContent(path, text);
+                renderMarkdownContent(path, text);
             })
             .catch(error => {
                 console.error('Error loading file:', error);
@@ -688,10 +753,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    function renderContent(path, text) {
-        // Toolbar with copy link
+    function createContentToolbar(path) {
         const toolbar = document.createElement('div');
         toolbar.className = 'content-toolbar';
+
         const copyBtn = document.createElement('button');
         copyBtn.className = 'btn';
         copyBtn.innerHTML = '<i class="fas fa-link"></i> Copy link';
@@ -704,14 +769,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         toolbar.appendChild(copyBtn);
 
-        const html = converter.makeHtml(text);
-        content.innerHTML = '';
-        content.appendChild(toolbar);
-        const article = document.createElement('div');
-        article.innerHTML = html;
-        content.appendChild(article);
+        const viewBtn = document.createElement('a');
+        viewBtn.className = 'btn';
+        viewBtn.href = basePath + encodePath(path);
+        viewBtn.target = '_blank';
+        viewBtn.rel = 'noopener';
+        viewBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open source';
+        toolbar.appendChild(viewBtn);
 
-        if (window.MathJax) {
+        return toolbar;
+    }
+
+    function finalizeContentRender(path, { enableMathJax = false } = {}) {
+        if (enableMathJax && window.MathJax) {
             MathJax.typesetPromise([content]).catch((err) => console.log(err.message));
         }
 
@@ -720,22 +790,74 @@ document.addEventListener('DOMContentLoaded', () => {
         currentView = 'content';
         viewToggle.innerHTML = '<i class="fas fa-th-large"></i>';
 
-        // Track current file to avoid duplicate reloads via hashchange
         currentFilePath = path;
         window.__CURRENT_FILE__ = path;
 
-        // Breadcrumb
-        let fileName = path.split('/').pop();
-        if (fileName.endsWith('.md')) { fileName = fileName.replace('.md', ''); }
+        let fileName = path.split('/').pop() || path;
+        if (fileName.endsWith('.md')) { fileName = fileName.slice(0, -3); }
         fileName = fileName.replace(/_/g, ' ');
         updateBreadcrumb([
             { name: 'Home', action: showDashboard },
             { name: fileName, action: null }
         ]);
 
-        // Quiz CTA and sidebar focus
-        maybeInjectQuizCTA(path);
+        if (isMarkdownPath(path)) {
+            maybeInjectQuizCTA(path);
+        }
         expandSidebarToPath(path);
+    }
+
+    function renderMarkdownContent(path, text) {
+        const toolbar = createContentToolbar(path);
+        const html = converter.makeHtml(text);
+        content.innerHTML = '';
+        content.appendChild(toolbar);
+        const article = document.createElement('div');
+        article.innerHTML = html;
+        content.appendChild(article);
+
+        finalizeContentRender(path, { enableMathJax: true });
+    }
+
+    function renderImageContent(path) {
+        const toolbar = createContentToolbar(path);
+        const figure = document.createElement('figure');
+        figure.className = 'image-note';
+        const fileLabel = (path.split('/').pop() || 'Notebook scan').replace(/_/g, ' ');
+        const img = document.createElement('img');
+        img.src = basePath + encodePath(path);
+        img.alt = fileLabel;
+        img.loading = 'lazy';
+        figure.appendChild(img);
+
+        const caption = document.createElement('figcaption');
+        caption.textContent = fileLabel;
+        figure.appendChild(caption);
+
+        content.innerHTML = '';
+        content.appendChild(toolbar);
+        content.appendChild(figure);
+
+        finalizeContentRender(path);
+    }
+
+    function renderUnsupportedFile(path) {
+        const toolbar = createContentToolbar(path);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'unsupported-note';
+        wrapper.innerHTML = `
+            <i class="fas fa-file-times"></i>
+            <h2>Unsupported File</h2>
+            <p>The file type for <strong>${path.split('/').pop()}</strong> isn't supported yet.</p>
+            <button class="btn" type="button" onclick="showDashboard()">
+                <i class="fas fa-home"></i> Back to Dashboard
+            </button>
+        `;
+
+        content.innerHTML = '';
+        content.appendChild(toolbar);
+        content.appendChild(wrapper);
+        finalizeContentRender(path);
     }
 
     // --- Quiz Integration ---
@@ -776,8 +898,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function maybeInjectQuizCTA(lecturePath) {
+        if (!isMarkdownPath(lecturePath)) return;
         const quizPath = guessQuizPathForLecture(lecturePath);
-        fetch(basePath + quizPath, { method: 'HEAD' })
+        headRequest(quizPath)
             .then(res => {
                 if (!res.ok) throw new Error('No quiz');
                 // Create CTA UI
@@ -819,13 +942,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function ensureSearchIndex() {
         if (ensureIndexPromise) return ensureIndexPromise;
         const fetchTexts = (path) => new Promise((resolve) => {
+            if (!isMarkdownPath(path)) {
+                resolve('');
+                return;
+            }
             const key = `md:${path}`;
             const cached = sessionStorage.getItem(key);
             if (cached) {
                 resolve(cached);
-                fetch(basePath + path).then(r=>r.text()).then(t=>sessionStorage.setItem(key,t)).catch(()=>{});
+                fetchTextWithFallback(path)
+                    .then(({ text }) => sessionStorage.setItem(key, text))
+                    .catch(() => {});
             } else {
-                fetch(basePath + path).then(r=>r.text()).then(t=>{ sessionStorage.setItem(key,t); resolve(t); }).catch(()=>resolve(''));
+                fetchTextWithFallback(path)
+                    .then(({ text }) => {
+                        sessionStorage.setItem(key, text);
+                        resolve(text);
+                    })
+                    .catch((err) => {
+                        console.warn('Search index fetch failed for', path, err);
+                        resolve('');
+                    });
             }
         });
 
